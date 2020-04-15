@@ -1,13 +1,15 @@
 
 package com.davidlutta.filamu.models;
 
-import java.io.Serializable;
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.List;
 
 public class Movies implements Serializable, Parcelable
 {
@@ -95,6 +97,13 @@ public class Movies implements Serializable, Parcelable
      */
     public Movies() {
     }
+
+    public static final Comparator<Movies> BY_RATING = new Comparator<Movies>() {
+        @Override
+        public int compare(Movies o1, Movies o2) {
+            return o1.voteAverage.compareTo(o2.voteAverage);
+        }
+    };
 
     /**
      * 

@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MoviesApi {
-    @GET("/now_playing")
+    @GET("/3/movie/now_playing")
     Call<MovieResponse> getNowPlayingMovies(@Query("api_key") String key, @Query("page") String page);
 
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Filamu</string>
+    <string name="movies">Movies</string>
+    <string name="tv">TV</string>
+    <string name="saved">Saved</string>
+    <string name="background_image">Background Image</string>
+    <string name="title">Title</string>
+    <string name="rating">Rating: 7 /10</string>
+    <string name="now_playing">Now Playing</string>
 </resources>
