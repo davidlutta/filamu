@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
-
-import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -57,7 +54,7 @@ public class Movies implements Serializable, Parcelable
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
-    public final static Creator<Movies> CREATOR = new Creator<Movies>() {
+    public final static Parcelable.Creator<Movies> CREATOR = new Creator<Movies>() {
 
 
         @SuppressWarnings({
@@ -73,7 +70,7 @@ public class Movies implements Serializable, Parcelable
 
     }
     ;
-    private final static long serialVersionUID = 1121456109942826512L;
+    private final static long serialVersionUID = -1963863705001619173L;
 
     protected Movies(Parcel in) {
         this.popularity = ((Double) in.readValue((Double.class.getClassLoader())));
@@ -85,7 +82,7 @@ public class Movies implements Serializable, Parcelable
         this.backdropPath = ((String) in.readValue((String.class.getClassLoader())));
         this.originalLanguage = ((String) in.readValue((String.class.getClassLoader())));
         this.originalTitle = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.genreIds, (Long.class.getClassLoader()));
+        in.readList(this.genreIds, (java.lang.Long.class.getClassLoader()));
         this.title = ((String) in.readValue((String.class.getClassLoader())));
         this.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));
         this.overview = ((String) in.readValue((String.class.getClassLoader())));
@@ -248,7 +245,7 @@ public class Movies implements Serializable, Parcelable
 
     @Override
     public String toString() {
-        return "Movies{" +
+        return "Result{" +
                 "popularity=" + popularity +
                 ", voteCount=" + voteCount +
                 ", video=" + video +
@@ -258,6 +255,7 @@ public class Movies implements Serializable, Parcelable
                 ", backdropPath='" + backdropPath + '\'' +
                 ", originalLanguage='" + originalLanguage + '\'' +
                 ", originalTitle='" + originalTitle + '\'' +
+                ", genreIds=" + genreIds +
                 ", title='" + title + '\'' +
                 ", voteAverage=" + voteAverage +
                 ", overview='" + overview + '\'' +
