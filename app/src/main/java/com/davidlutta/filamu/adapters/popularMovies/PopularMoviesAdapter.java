@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.adapters;
+package com.davidlutta.filamu.adapters.popularMovies;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.R;
-import com.davidlutta.filamu.adapters.viewholder.BaseViewHolder;
+import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.models.Movies;
 
 import java.util.List;
 
-public class NowPlayingMoviesAdapter extends RecyclerView.Adapter<NowPlayingMoviesAdapter.MovieViewHolder> {
+public class PopularMoviesAdapter extends RecyclerView.Adapter<PopularMoviesAdapter.MovieViewHolder> {
     private Context mContext;
     private List<Movies> moviesList;
-    private OnMovieListener movieListener;
+    private OnPopularMovieListener movieListener;
 
-    public NowPlayingMoviesAdapter(Context mContext, List<Movies> moviesList, OnMovieListener movieListener) {
+    public PopularMoviesAdapter(Context mContext, List<Movies> moviesList, OnPopularMovieListener movieListener) {
         this.mContext = mContext;
         this.moviesList = moviesList;
         this.movieListener = movieListener;
@@ -61,14 +61,14 @@ public class NowPlayingMoviesAdapter extends RecyclerView.Adapter<NowPlayingMovi
     }
 
     public class MovieViewHolder extends BaseViewHolder implements View.OnClickListener {
-        OnMovieListener movieListener;
+        OnPopularMovieListener movieListener;
         private TextView titleTextView;
         private TextView ratingTextView;
         private ImageView backgroundImageview;
 
-        public MovieViewHolder(@NonNull View itemView, OnMovieListener onMovieListener) {
+        public MovieViewHolder(@NonNull View itemView, OnPopularMovieListener onPopularMovieListener) {
             super(itemView);
-            this.movieListener = onMovieListener;
+            this.movieListener = onPopularMovieListener;
             titleTextView = itemView.findViewById(R.id.titleTextView);
             ratingTextView = itemView.findViewById(R.id.ratingTextView);
             backgroundImageview = itemView.findViewById(R.id.backgroundImageView);
@@ -82,7 +82,7 @@ public class NowPlayingMoviesAdapter extends RecyclerView.Adapter<NowPlayingMovi
 
         @Override
         public void onClick(View v) {
-            movieListener.OnMovieClick(getAdapterPosition());
+            movieListener.OnPopularMovieClick(getAdapterPosition());
         }
     }
 }

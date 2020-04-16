@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.adapters.viewholder;
+package com.davidlutta.filamu.adapters;
 
 import android.view.View;
 

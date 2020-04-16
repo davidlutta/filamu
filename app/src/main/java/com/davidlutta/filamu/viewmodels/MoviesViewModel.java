@@ -18,8 +18,16 @@ public class MoviesViewModel extends ViewModel {
         mIsPerformingQuery = false;
     }
 
-    public LiveData<List<Movies>> getMovies() {
-        return mMoviesRepository.getMovies();
+    public LiveData<List<Movies>> getPopularMovies() {
+        return mMoviesRepository.getPopularMovies();
+    }
+
+    public LiveData<List<Movies>> getMoviesPlayingNow() {
+        return mMoviesRepository.getMoviesPlayingNow();
+    }
+
+    public LiveData<List<Movies>> getUpcomingMovies() {
+        return mMoviesRepository.getUpcomingMovies();
     }
 
     public void searchNextPage() {
