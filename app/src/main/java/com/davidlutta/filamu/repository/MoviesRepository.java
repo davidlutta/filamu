@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.davidlutta.filamu.api.MoviesApi;
 import com.davidlutta.filamu.api.RetrofitService;
-import com.davidlutta.filamu.models.MovieResponse;
-import com.davidlutta.filamu.models.Movies;
+import com.davidlutta.filamu.models.movie.Movie;
+import com.davidlutta.filamu.models.movies.MovieResponse;
+import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.util.Constants;
 
 import java.util.Collections;
@@ -101,6 +102,26 @@ public class MoviesRepository {
             }
         });
         return moviesData;
+    }
+
+    public MutableLiveData<Movie> getMovieDetails(String movieId) {
+        final MutableLiveData<Movie> movieData = new MutableLiveData<>();
+        moviesApi.getMovieDetails(movieId, Constants.API_KEY).enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        movieData.postValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+
+            }
+        });
+        return movieData;
     }
 
     // TODO: 4/16/20 LOOK AT MEE TOO PLEASE !!!

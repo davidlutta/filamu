@@ -7,4 +7,14 @@
         <item name="android:fontFamily">@font/regular</item>
     </style>
 
+    <style name="AppThemeActionBar" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/regular</item>
+
+        <item name="actionBarTheme">@drawable/toolbar_background</item>
+    </style>
+
+
 </resources>

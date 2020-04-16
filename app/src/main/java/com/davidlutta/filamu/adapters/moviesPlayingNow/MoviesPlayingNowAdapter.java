@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
-import com.davidlutta.filamu.models.Movies;
+import com.davidlutta.filamu.models.movies.Movies;
+import com.davidlutta.filamu.util.Constants;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class MoviesPlayingNowAdapter extends RecyclerView.Adapter<MoviesPlayingN
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         String title = moviesList.get(position).getTitle();
         String rating = "Rating: " + moviesList.get(position).getVoteAverage().toString() + " / 10";
-        String poster = "https://image.tmdb.org/t/p/w500" + moviesList.get(position).getPosterPath();
+        String poster = Constants.IMAGE_BASE_URL + moviesList.get(position).getPosterPath();
         holder.titleTextView.setText(title);
         holder.ratingTextView.setText(rating);
         Glide.with(mContext)
@@ -70,9 +71,9 @@ public class MoviesPlayingNowAdapter extends RecyclerView.Adapter<MoviesPlayingN
         public MovieViewHolder(@NonNull View itemView, OnMoviesNowPlayingListener onMovieListener) {
             super(itemView);
             this.movieListener = onMovieListener;
-            titleTextView = itemView.findViewById(R.id.titleTextView);
-            ratingTextView = itemView.findViewById(R.id.ratingTextView);
-            backgroundImageview = itemView.findViewById(R.id.backgroundImageView);
+            titleTextView = itemView.findViewById(R.id.itemTitleTextView);
+            ratingTextView = itemView.findViewById(R.id.itemRatingTextView);
+            backgroundImageview = itemView.findViewById(R.id.itemBackgroundImageView);
             itemView.setOnClickListener(this);
         }
 

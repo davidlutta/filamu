@@ -1,9 +1,11 @@
 package com.davidlutta.filamu.api;
 
-import com.davidlutta.filamu.models.MovieResponse;
+import com.davidlutta.filamu.models.movie.Movie;
+import com.davidlutta.filamu.models.movies.MovieResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MoviesApi {
@@ -15,4 +17,7 @@ public interface MoviesApi {
 
     @GET("/3/movie/upcoming")
     Call<MovieResponse> getUpcomingMovies(@Query("api_key") String key, @Query("page") String page);
+
+    @GET("/3/movie/{movie_id}")
+    Call<Movie> getMovieDetails(@Path("movie_id") String movieId, @Query("api_key") String key);
 }

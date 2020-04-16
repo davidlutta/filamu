@@ -2,8 +2,6 @@ package com.davidlutta.filamu;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +15,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
-        mProgressBar = findViewById(R.id.progress_bar);
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,7 +51,5 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void showProgressBar(boolean visibility) {
-        mProgressBar.setVisibility(visibility ? View.VISIBLE : View.INVISIBLE);
-    }
+
 }

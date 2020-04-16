@@ -10,4 +10,8 @@
     <string name="view_all">View All</string>
     <string name="popular">Popular</string>
     <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="save">Save</string>
+    <string name="genreText">Action, Fantasy, Drama</string>
+    <string name="overviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras odio turpis, auctor at arcu non, tincidunt placerat sem. Donec et ligula et augue tristique tempor. Fusce auctor ipsum ultricies lectus viverra, ut tempus dui volutpat. Mauris molestie libero diam, pellentesque blandit lectus vulputate in. Phasellus pulvinar arcu arcu, luctus sollicitudin leo interdum sed. Quisque aliquet nisi vitae varius sagittis. In dictum gravida dui, vitae facilisis tellus gravida mattis. Donec dolor tellus, luctus sit amet metus eget, luctus rutrum dolor. Nullam vitae accumsan diam. Duis et mollis libero. Quisque aliquet urna pretium nulla auctor, sed ullamcorper quam rutrum. Donec tristique massa mi, id consequat odio rutrum ac. In a aliquet tellus.</string>
+    <string name="cast">Cast</string>
 </resources>

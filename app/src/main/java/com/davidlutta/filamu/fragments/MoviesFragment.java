@@ -1,10 +1,12 @@
 package com.davidlutta.filamu.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,17 +16,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.davidlutta.filamu.MovieActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.moviesPlayingNow.MoviesPlayingNowAdapter;
 import com.davidlutta.filamu.adapters.moviesPlayingNow.OnMoviesNowPlayingListener;
-import com.davidlutta.filamu.adapters.upcomingMovies.OnUpcomingMovieListener;
-import com.davidlutta.filamu.adapters.popularMovies.PopularMoviesAdapter;
 import com.davidlutta.filamu.adapters.popularMovies.OnPopularMovieListener;
+import com.davidlutta.filamu.adapters.popularMovies.PopularMoviesAdapter;
+import com.davidlutta.filamu.adapters.upcomingMovies.OnUpcomingMovieListener;
 import com.davidlutta.filamu.adapters.upcomingMovies.UpcomingMoviesAdapter;
-import com.davidlutta.filamu.models.Movies;
+import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
 
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MoviesFragment extends Fragment implements OnPopularMovieListener, OnUpcomingMovieListener, OnMoviesNowPlayingListener {
 
@@ -42,6 +47,17 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
     private RecyclerView upcomingMoviesRecyclerView;
     private List<Movies> upcomingMoviesList;
 
+    SweetAlertDialog sweetAlertDialog;
+    private ProgressBar progressBar;
+    private ProgressBar moviesNowPlayingProgressBar;
+    private ProgressBar upcomingMoviesProgressBar;
+    private TextView popularTitleTextView;
+    private TextView viewAllPopularMoviesTextView;
+    private TextView discoverTitleTextView;
+    private TextView viewAllMoviesPlayingNowTextView;
+    private TextView upcomingMoviesTitle;
+    private TextView viewAllUpcomingMoviesTextView;
+
     public static MoviesFragment newInstance() {
         return new MoviesFragment();
     }
@@ -53,6 +69,14 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
         popularMoviesRecyclerView = view.findViewById(R.id.popular_movies_recyclerView);
         moviesPlayingNowRecyclerView = view.findViewById(R.id.now_playing_recyclerView);
         upcomingMoviesRecyclerView = view.findViewById(R.id.upcomingMoviesRecyclerView);
+        progressBar = view.findViewById(R.id.popularMoviesFragmentProgressBar);
+        popularTitleTextView = view.findViewById(R.id.popularTitleTextView);
+        discoverTitleTextView = view.findViewById(R.id.discoverTitleTextView);
+        upcomingMoviesTitle = view.findViewById(R.id.upcomingMoviesTitle);
+        viewAllMoviesPlayingNowTextView = view.findViewById(R.id.viewAllMoviesPlayingNowTextView);
+        viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
+        viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
+
         final float scale = getContext().getResources().getDisplayMetrics().density;
         int pixels = (int) (350 * scale + 0.5f);
         upcomingMoviesRecyclerView.getLayoutParams().height = pixels;
@@ -119,19 +143,55 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
 
     @Override
     public void OnPopularMovieClick(int position) {
-        Movies popularMovie = popularMoviesAdapter.getSelectedMovie(position);
-        Toast.makeText(getContext(), popularMovie.getTitle(), Toast.LENGTH_SHORT).show();
+        Movies selectedMovie = popularMoviesAdapter.getSelectedMovie(position);
+        Intent intent = new Intent(getContext(), MovieActivity.class);
+        String id = selectedMovie.getId().toString();
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     @Override
     public void onUpcomingMovieClick(int position) {
-        Movies upcomingMovie = upcomingMoviesAdapter.getSelectedMovie(position);
-        Toast.makeText(getContext(), upcomingMovie.getTitle(), Toast.LENGTH_SHORT).show();
+        Movies selectedMovie = upcomingMoviesAdapter.getSelectedMovie(position);
+        Intent intent = new Intent(getContext(), MovieActivity.class);
+        String id = selectedMovie.getId().toString();
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     @Override
     public void onMovieNowPlayingListener(int position) {
-        Movies moviePlayingNow = moviesPlayingNowAdapter.getSelectedMovie(position);
-        Toast.makeText(getContext(), moviePlayingNow.getTitle(), Toast.LENGTH_SHORT).show();
+        Movies selectedMovie = moviesPlayingNowAdapter.getSelectedMovie(position);
+        Intent intent = new Intent(getContext(), MovieActivity.class);
+        String id = selectedMovie.getId().toString();
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
+
+    private void showProgressBar() {
+        /*SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();*/
+        progressBar.setVisibility(View.VISIBLE);
+        popularTitleTextView.setVisibility(View.INVISIBLE);
+        discoverTitleTextView.setVisibility(View.INVISIBLE);
+        upcomingMoviesTitle.setVisibility(View.INVISIBLE);
+        viewAllUpcomingMoviesTextView.setVisibility(View.INVISIBLE);
+        viewAllPopularMoviesTextView.setVisibility(View.INVISIBLE);
+        viewAllMoviesPlayingNowTextView.setVisibility(View.INVISIBLE);
+    }
+
+    private void hideProgressBar() {
+        if (!popularMoviesList.isEmpty() && !moviesPlayingNowList.isEmpty() && !upcomingMoviesList.isEmpty()) {
+            progressBar.setVisibility(View.INVISIBLE);
+            popularTitleTextView.setVisibility(View.VISIBLE);
+            discoverTitleTextView.setVisibility(View.VISIBLE);
+            upcomingMoviesTitle.setVisibility(View.VISIBLE);
+            viewAllUpcomingMoviesTextView.setVisibility(View.VISIBLE);
+            viewAllPopularMoviesTextView.setVisibility(View.VISIBLE);
+            viewAllMoviesPlayingNowTextView.setVisibility(View.VISIBLE);
+        }
     }
 }

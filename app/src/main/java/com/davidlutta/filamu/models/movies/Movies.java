@@ -1,5 +1,5 @@
 
-package com.davidlutta.filamu.models;
+package com.davidlutta.filamu.models.movies;
 
 import android.os.Parcel;
 import android.os.Parcelable;

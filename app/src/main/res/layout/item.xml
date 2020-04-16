@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/backgroundImageView"
+            android:id="@+id/itemBackgroundImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/background_image"
@@ -27,7 +27,7 @@
 
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/itemTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/ratingTextView"
+        android:id="@+id/itemRatingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -52,7 +52,7 @@
         android:textColor="@color/textColor"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/titleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintStart_toStartOf="@+id/itemTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/itemTitleTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
