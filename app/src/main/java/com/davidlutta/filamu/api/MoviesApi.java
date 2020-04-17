@@ -1,5 +1,6 @@
 package com.davidlutta.filamu.api;
 
+import com.davidlutta.filamu.models.cast.CastResponse;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.MovieResponse;
 
@@ -20,4 +21,7 @@ public interface MoviesApi {
 
     @GET("/3/movie/{movie_id}")
     Call<Movie> getMovieDetails(@Path("movie_id") String movieId, @Query("api_key") String key);
+
+    @GET("/3/movie/{movie_id}/credits")
+    Call<CastResponse> getCredits(@Path("movie_id") String movieId, @Query("api_key") String key);
 }

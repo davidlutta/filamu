@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,15 +13,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.davidlutta.filamu.adapters.cast.CastAdapter;
+import com.davidlutta.filamu.adapters.cast.OnCastClickListener;
+import com.davidlutta.filamu.adapters.crew.CrewAdapter;
+import com.davidlutta.filamu.adapters.crew.OnCrewClickListener;
+import com.davidlutta.filamu.models.cast.Cast;
+import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
 
+import java.util.List;
 import java.util.StringJoiner;
 
-public class MovieActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity implements OnCastClickListener, OnCrewClickListener {
 
     private Toolbar toolbar;
     private MoviesViewModel moviesViewModel;
@@ -31,8 +41,16 @@ public class MovieActivity extends AppCompatActivity {
     private TextView overviewTextView;
     private ImageView backgroundImageView;
 
-    @Override
+    private RecyclerView castRecyclerView;
+    private List<Cast> castList;
+    private CastAdapter castAdapter;
 
+    private RecyclerView crewRecyclerView;
+    private List<Crew> crewList;
+    private CrewAdapter crewAdapter;
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
@@ -42,18 +60,33 @@ public class MovieActivity extends AppCompatActivity {
         ratingTextView = findViewById(R.id.ratingTextView);
         overviewTextView = findViewById(R.id.overviewTextView);
         backgroundImageView = findViewById(R.id.backgroundImageView);
+        castRecyclerView = findViewById(R.id.castRecyclerView);
+        crewRecyclerView = findViewById(R.id.crewRecyclerView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         subscribeObservers();
     }
 
     private void subscribeObservers() {
         if (getIntent().hasExtra("id")) {
-//            String id = Objects.requireNonNull(getIntent().getExtras()).getString("id");
             String id = getIntent().getExtras().getString("id");
             moviesViewModel.getMovieDetails(id).observe(this, new Observer<Movie>() {
                 @Override
                 public void onChanged(Movie movie) {
                     populateData(movie);
+                }
+            });
+            moviesViewModel.getCastDetails(id).observe(this, new Observer<List<Cast>>() {
+                @Override
+                public void onChanged(List<Cast> casts) {
+                    castList = casts;
+                    setUpCastAdapter();
+                }
+            });
+            moviesViewModel.getCrewDetails(id).observe(this, new Observer<List<Crew>>() {
+                @Override
+                public void onChanged(List<Crew> crews) {
+                    crewList = crews;
+                    setUpCrewAdapter();
                 }
             });
         }
@@ -75,7 +108,7 @@ public class MovieActivity extends AppCompatActivity {
             genreTextView.setText(joinedString);
         } else {
             StringBuilder stringBuilder = new StringBuilder();
-            String delim = "| ";
+            String delim = " | ";
             String loopDelim = "";
             for (int i = 0; i < movie.getGenres().size(); i++) {
                 stringBuilder.append(loopDelim);
@@ -85,12 +118,31 @@ public class MovieActivity extends AppCompatActivity {
             String joinedString = stringBuilder.toString();
             genreTextView.setText(joinedString);
         }
-
+        backgroundImageView.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(poster)
                 .placeholder(R.drawable.ic_launcher)
                 .into(backgroundImageView);
     }
+
+    private void setUpCastAdapter() {
+        if (castAdapter == null) {
+            castAdapter = new CastAdapter(this, castList, this);
+            castRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            castRecyclerView.setAdapter(castAdapter);
+            castRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpCrewAdapter() {
+        if (crewAdapter == null) {
+            crewAdapter = new CrewAdapter(this, crewList, this);
+            crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            crewRecyclerView.setAdapter(crewAdapter);
+            crewRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,5 +158,17 @@ public class MovieActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCastClicked(int position) {
+        Cast selectedCast = castAdapter.getSelectedCast(position);
+        Toast.makeText(this, selectedCast.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCrewClicked(int position) {
+        Crew selectedCrew = crewAdapter.getSelectedCrew(position);
+        Toast.makeText(this, selectedCrew.getName(), Toast.LENGTH_SHORT).show();
     }
 }
