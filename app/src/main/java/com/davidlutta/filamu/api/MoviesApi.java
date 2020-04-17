@@ -3,6 +3,7 @@ package com.davidlutta.filamu.api;
 import com.davidlutta.filamu.models.cast.CastResponse;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.MovieResponse;
+import com.davidlutta.filamu.models.trailers.TrailerResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -24,4 +25,8 @@ public interface MoviesApi {
 
     @GET("/3/movie/{movie_id}/credits")
     Call<CastResponse> getCredits(@Path("movie_id") String movieId, @Query("api_key") String key);
+
+    @GET("/3/movie/{movie_id}/videos")
+    Call<TrailerResponse> getTrailers(@Path("movie_id") String movieId, @Query("api_key") String key);
+
 }

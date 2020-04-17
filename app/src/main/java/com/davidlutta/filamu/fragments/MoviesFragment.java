@@ -77,6 +77,7 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
         viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
         viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
 
+        // TODO: 4/18/20 CHECK OUT https://github.com/delaroy/SnapRecyclerview/blob/master/app/src/main/java/com/delaroystudios/snaprecyclerview/MovieAdapter.java In order to use only one recyclerview
         final float scale = getContext().getResources().getDisplayMetrics().density;
         int pixels = (int) (350 * scale + 0.5f);
         upcomingMoviesRecyclerView.getLayoutParams().height = pixels;

@@ -7,6 +7,7 @@ import com.davidlutta.filamu.models.cast.Cast;
 import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.Movies;
+import com.davidlutta.filamu.models.trailers.Trailers;
 import com.davidlutta.filamu.repository.MoviesRepository;
 
 import java.util.List;
@@ -43,6 +44,10 @@ public class MoviesViewModel extends ViewModel {
 
     public LiveData<List<Crew>> getCrewDetails(String movieId) {
         return mMoviesRepository.getCrew(movieId);
+    }
+
+    public LiveData<List<Trailers>> getTrailers(String movieId) {
+        return mMoviesRepository.getMovieTrailers(movieId);
     }
 
     public void searchNextPage() {

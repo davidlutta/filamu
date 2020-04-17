@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,9 +20,11 @@ import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.cast.OnCastClickListener;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
 import com.davidlutta.filamu.adapters.crew.OnCrewClickListener;
+import com.davidlutta.filamu.adapters.trailers.TrailersAdapter;
 import com.davidlutta.filamu.models.cast.Cast;
 import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
+import com.davidlutta.filamu.models.trailers.Trailers;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
 
@@ -32,7 +33,6 @@ import java.util.StringJoiner;
 
 public class MovieActivity extends AppCompatActivity implements OnCastClickListener, OnCrewClickListener {
 
-    private Toolbar toolbar;
     private MoviesViewModel moviesViewModel;
 
     private TextView titleTextView;
@@ -49,8 +49,12 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
     private List<Crew> crewList;
     private CrewAdapter crewAdapter;
 
+    private RecyclerView trailersRecyclerView;
+    private List<Trailers> trailersList;
+    private TrailersAdapter trailersAdapter;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
@@ -62,6 +66,7 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
         backgroundImageView = findViewById(R.id.backgroundImageView);
         castRecyclerView = findViewById(R.id.castRecyclerView);
         crewRecyclerView = findViewById(R.id.crewRecyclerView);
+        trailersRecyclerView = findViewById(R.id.trailersRecyclerView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         subscribeObservers();
     }
@@ -78,15 +83,38 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
             moviesViewModel.getCastDetails(id).observe(this, new Observer<List<Cast>>() {
                 @Override
                 public void onChanged(List<Cast> casts) {
-                    castList = casts;
-                    setUpCastAdapter();
+                    if (casts.size() > 2) {
+                        // FIXME: 4/18/20
+                        castList = casts.subList(0, 10);
+                        setUpCastAdapter();
+                    } else {
+                        castList = casts;
+                        setUpCastAdapter();
+                    }
                 }
             });
             moviesViewModel.getCrewDetails(id).observe(this, new Observer<List<Crew>>() {
                 @Override
                 public void onChanged(List<Crew> crews) {
-                    crewList = crews;
-                    setUpCrewAdapter();
+                    if (crews.size() > 2) {
+                        crewList = crews.subList(0, 10);
+                        setUpCrewAdapter();
+                    } else {
+                        crewList = crews;
+                        setUpTrailersAdapter();
+                    }
+                }
+            });
+            moviesViewModel.getTrailers(id).observe(this, new Observer<List<Trailers>>() {
+                @Override
+                public void onChanged(List<Trailers> trailers) {
+                    if (trailers.size() > 2) {
+                        trailersList = trailers.subList(0, 3);
+                        setUpTrailersAdapter();
+                    } else {
+                        trailersList = trailers;
+                        setUpTrailersAdapter();
+                    }
                 }
             });
         }
@@ -140,6 +168,15 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
             crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             crewRecyclerView.setAdapter(crewAdapter);
             crewRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpTrailersAdapter() {
+        if (trailersAdapter == null) {
+            trailersAdapter = new TrailersAdapter(this, trailersList);
+            trailersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            trailersRecyclerView.setAdapter(trailersAdapter);
+            trailersRecyclerView.setNestedScrollingEnabled(false);
         }
     }
 

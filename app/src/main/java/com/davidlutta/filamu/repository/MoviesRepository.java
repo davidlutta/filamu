@@ -12,6 +12,8 @@ import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.MovieResponse;
 import com.davidlutta.filamu.models.movies.Movies;
+import com.davidlutta.filamu.models.trailers.TrailerResponse;
+import com.davidlutta.filamu.models.trailers.Trailers;
 import com.davidlutta.filamu.util.Constants;
 
 import java.util.Collections;
@@ -170,6 +172,26 @@ public class MoviesRepository {
             }
         });
         return crewData;
+    }
+
+    public MutableLiveData<List<Trailers>> getMovieTrailers(String movieId) {
+        final MutableLiveData<List<Trailers>> trailerData = new MutableLiveData<>();
+        moviesApi.getTrailers(movieId, Constants.API_KEY).enqueue(new Callback<TrailerResponse>() {
+            @Override
+            public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        trailerData.postValue(response.body().getTrailers());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                Log.d(TAG, "GetMovieTrailers onFailure: FAILED TO FETCH TRAILERS");
+            }
+        });
+        return trailerData;
     }
 
     // TODO: 4/16/20 LOOK AT MEE TOO PLEASE !!!

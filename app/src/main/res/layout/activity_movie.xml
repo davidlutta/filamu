@@ -13,7 +13,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="500dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -90,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/cast"
             android:textFontWeight="700"
@@ -98,10 +99,24 @@
             app:layout_constraintStart_toStartOf="@+id/overviewTextView"
             app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
 
+        <TextView
+            android:id="@+id/viewAllCastTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/view_all"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/castTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/castRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
             app:layout_constraintStart_toStartOf="@+id/castTitle"
             app:layout_constraintTop_toBottomOf="@+id/castTitle" />
@@ -111,21 +126,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/nunito_bold"
             android:text="@string/crew"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/nunito_bold"
             android:textFontWeight="700"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/castRecyclerView"
             app:layout_constraintTop_toBottomOf="@+id/castRecyclerView" />
 
+        <TextView
+            android:id="@+id/viewAllCrewTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/view_all"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/crewTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/castRecyclerView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/crewRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
             app:layout_constraintStart_toStartOf="@+id/crewTitleTextView"
             app:layout_constraintTop_toBottomOf="@+id/crewTitleTextView" />
+
+        <TextView
+            android:id="@+id/trailersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/trailers"
+            android:textColor="@color/textColor"
+            android:textFontWeight="700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/crewRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/crewRecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trailersRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+            app:layout_constraintStart_toStartOf="@+id/trailersTextView"
+            app:layout_constraintTop_toBottomOf="@+id/trailersTextView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

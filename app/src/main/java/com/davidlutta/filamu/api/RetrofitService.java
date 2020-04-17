@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitService {
     public static final String HEADER_CACHE_CONTROL = "Cache-Control";
     public static final String HEADER_PRAGMA = "Pragma";
-    private static long cacheSize = (10 * 1024 * 1024); // 10 MB
+    private static long cacheSize = (100 * 1024 * 1024); // 100 MB
 
     private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
             .baseUrl(Constants.MOVIE_BASE_URL)
