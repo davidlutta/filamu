@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.davidlutta.filamu.api.MoviesApi;
 import com.davidlutta.filamu.api.RetrofitService;
+import com.davidlutta.filamu.models.cast.Cast;
+import com.davidlutta.filamu.models.cast.CastResponse;
+import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.MovieResponse;
 import com.davidlutta.filamu.models.movies.Movies;
@@ -118,10 +121,55 @@ public class MoviesRepository {
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-
+                Log.d(TAG, "GetMovieDetails: onFailure: FAILED TO FETCH MOVIE DETAILS");
             }
         });
         return movieData;
+    }
+
+    public MutableLiveData<List<Cast>> getCast(String movieId) {
+        final MutableLiveData<List<Cast>> castData = new MutableLiveData<>();
+        moviesApi.getCredits(movieId, Constants.API_KEY).enqueue(new Callback<CastResponse>() {
+            @Override
+            public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
+
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<Cast> cast = response.body().getCast();
+                        castData.postValue(cast);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CastResponse> call, Throwable t) {
+                castData.postValue(null);
+                Log.d(TAG, " GetCast: onFailure: FAILED TO FETCH CAST DETAILS");
+            }
+        });
+        return castData;
+    }
+
+    public MutableLiveData<List<Crew>> getCrew(String movieId) {
+        final MutableLiveData<List<Crew>> crewData = new MutableLiveData<>();
+        moviesApi.getCredits(movieId, Constants.API_KEY).enqueue(new Callback<CastResponse>() {
+            @Override
+            public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<Crew> crew = response.body().getCrew();
+                        crewData.postValue(crew);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CastResponse> call, Throwable t) {
+                crewData.postValue(null);
+                Log.d(TAG, "GetCrew: onFailure: FAILED TO FETCH CREW DETAILS");
+            }
+        });
+        return crewData;
     }
 
     // TODO: 4/16/20 LOOK AT MEE TOO PLEASE !!!

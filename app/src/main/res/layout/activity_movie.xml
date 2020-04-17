@@ -13,11 +13,12 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="10dp"
+            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,8 +27,10 @@
                 android:id="@+id/backgroundImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/background_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/poster" />
+                android:src="@drawable/poster"
+                android:visibility="invisible" />
 
         </androidx.cardview.widget.CardView>
 
@@ -37,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="Batman V Superman"
             android:textColor="@color/textColor"
             android:textFontWeight="900"
             android:textSize="25sp"
@@ -51,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_light"
-            android:text="@string/genreText"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/titleTextView"
@@ -64,7 +65,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/nunito_light"
-            android:text="@string/rating"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,6 @@
             android:ellipsize="none"
             android:fontFamily="@font/nunito_regular"
             android:scrollHorizontally="false"
-            android:text="@string/overviewText"
             android:textAlignment="textStart"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/cardView2"
@@ -98,5 +97,13 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/overviewTextView"
             app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/castRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+            app:layout_constraintStart_toStartOf="@+id/castTitle"
+            app:layout_constraintTop_toBottomOf="@+id/castTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
