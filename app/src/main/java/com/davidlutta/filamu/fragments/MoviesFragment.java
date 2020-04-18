@@ -1,6 +1,5 @@
 package com.davidlutta.filamu.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,37 +13,28 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.davidlutta.filamu.MovieActivity;
 import com.davidlutta.filamu.R;
-import com.davidlutta.filamu.adapters.moviesPlayingNow.MoviesPlayingNowAdapter;
-import com.davidlutta.filamu.adapters.moviesPlayingNow.OnMoviesNowPlayingListener;
-import com.davidlutta.filamu.adapters.popularMovies.OnPopularMovieListener;
-import com.davidlutta.filamu.adapters.popularMovies.PopularMoviesAdapter;
-import com.davidlutta.filamu.adapters.upcomingMovies.OnUpcomingMovieListener;
-import com.davidlutta.filamu.adapters.upcomingMovies.UpcomingMoviesAdapter;
+import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
+import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MoviesFragment extends Fragment implements OnPopularMovieListener, OnUpcomingMovieListener, OnMoviesNowPlayingListener {
+public class MoviesFragment extends Fragment {
 
     private MoviesViewModel mViewModel;
 
-    private PopularMoviesAdapter popularMoviesAdapter;
-    private RecyclerView popularMoviesRecyclerView;
+    private MultiSnapRecyclerView popularMoviesRecyclerView;
     private List<Movies> popularMoviesList;
 
-    private MoviesPlayingNowAdapter moviesPlayingNowAdapter;
-    private RecyclerView moviesPlayingNowRecyclerView;
+    private MultiSnapRecyclerView moviesPlayingNowRecyclerView;
     private List<Movies> moviesPlayingNowList;
 
-    private UpcomingMoviesAdapter upcomingMoviesAdapter;
-    private RecyclerView upcomingMoviesRecyclerView;
+    private MultiSnapRecyclerView upcomingMoviesRecyclerView;
     private List<Movies> upcomingMoviesList;
 
     SweetAlertDialog sweetAlertDialog;
@@ -58,6 +48,8 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
     private TextView upcomingMoviesTitle;
     private TextView viewAllUpcomingMoviesTextView;
 
+    private MoviesAdapter moviesAdapter;
+
     public static MoviesFragment newInstance() {
         return new MoviesFragment();
     }
@@ -65,6 +57,7 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        // FIXME: 4/19/20 Make Unnecessary Text disappear until data is loaded
         View view = inflater.inflate(R.layout.movies_fragment, container, false);
         popularMoviesRecyclerView = view.findViewById(R.id.popular_movies_recyclerView);
         moviesPlayingNowRecyclerView = view.findViewById(R.id.now_playing_recyclerView);
@@ -76,8 +69,6 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
         viewAllMoviesPlayingNowTextView = view.findViewById(R.id.viewAllMoviesPlayingNowTextView);
         viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
         viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
-
-        // TODO: 4/18/20 CHECK OUT https://github.com/delaroy/SnapRecyclerview/blob/master/app/src/main/java/com/delaroystudios/snaprecyclerview/MovieAdapter.java In order to use only one recyclerview
         final float scale = getContext().getResources().getDisplayMetrics().density;
         int pixels = (int) (350 * scale + 0.5f);
         upcomingMoviesRecyclerView.getLayoutParams().height = pixels;
@@ -85,29 +76,33 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
     }
 
     private void setUpPopularMoviesAdapter() {
-        if (popularMoviesAdapter == null) {
-            popularMoviesAdapter = new PopularMoviesAdapter(getContext(), popularMoviesList, this);
+        if (moviesAdapter == null) {
+            moviesAdapter = new MoviesAdapter(getContext(), popularMoviesList);
             popularMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            popularMoviesRecyclerView.setAdapter(popularMoviesAdapter);
+            popularMoviesRecyclerView.setAdapter(moviesAdapter);
             popularMoviesRecyclerView.setNestedScrollingEnabled(false);
+            moviesAdapter = null;
         }
+
     }
 
     private void setUpMoviesPlayingNowAdapter() {
-        if (moviesPlayingNowAdapter == null) {
-            moviesPlayingNowAdapter = new MoviesPlayingNowAdapter(getContext(), moviesPlayingNowList, this);
+        if (moviesAdapter == null) {
+            moviesAdapter = new MoviesAdapter(getContext(), moviesPlayingNowList);
             moviesPlayingNowRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            moviesPlayingNowRecyclerView.setAdapter(moviesPlayingNowAdapter);
+            moviesPlayingNowRecyclerView.setAdapter(moviesAdapter);
             moviesPlayingNowRecyclerView.setNestedScrollingEnabled(false);
+            moviesAdapter = null;
         }
     }
 
     private void setUpUpcomingMoviesAdapter() {
-        if (upcomingMoviesAdapter == null) {
-            upcomingMoviesAdapter = new UpcomingMoviesAdapter(getContext(), upcomingMoviesList, this);
+        if (moviesAdapter == null) {
+            moviesAdapter = new MoviesAdapter(getContext(), upcomingMoviesList);
             upcomingMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            upcomingMoviesRecyclerView.setAdapter(upcomingMoviesAdapter);
+            upcomingMoviesRecyclerView.setAdapter(moviesAdapter);
             upcomingMoviesRecyclerView.setNestedScrollingEnabled(false);
+            moviesAdapter = null;
         }
     }
 
@@ -140,33 +135,6 @@ public class MoviesFragment extends Fragment implements OnPopularMovieListener, 
                 setUpUpcomingMoviesAdapter();
             }
         });
-    }
-
-    @Override
-    public void OnPopularMovieClick(int position) {
-        Movies selectedMovie = popularMoviesAdapter.getSelectedMovie(position);
-        Intent intent = new Intent(getContext(), MovieActivity.class);
-        String id = selectedMovie.getId().toString();
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onUpcomingMovieClick(int position) {
-        Movies selectedMovie = upcomingMoviesAdapter.getSelectedMovie(position);
-        Intent intent = new Intent(getContext(), MovieActivity.class);
-        String id = selectedMovie.getId().toString();
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onMovieNowPlayingListener(int position) {
-        Movies selectedMovie = moviesPlayingNowAdapter.getSelectedMovie(position);
-        Intent intent = new Intent(getContext(), MovieActivity.class);
-        String id = selectedMovie.getId().toString();
-        intent.putExtra("id", id);
-        startActivity(intent);
     }
 
     private void showProgressBar() {

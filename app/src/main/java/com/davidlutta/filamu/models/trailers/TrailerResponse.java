@@ -33,11 +33,11 @@ public class TrailerResponse implements Serializable, Parcelable {
     private Integer id;
     @SerializedName("results")
     @Expose
-    private List<Trailers> trailers = null;
+    private List<Trailer> trailers = null;
 
     protected TrailerResponse(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        in.readList(this.trailers, (Trailers.class.getClassLoader()));
+        in.readList(this.trailers, (Trailer.class.getClassLoader()));
     }
 
     /**
@@ -50,7 +50,7 @@ public class TrailerResponse implements Serializable, Parcelable {
      * @param id
      * @param trailers
      */
-    public TrailerResponse(Integer id, List<Trailers> trailers) {
+    public TrailerResponse(Integer id, List<Trailer> trailers) {
         super();
         this.id = id;
         this.trailers = trailers;
@@ -64,11 +64,11 @@ public class TrailerResponse implements Serializable, Parcelable {
         this.id = id;
     }
 
-    public List<Trailers> getTrailers() {
+    public List<Trailer> getTrailers() {
         return trailers;
     }
 
-    public void setTrailers(List<Trailers> trailers) {
+    public void setTrailers(List<Trailer> trailers) {
         this.trailers = trailers;
     }
 

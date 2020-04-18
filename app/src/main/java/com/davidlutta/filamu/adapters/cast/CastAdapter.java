@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,19 +24,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
     private Context mContext;
     private List<Cast> CastList;
-    private OnCastClickListener castListener;
 
-    public CastAdapter(Context mContext, List<Cast> CastList, OnCastClickListener castListener) {
+    public CastAdapter(Context mContext, List<Cast> CastList) {
         this.mContext = mContext;
         this.CastList = CastList;
-        this.castListener = castListener;
     }
 
     @NonNull
     @Override
     public CastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cast_item, parent, false);
-        return new CastViewHolder(view, castListener);
+        return new CastViewHolder(view);
     }
 
     @Override
@@ -56,36 +55,29 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         return CastList.size();
     }
 
-    public Cast getSelectedCast(int position) {
+    private Cast getSelectedCast(int position) {
         if (CastList.size() > 0) {
             return CastList.get(position);
         }
         return null;
     }
 
-    public class CastViewHolder extends BaseViewHolder implements View.OnClickListener {
-        OnCastClickListener castListener;
+    public class CastViewHolder extends BaseViewHolder {
         private TextView castNameTextView;
         private TextView castRoleTextView;
         private CircleImageView castImageView;
 
-        public CastViewHolder(@NonNull View itemView, OnCastClickListener oncastListener) {
+        public CastViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.castListener = oncastListener;
             castNameTextView = itemView.findViewById(R.id.castNameTextView);
             castRoleTextView = itemView.findViewById(R.id.castRoleTextView);
             castImageView = itemView.findViewById(R.id.castImageView);
-            itemView.setOnClickListener(this);
         }
-
         @Override
-        public int getCurrentPosition() {
-            return super.getCurrentPosition();
-        }
-
-        @Override
-        public void onClick(View v) {
-            castListener.onCastClicked(getAdapterPosition());
+        protected void onClickItem() {
+            int position = getAdapterPosition();
+            Cast selectedCast = getSelectedCast(position);
+            Toast.makeText(itemView.getContext(), selectedCast.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }

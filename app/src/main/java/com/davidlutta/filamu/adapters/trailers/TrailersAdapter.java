@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.R;
-import com.davidlutta.filamu.adapters.BaseViewHolder;
-import com.davidlutta.filamu.models.trailers.Trailers;
+import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,11 +22,11 @@ import java.util.List;
 
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.TrailersViewHolder> {
     private Context mContext;
-    private List<Trailers> trailersList;
+    private List<Trailer> trailerList;
 
-    public TrailersAdapter(Context mContext, List<Trailers> trailersList) {
+    public TrailersAdapter(Context mContext, List<Trailer> trailerList) {
         this.mContext = mContext;
-        this.trailersList = trailersList;
+        this.trailerList = trailerList;
     }
 
     @NonNull
@@ -39,7 +38,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
 
     @Override
     public void onBindViewHolder(@NonNull TrailersViewHolder holder, int position) {
-        Trailers trailer = trailersList.get(position);
+        Trailer trailer = trailerList.get(position);
         String thumbnail = Constants.THUMBNAIL_BASE_URL + trailer.getKey() + Constants.THUMBNAIL_END;
         Glide.with(mContext)
                 .load(thumbnail)
@@ -47,12 +46,19 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
                 .into(holder.trailersImageView);
     }
 
-    @Override
-    public int getItemCount() {
-        return trailersList.size();
+    private Trailer getSelectedTrailer(int position) {
+        if (trailerList.size() > 0) {
+            return trailerList.get(position);
+        }
+        return null;
     }
 
-    public class TrailersViewHolder extends BaseViewHolder {
+    @Override
+    public int getItemCount() {
+        return trailerList.size();
+    }
+
+    public class TrailersViewHolder extends RecyclerView.ViewHolder {
         private ImageView trailersImageView;
         private FloatingActionButton playButton;
 
@@ -64,7 +70,8 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    String videoId = trailersList.get(position).getKey();
+                    Trailer selectedTrailer = trailerList.get(position);
+                    String videoId = selectedTrailer.getKey();
                     Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.YOUTUBE_WEB_BASE_URL + videoId));
                     Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.YOUTUBE_APP_BASE_URL + videoId));
                     webIntent.putExtra("VIDEO_ID", videoId);
@@ -76,11 +83,6 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
                     }
                 }
             });
-        }
-
-        @Override
-        public int getCurrentPosition() {
-            return super.getCurrentPosition();
         }
     }
 }

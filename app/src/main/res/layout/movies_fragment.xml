@@ -66,12 +66,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/popular_movies_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:msrv_gravity="start"
+                app:msrv_interval="1"
+                app:msrv_speed_ms_per_inch="100"
                 app:layout_constraintStart_toStartOf="@+id/popularTitleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/popularTitleTextView" />
 
@@ -122,21 +126,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/now_playing_recyclerView"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/upcomingMoviesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:padding="1dp"
+                android:orientation="horizontal"
+                app:msrv_gravity="start"
+                app:msrv_interval="1"
+                app:msrv_speed_ms_per_inch="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/upcomingMoviesTitle"
                 app:layout_constraintTop_toBottomOf="@+id/upcomingMoviesTitle" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/now_playing_recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:msrv_gravity="start"
+                app:msrv_interval="1"
+                app:msrv_speed_ms_per_inch="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/popular_movies_recyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/discoverTitleTextView" />

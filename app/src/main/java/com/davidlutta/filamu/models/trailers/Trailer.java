@@ -9,20 +9,20 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Trailers implements Serializable, Parcelable {
+public class Trailer implements Serializable, Parcelable {
 
-    public final static Creator<Trailers> CREATOR = new Creator<Trailers>() {
+    public final static Creator<Trailer> CREATOR = new Creator<Trailer>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Trailers createFromParcel(Parcel in) {
-            return new Trailers(in);
+        public Trailer createFromParcel(Parcel in) {
+            return new Trailer(in);
         }
 
-        public Trailers[] newArray(int size) {
-            return (new Trailers[size]);
+        public Trailer[] newArray(int size) {
+            return (new Trailer[size]);
         }
 
     };
@@ -52,7 +52,7 @@ public class Trailers implements Serializable, Parcelable {
     @Expose
     private String type;
 
-    protected Trailers(Parcel in) {
+    protected Trailer(Parcel in) {
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.iso6391 = ((String) in.readValue((String.class.getClassLoader())));
         this.iso31661 = ((String) in.readValue((String.class.getClassLoader())));
@@ -66,7 +66,7 @@ public class Trailers implements Serializable, Parcelable {
     /**
      * No args constructor for use in serialization
      */
-    public Trailers() {
+    public Trailer() {
     }
 
     /**
@@ -79,7 +79,7 @@ public class Trailers implements Serializable, Parcelable {
      * @param type
      * @param key
      */
-    public Trailers(String id, String iso6391, String iso31661, String key, String name, String site, Integer size, String type) {
+    public Trailer(String id, String iso6391, String iso31661, String key, String name, String site, Integer size, String type) {
         super();
         this.id = id;
         this.iso6391 = iso6391;

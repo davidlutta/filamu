@@ -1,7 +1,7 @@
-package com.davidlutta.filamu.adapters.moviesPlayingNow;
-
+package com.davidlutta.filamu.adapters.movies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.davidlutta.filamu.MovieActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.models.movies.Movies;
@@ -19,26 +20,25 @@ import com.davidlutta.filamu.util.Constants;
 
 import java.util.List;
 
-public class MoviesPlayingNowAdapter extends RecyclerView.Adapter<MoviesPlayingNowAdapter.MovieViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
+
     private Context mContext;
     private List<Movies> moviesList;
-    private OnMoviesNowPlayingListener movieListener;
 
-    public MoviesPlayingNowAdapter(Context mContext, List<Movies> moviesList, OnMoviesNowPlayingListener movieListener) {
+    public MoviesAdapter(Context mContext, List<Movies> moviesList) {
         this.mContext = mContext;
         this.moviesList = moviesList;
-        this.movieListener = movieListener;
     }
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MoviesAdapter.MoviesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        return new MovieViewHolder(view, movieListener);
+        return new MoviesAdapter.MoviesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MoviesAdapter.MoviesViewHolder holder, int position) {
         String title = moviesList.get(position).getTitle();
         String rating = "Rating: " + moviesList.get(position).getVoteAverage().toString() + " / 10";
         String poster = Constants.IMAGE_BASE_URL + moviesList.get(position).getPosterPath();
@@ -47,7 +47,7 @@ public class MoviesPlayingNowAdapter extends RecyclerView.Adapter<MoviesPlayingN
         Glide.with(mContext)
                 .load(poster)
                 .placeholder(R.drawable.poster)
-                .into(holder.backgroundImageview);
+                .into(holder.backgroundImageView);
     }
 
     @Override
@@ -55,36 +55,34 @@ public class MoviesPlayingNowAdapter extends RecyclerView.Adapter<MoviesPlayingN
         return moviesList.size();
     }
 
-    public Movies getSelectedMovie(int position) {
+    private Movies getSelectedMovie(int position) {
         if (moviesList.size() > 0) {
             return moviesList.get(position);
         }
         return null;
     }
 
-    public class MovieViewHolder extends BaseViewHolder implements View.OnClickListener {
-        OnMoviesNowPlayingListener movieListener;
+
+    public class MoviesViewHolder extends BaseViewHolder {
         private TextView titleTextView;
         private TextView ratingTextView;
-        private ImageView backgroundImageview;
+        private ImageView backgroundImageView;
 
-        public MovieViewHolder(@NonNull View itemView, OnMoviesNowPlayingListener onMovieListener) {
+        public MoviesViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.movieListener = onMovieListener;
             titleTextView = itemView.findViewById(R.id.itemTitleTextView);
             ratingTextView = itemView.findViewById(R.id.itemRatingTextView);
-            backgroundImageview = itemView.findViewById(R.id.itemBackgroundImageView);
-            itemView.setOnClickListener(this);
+            backgroundImageView = itemView.findViewById(R.id.itemBackgroundImageView);
         }
 
         @Override
-        public int getCurrentPosition() {
-            return super.getCurrentPosition();
-        }
-
-        @Override
-        public void onClick(View v) {
-            movieListener.onMovieNowPlayingListener(getAdapterPosition());
+        protected void onClickItem() {
+            int position = getAdapterPosition();
+            Movies selectedMovie = getSelectedMovie(position);
+            String id = selectedMovie.getId().toString();
+            Intent intent = new Intent(itemView.getContext(), MovieActivity.class);
+            intent.putExtra("id", id);
+            itemView.getContext().startActivity(intent);
         }
     }
 }

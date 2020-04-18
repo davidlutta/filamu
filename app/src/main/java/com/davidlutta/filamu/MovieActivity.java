@@ -17,21 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
-import com.davidlutta.filamu.adapters.cast.OnCastClickListener;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
-import com.davidlutta.filamu.adapters.crew.OnCrewClickListener;
+import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.adapters.trailers.TrailersAdapter;
 import com.davidlutta.filamu.models.cast.Cast;
 import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
-import com.davidlutta.filamu.models.trailers.Trailers;
+import com.davidlutta.filamu.models.movies.Movies;
+import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
 
 import java.util.List;
 import java.util.StringJoiner;
 
-public class MovieActivity extends AppCompatActivity implements OnCastClickListener, OnCrewClickListener {
+public class MovieActivity extends AppCompatActivity {
 
     private MoviesViewModel moviesViewModel;
 
@@ -50,15 +50,19 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
     private CrewAdapter crewAdapter;
 
     private RecyclerView trailersRecyclerView;
-    private List<Trailers> trailersList;
+    private List<Trailer> trailerList;
     private TrailersAdapter trailersAdapter;
 
-    @Override
+    private RecyclerView similarMoviesRecyclerView;
+    private List<Movies> similarMoviesList;
+    private MoviesAdapter similarMoviesAdapter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         setTitle("");
+        // FIXME: 4/19/20 Make Uneccessary Text disappear until data is loaded
         titleTextView = findViewById(R.id.titleTextView);
         genreTextView = findViewById(R.id.genreTextView);
         ratingTextView = findViewById(R.id.ratingTextView);
@@ -67,6 +71,7 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
         castRecyclerView = findViewById(R.id.castRecyclerView);
         crewRecyclerView = findViewById(R.id.crewRecyclerView);
         trailersRecyclerView = findViewById(R.id.trailersRecyclerView);
+        similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         subscribeObservers();
     }
@@ -105,16 +110,23 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
                     }
                 }
             });
-            moviesViewModel.getTrailers(id).observe(this, new Observer<List<Trailers>>() {
+            moviesViewModel.getTrailers(id).observe(this, new Observer<List<Trailer>>() {
                 @Override
-                public void onChanged(List<Trailers> trailers) {
+                public void onChanged(List<Trailer> trailers) {
                     if (trailers.size() > 2) {
-                        trailersList = trailers.subList(0, 3);
+                        trailerList = trailers.subList(0, 3);
                         setUpTrailersAdapter();
                     } else {
-                        trailersList = trailers;
+                        trailerList = trailers;
                         setUpTrailersAdapter();
                     }
+                }
+            });
+            moviesViewModel.getSimilarMovies(id).observe(this, new Observer<List<Movies>>() {
+                @Override
+                public void onChanged(List<Movies> movies) {
+                    similarMoviesList = movies;
+                    setUpSimilarMoviesAdapter();
                 }
             });
         }
@@ -155,7 +167,7 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
 
     private void setUpCastAdapter() {
         if (castAdapter == null) {
-            castAdapter = new CastAdapter(this, castList, this);
+            castAdapter = new CastAdapter(this, castList);
             castRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             castRecyclerView.setAdapter(castAdapter);
             castRecyclerView.setNestedScrollingEnabled(false);
@@ -164,7 +176,7 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
 
     private void setUpCrewAdapter() {
         if (crewAdapter == null) {
-            crewAdapter = new CrewAdapter(this, crewList, this);
+            crewAdapter = new CrewAdapter(this, crewList);
             crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             crewRecyclerView.setAdapter(crewAdapter);
             crewRecyclerView.setNestedScrollingEnabled(false);
@@ -173,10 +185,19 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
 
     private void setUpTrailersAdapter() {
         if (trailersAdapter == null) {
-            trailersAdapter = new TrailersAdapter(this, trailersList);
+            trailersAdapter = new TrailersAdapter(this, trailerList);
             trailersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             trailersRecyclerView.setAdapter(trailersAdapter);
             trailersRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpSimilarMoviesAdapter() {
+        if (similarMoviesAdapter == null) {
+            similarMoviesAdapter = new MoviesAdapter(this, similarMoviesList);
+            similarMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            similarMoviesRecyclerView.setAdapter(similarMoviesAdapter);
+            similarMoviesRecyclerView.setNestedScrollingEnabled(false);
         }
     }
 
@@ -195,17 +216,5 @@ public class MovieActivity extends AppCompatActivity implements OnCastClickListe
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCastClicked(int position) {
-        Cast selectedCast = castAdapter.getSelectedCast(position);
-        Toast.makeText(this, selectedCast.getName(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onCrewClicked(int position) {
-        Crew selectedCrew = crewAdapter.getSelectedCrew(position);
-        Toast.makeText(this, selectedCrew.getName(), Toast.LENGTH_SHORT).show();
     }
 }

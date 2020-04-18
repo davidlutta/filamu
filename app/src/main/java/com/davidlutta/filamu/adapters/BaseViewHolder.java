@@ -5,14 +5,16 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BaseViewHolder extends RecyclerView.ViewHolder {
-    private int mCurrentPosition;
-
+public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder(@NonNull View itemView) {
         super(itemView);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItem();
+            }
+        });
     }
 
-    public int getCurrentPosition() {
-        return mCurrentPosition;
-    }
+    protected abstract void onClickItem();
 }

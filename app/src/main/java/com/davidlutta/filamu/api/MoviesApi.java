@@ -29,4 +29,6 @@ public interface MoviesApi {
     @GET("/3/movie/{movie_id}/videos")
     Call<TrailerResponse> getTrailers(@Path("movie_id") String movieId, @Query("api_key") String key);
 
+    @GET("/3/movie/{movie_id}/similar")
+    Call<MovieResponse> getSimilar(@Path("movie_id") String movieId, @Query("api_key") String key, @Query("page") String page);
 }

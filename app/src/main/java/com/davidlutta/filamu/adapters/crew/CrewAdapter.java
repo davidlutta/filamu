@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,19 +24,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder> {
     private Context mContext;
     private List<Crew> CrewList;
-    private OnCrewClickListener CrewListener;
 
-    public CrewAdapter(Context mContext, List<Crew> CrewList, OnCrewClickListener CrewListener) {
+    public CrewAdapter(Context mContext, List<Crew> CrewList) {
         this.mContext = mContext;
         this.CrewList = CrewList;
-        this.CrewListener = CrewListener;
     }
 
     @NonNull
     @Override
     public CrewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cast_item, parent, false);
-        return new CrewViewHolder(view, CrewListener);
+        return new CrewViewHolder(view);
     }
 
     @Override
@@ -56,36 +55,30 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
         return CrewList.size();
     }
 
-    public Crew getSelectedCrew(int position) {
+    private Crew getSelectedCrew(int position) {
         if (CrewList.size() > 0) {
             return CrewList.get(position);
         }
         return null;
     }
 
-    public class CrewViewHolder extends BaseViewHolder implements View.OnClickListener {
-        OnCrewClickListener CrewListener;
+    public class CrewViewHolder extends BaseViewHolder {
         private TextView CrewNameTextView;
         private TextView CrewRoleTextView;
         private CircleImageView CrewImageView;
 
-        public CrewViewHolder(@NonNull View itemView, OnCrewClickListener onCrewListener) {
+        public CrewViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.CrewListener = onCrewListener;
             CrewNameTextView = itemView.findViewById(R.id.castNameTextView);
             CrewRoleTextView = itemView.findViewById(R.id.castRoleTextView);
             CrewImageView = itemView.findViewById(R.id.castImageView);
-            itemView.setOnClickListener(this);
         }
 
         @Override
-        public int getCurrentPosition() {
-            return super.getCurrentPosition();
-        }
-
-        @Override
-        public void onClick(View v) {
-            CrewListener.onCrewClicked(getAdapterPosition());
+        protected void onClickItem() {
+            int position = getAdapterPosition();
+            Crew selectedCrew = getSelectedCrew(position);
+            Toast.makeText(itemView.getContext(), selectedCrew.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }
