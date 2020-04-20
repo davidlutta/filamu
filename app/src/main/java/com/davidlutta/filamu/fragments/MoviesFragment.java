@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
@@ -23,7 +24,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private MoviesViewModel mViewModel;
 
@@ -44,6 +45,8 @@ public class MoviesFragment extends Fragment {
     private TextView upcomingMoviesTitle;
     private TextView viewAllUpcomingMoviesTextView;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     private MoviesAdapter moviesAdapter;
 
     public static MoviesFragment newInstance() {
@@ -55,15 +58,22 @@ public class MoviesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // FIXME: 4/19/20 Make Unnecessary Text disappear until data is loaded
         View view = inflater.inflate(R.layout.movies_fragment, container, false);
+
+        swipeRefreshLayout = view.findViewById(R.id.moviesFragmentSwipeRefreshLayout);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         popularMoviesRecyclerView = view.findViewById(R.id.popular_movies_recyclerView);
         moviesPlayingNowRecyclerView = view.findViewById(R.id.now_playing_recyclerView);
         upcomingMoviesRecyclerView = view.findViewById(R.id.upcomingMoviesRecyclerView);
+
         popularTitleTextView = view.findViewById(R.id.popularTitleTextView);
         discoverTitleTextView = view.findViewById(R.id.discoverTitleTextView);
         upcomingMoviesTitle = view.findViewById(R.id.upcomingMoviesTitle);
         viewAllMoviesPlayingNowTextView = view.findViewById(R.id.viewAllMoviesPlayingNowTextView);
         viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
         viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
+
         final float scale = getContext().getResources().getDisplayMetrics().density;
         int pixels = (int) (350 * scale + 0.5f);
         upcomingMoviesRecyclerView.getLayoutParams().height = pixels;
@@ -112,6 +122,7 @@ public class MoviesFragment extends Fragment {
         mViewModel.getPopularMovies().observe(getViewLifecycleOwner(), new Observer<List<Movies>>() {
             @Override
             public void onChanged(List<Movies> movies) {
+                swipeRefreshLayout.setRefreshing(false);
                 popularMoviesList = movies;
                 setUpPopularMoviesAdapter();
             }
@@ -119,6 +130,7 @@ public class MoviesFragment extends Fragment {
         mViewModel.getMoviesPlayingNow().observe(getViewLifecycleOwner(), new Observer<List<Movies>>() {
             @Override
             public void onChanged(List<Movies> movies) {
+                swipeRefreshLayout.setRefreshing(false);
                 moviesPlayingNowList = movies;
                 setUpMoviesPlayingNowAdapter();
             }
@@ -126,6 +138,7 @@ public class MoviesFragment extends Fragment {
         mViewModel.getUpcomingMovies().observe(getViewLifecycleOwner(), new Observer<List<Movies>>() {
             @Override
             public void onChanged(List<Movies> movies) {
+                swipeRefreshLayout.setRefreshing(false);
                 upcomingMoviesList = movies;
                 setUpUpcomingMoviesAdapter();
             }
@@ -155,5 +168,10 @@ public class MoviesFragment extends Fragment {
             viewAllPopularMoviesTextView.setVisibility(View.VISIBLE);
             viewAllMoviesPlayingNowTextView.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        subscribeObservers();
     }
 }

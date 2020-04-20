@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
@@ -39,12 +40,15 @@ public class ProfileActivity extends AppCompatActivity {
     private List<CreditsCast> creditsCastsList;
     private RecyclerView knownForRecycler;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        swipeRefreshLayout = findViewById(R.id.profileActivitySwipeRefreshLayout);
         profilePicImageView = findViewById(R.id.profilePicImageView);
         nameTextView = findViewById(R.id.userNameTextView);
         jobTextView = findViewById(R.id.jobTextView);
@@ -55,6 +59,12 @@ public class ProfileActivity extends AppCompatActivity {
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         subscribeViewModels();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                subscribeViewModels();
+            }
+        });
     }
 
     private void subscribeViewModels() {
@@ -73,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
                         profileViewModel.getCreditsCrew(personId).observe(this, new Observer<List<CreditsCrew>>() {
                             @Override
                             public void onChanged(List<CreditsCrew> creditsCrews) {
+                                swipeRefreshLayout.setRefreshing(false);
                                 creditsCrewsList = creditsCrews;
                                 setUpCrewAdapter();
                             }
@@ -81,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
                         profileViewModel.getCreditCast(personId).observe(this, new Observer<List<CreditsCast>>() {
                             @Override
                             public void onChanged(List<CreditsCast> creditsCasts) {
+                                swipeRefreshLayout.setRefreshing(false);
                                 creditsCastsList = creditsCasts;
                                 setUpCastAdapter();
                             }

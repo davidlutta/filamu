@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
@@ -57,12 +58,15 @@ public class MovieActivity extends AppCompatActivity {
     private List<Movies> similarMoviesList;
     private MoviesAdapter similarMoviesAdapter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         setTitle("");
         // FIXME: 4/19/20 Make Uneccessary Text disappear until data is loaded
+        swipeRefreshLayout = findViewById(R.id.moviesActivitySwipeRefreshLayout);
         titleTextView = findViewById(R.id.titleTextView);
         genreTextView = findViewById(R.id.genreTextView);
         ratingTextView = findViewById(R.id.ratingTextView);
@@ -74,6 +78,12 @@ public class MovieActivity extends AppCompatActivity {
         similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         subscribeObservers();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                subscribeObservers();
+            }
+        });
     }
 
     private void subscribeObservers() {
@@ -82,12 +92,14 @@ public class MovieActivity extends AppCompatActivity {
             moviesViewModel.getMovieDetails(id).observe(this, new Observer<Movie>() {
                 @Override
                 public void onChanged(Movie movie) {
+                    swipeRefreshLayout.setRefreshing(false);
                     populateData(movie);
                 }
             });
             moviesViewModel.getCastDetails(id).observe(this, new Observer<List<Cast>>() {
                 @Override
                 public void onChanged(List<Cast> casts) {
+                    swipeRefreshLayout.setRefreshing(false);
                     castList = casts;
                     setUpCastAdapter();
                 }
@@ -95,6 +107,7 @@ public class MovieActivity extends AppCompatActivity {
             moviesViewModel.getCrewDetails(id).observe(this, new Observer<List<Crew>>() {
                 @Override
                 public void onChanged(List<Crew> crews) {
+                    swipeRefreshLayout.setRefreshing(false);
                     crewList = crews;
                     setUpCrewAdapter();
                 }
@@ -102,6 +115,7 @@ public class MovieActivity extends AppCompatActivity {
             moviesViewModel.getTrailers(id).observe(this, new Observer<List<Trailer>>() {
                 @Override
                 public void onChanged(List<Trailer> trailers) {
+                    swipeRefreshLayout.setRefreshing(false);
                     trailerList = trailers;
                     setUpTrailersAdapter();
                 }
@@ -109,6 +123,7 @@ public class MovieActivity extends AppCompatActivity {
             moviesViewModel.getSimilarMovies(id).observe(this, new Observer<List<Movies>>() {
                 @Override
                 public void onChanged(List<Movies> movies) {
+                    swipeRefreshLayout.setRefreshing(false);
                     similarMoviesList = movies;
                     setUpSimilarMoviesAdapter();
                 }

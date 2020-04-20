@@ -1,217 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/moviesActivitySwipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".MovieActivity">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="0dp"
-            android:layout_height="500dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="10dp"
-            android:elevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/backgroundImageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/background_image"
-                android:scaleType="centerCrop"
-                android:src="@drawable/poster"
-                android:visibility="invisible" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/textColor"
-            android:textFontWeight="900"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/cardView2"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            tools:context=".MovieActivity">
 
-        <TextView
-            android:id="@+id/genreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/nunito_light"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/titleTextView"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="500dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:elevation="1dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/ratingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/nunito_light"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+                <ImageView
+                    android:id="@+id/backgroundImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/background_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/poster"
+                    android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/overviewTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ellipsize="none"
-            android:fontFamily="@font/nunito_regular"
-            android:scrollHorizontally="false"
-            android:textAlignment="textStart"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/cardView2"
-            app:layout_constraintStart_toStartOf="@+id/genreTextView"
-            app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+            </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/castTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/creditsCast"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/nunito_bold"
-            android:textFontWeight="700"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/overviewTextView"
-            app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/textColor"
+                android:textFontWeight="900"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-        <TextView
-            android:id="@+id/viewAllCastTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/view_all"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/castTitle"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/genreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/castRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
-            app:layout_constraintStart_toStartOf="@+id/castTitle"
-            app:layout_constraintTop_toBottomOf="@+id/castTitle" />
+            <TextView
+                android:id="@+id/ratingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
-        <TextView
-            android:id="@+id/crewTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/creditsCrew"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/nunito_bold"
-            android:textFontWeight="700"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/castRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/castRecyclerView" />
+            <TextView
+                android:id="@+id/overviewTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="none"
+                android:fontFamily="@font/nunito_regular"
+                android:scrollHorizontally="false"
+                android:textAlignment="textStart"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="@+id/genreTextView"
+                app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
 
-        <TextView
-            android:id="@+id/viewAllCrewTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/view_all"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/crewTitleTextView"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/castTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/creditsCast"
+                android:textColor="@color/textColor"
+                android:textFontWeight="700"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/overviewTextView"
+                app:layout_constraintTop_toBottomOf="@+id/overviewTextView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/crewRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
-            app:layout_constraintStart_toStartOf="@+id/crewTitleTextView"
-            app:layout_constraintTop_toBottomOf="@+id/crewTitleTextView" />
+            <TextView
+                android:id="@+id/viewAllCastTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/view_all"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/castTitle"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/trailersTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/trailers"
-            android:textColor="@color/textColor"
-            android:textFontWeight="700"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/crewRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/crewRecyclerView" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/castRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+                app:layout_constraintStart_toStartOf="@+id/castTitle"
+                app:layout_constraintTop_toBottomOf="@+id/castTitle" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/trailersRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
-            app:layout_constraintStart_toStartOf="@+id/trailersTextView"
-            app:layout_constraintTop_toBottomOf="@+id/trailersTextView" />
+            <TextView
+                android:id="@+id/crewTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/creditsCrew"
+                android:textColor="@color/textColor"
+                android:textFontWeight="700"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/castRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/castRecyclerView" />
 
-        <TextView
-            android:id="@+id/similarMoviesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/similar_movies"
-            android:textColor="@color/textColor"
-            android:textFontWeight="700"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/overviewTextView"
-            app:layout_constraintTop_toBottomOf="@+id/trailersRecyclerView" />
+            <TextView
+                android:id="@+id/viewAllCrewTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/view_all"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/crewTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/viewAllSimilarMoviesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/view_all"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/similarMoviesTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trailersRecyclerView" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/crewRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+                app:layout_constraintStart_toStartOf="@+id/crewTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/crewTitleTextView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/similarMoviesRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
-            app:layout_constraintStart_toStartOf="@+id/similarMoviesTextView"
-            app:layout_constraintTop_toBottomOf="@+id/similarMoviesTextView" />
+            <TextView
+                android:id="@+id/trailersTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/trailers"
+                android:textColor="@color/textColor"
+                android:textFontWeight="700"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/crewRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/crewRecyclerView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trailersRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+                app:layout_constraintStart_toStartOf="@+id/trailersTextView"
+                app:layout_constraintTop_toBottomOf="@+id/trailersTextView" />
+
+            <TextView
+                android:id="@+id/similarMoviesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/similar_movies"
+                android:textColor="@color/textColor"
+                android:textFontWeight="700"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/overviewTextView"
+                app:layout_constraintTop_toBottomOf="@+id/trailersRecyclerView" />
+
+            <TextView
+                android:id="@+id/viewAllSimilarMoviesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/view_all"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/similarMoviesTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trailersRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/similarMoviesRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
+                app:layout_constraintStart_toStartOf="@+id/similarMoviesTextView"
+                app:layout_constraintTop_toBottomOf="@+id/similarMoviesTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
