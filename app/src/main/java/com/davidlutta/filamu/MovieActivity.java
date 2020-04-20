@@ -88,38 +88,22 @@ public class MovieActivity extends AppCompatActivity {
             moviesViewModel.getCastDetails(id).observe(this, new Observer<List<Cast>>() {
                 @Override
                 public void onChanged(List<Cast> casts) {
-                    if (casts.size() > 2) {
-                        // FIXME: 4/18/20
-                        castList = casts.subList(0, 10);
-                        setUpCastAdapter();
-                    } else {
-                        castList = casts;
-                        setUpCastAdapter();
-                    }
+                    castList = casts;
+                    setUpCastAdapter();
                 }
             });
             moviesViewModel.getCrewDetails(id).observe(this, new Observer<List<Crew>>() {
                 @Override
                 public void onChanged(List<Crew> crews) {
-                    if (crews.size() > 2) {
-                        crewList = crews.subList(0, 10);
-                        setUpCrewAdapter();
-                    } else {
-                        crewList = crews;
-                        setUpTrailersAdapter();
-                    }
+                    crewList = crews;
+                    setUpCrewAdapter();
                 }
             });
             moviesViewModel.getTrailers(id).observe(this, new Observer<List<Trailer>>() {
                 @Override
                 public void onChanged(List<Trailer> trailers) {
-                    if (trailers.size() > 2) {
-                        trailerList = trailers.subList(0, 3);
-                        setUpTrailersAdapter();
-                    } else {
-                        trailerList = trailers;
-                        setUpTrailersAdapter();
-                    }
+                    trailerList = trailers;
+                    setUpTrailersAdapter();
                 }
             });
             moviesViewModel.getSimilarMovies(id).observe(this, new Observer<List<Movies>>() {
@@ -134,35 +118,37 @@ public class MovieActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void populateData(Movie movie) {
-        titleTextView.setText(movie.getTitle());
-        String rating = movie.getVoteAverage().toString() + " / 10";
-        ratingTextView.setText(rating);
-        overviewTextView.setText(movie.getOverview());
-        String poster = Constants.IMAGE_BASE_URL + movie.getPosterPath();
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            StringJoiner joiner = new StringJoiner(" | ");
-            for (int i = 0; i < movie.getGenres().size(); i++) {
-                joiner.add(movie.getGenres().get(i).getName());
+        if (movie != null) {
+            titleTextView.setText(movie.getTitle());
+            String rating = movie.getVoteAverage().toString() + " / 10";
+            ratingTextView.setText(rating);
+            overviewTextView.setText(movie.getOverview());
+            String poster = Constants.IMAGE_BASE_URL + movie.getPosterPath();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                StringJoiner joiner = new StringJoiner(" | ");
+                for (int i = 0; i < movie.getGenres().size(); i++) {
+                    joiner.add(movie.getGenres().get(i).getName());
+                }
+                String joinedString = joiner.toString();
+                genreTextView.setText(joinedString);
+            } else {
+                StringBuilder stringBuilder = new StringBuilder();
+                String delim = " | ";
+                String loopDelim = "";
+                for (int i = 0; i < movie.getGenres().size(); i++) {
+                    stringBuilder.append(loopDelim);
+                    stringBuilder.append(movie.getGenres().get(i).getName());
+                    loopDelim = delim;
+                }
+                String joinedString = stringBuilder.toString();
+                genreTextView.setText(joinedString);
             }
-            String joinedString = joiner.toString();
-            genreTextView.setText(joinedString);
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            String delim = " | ";
-            String loopDelim = "";
-            for (int i = 0; i < movie.getGenres().size(); i++) {
-                stringBuilder.append(loopDelim);
-                stringBuilder.append(movie.getGenres().get(i).getName());
-                loopDelim = delim;
-            }
-            String joinedString = stringBuilder.toString();
-            genreTextView.setText(joinedString);
+            backgroundImageView.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(poster)
+                    .placeholder(R.drawable.ic_launcher)
+                    .into(backgroundImageView);
         }
-        backgroundImageView.setVisibility(View.VISIBLE);
-        Glide.with(this)
-                .load(poster)
-                .placeholder(R.drawable.ic_launcher)
-                .into(backgroundImageView);
     }
 
     private void setUpCastAdapter() {

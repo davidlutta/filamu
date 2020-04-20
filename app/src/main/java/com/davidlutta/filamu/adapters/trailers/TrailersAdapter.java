@@ -23,6 +23,7 @@ import java.util.List;
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.TrailersViewHolder> {
     private Context mContext;
     private List<Trailer> trailerList;
+    private final int limit = 3;
 
     public TrailersAdapter(Context mContext, List<Trailer> trailerList) {
         this.mContext = mContext;
@@ -55,7 +56,11 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
 
     @Override
     public int getItemCount() {
-        return trailerList.size();
+        if (trailerList.size() > limit) {
+            return limit;
+        } else {
+            return trailerList.size();
+        }
     }
 
     public class TrailersViewHolder extends RecyclerView.ViewHolder {

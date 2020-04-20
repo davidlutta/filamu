@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder> {
     private Context mContext;
     private List<Crew> CrewList;
+    private final int limit = 10;
 
     public CrewAdapter(Context mContext, List<Crew> CrewList) {
         this.mContext = mContext;
@@ -53,7 +54,11 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
 
     @Override
     public int getItemCount() {
-        return CrewList.size();
+        if (CrewList.size() > limit) {
+            return limit;
+        } else {
+            return CrewList.size();
+        }
     }
 
     private Crew getSelectedCrew(int position) {
@@ -82,6 +87,7 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
             Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
             String personId = selectedCrew.getId().toString();
             intent.putExtra(mContext.getString(R.string.personIntentExtraName), personId);
+            intent.putExtra("Credits", "Crew");
             itemView.getContext().startActivity(intent);
         }
     }

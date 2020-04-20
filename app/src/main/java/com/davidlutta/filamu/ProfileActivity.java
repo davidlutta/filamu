@@ -7,14 +7,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
+import com.davidlutta.filamu.adapters.crew.CreditsCrewAdapter;
+import com.davidlutta.filamu.models.credits.CreditsCast;
+import com.davidlutta.filamu.models.credits.CreditsCrew;
 import com.davidlutta.filamu.models.profile.Profile;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.ProfileViewModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -26,6 +33,13 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView POBTextView;
 
     private ProfileViewModel profileViewModel;
+    private CreditsCastAdapter creditsCastAdapter;
+    private CreditsCrewAdapter creditsCrewAdapter;
+    private List<CreditsCrew> creditsCrewsList;
+    private List<CreditsCast> creditsCastsList;
+    private RecyclerView knownForRecycler;
+
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +51,9 @@ public class ProfileActivity extends AppCompatActivity {
         bio = findViewById(R.id.bioTextView);
         DOBTextView = findViewById(R.id.DOBTextView);
         POBTextView = findViewById(R.id.POBTextView);
+        knownForRecycler = findViewById(R.id.knownForRecycler);
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         subscribeViewModels();
     }
 
@@ -50,6 +66,28 @@ public class ProfileActivity extends AppCompatActivity {
                     populateData(profile);
                 }
             });
+            if (getIntent().hasExtra("Credits")) {
+                String credits = getIntent().getExtras().getString("Credits");
+                if (credits != null) {
+                    if (credits.equals("Crew")) {
+                        profileViewModel.getCreditsCrew(personId).observe(this, new Observer<List<CreditsCrew>>() {
+                            @Override
+                            public void onChanged(List<CreditsCrew> creditsCrews) {
+                                creditsCrewsList = creditsCrews;
+                                setUpCrewAdapter();
+                            }
+                        });
+                    } else if (credits.equals("Cast")) {
+                        profileViewModel.getCreditCast(personId).observe(this, new Observer<List<CreditsCast>>() {
+                            @Override
+                            public void onChanged(List<CreditsCast> creditsCasts) {
+                                creditsCastsList = creditsCasts;
+                                setUpCastAdapter();
+                            }
+                        });
+                    }
+                }
+            }
         }
     }
 
@@ -72,6 +110,24 @@ public class ProfileActivity extends AppCompatActivity {
                     .load(profileImage)
                     .placeholder(R.drawable.ic_launcher)
                     .into(profilePicImageView);
+        }
+    }
+
+    private void setUpCastAdapter() {
+        if (creditsCastAdapter == null) {
+            creditsCastAdapter = new CreditsCastAdapter(this, creditsCastsList);
+            knownForRecycler.setLayoutManager(linearLayoutManager);
+            knownForRecycler.setAdapter(creditsCastAdapter);
+            knownForRecycler.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpCrewAdapter() {
+        if (creditsCrewAdapter == null) {
+            creditsCrewAdapter = new CreditsCrewAdapter(this, creditsCrewsList);
+            knownForRecycler.setLayoutManager(linearLayoutManager);
+            knownForRecycler.setAdapter(creditsCrewAdapter);
+            knownForRecycler.setNestedScrollingEnabled(false);
         }
     }
 }

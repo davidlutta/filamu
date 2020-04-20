@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
     private Context mContext;
     private List<Cast> CastList;
+    private final int limit = 10;
 
     public CastAdapter(Context mContext, List<Cast> CastList) {
         this.mContext = mContext;
@@ -53,7 +54,11 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
     @Override
     public int getItemCount() {
-        return CastList.size();
+        if (CastList.size() > limit) {
+            return limit;
+        } else {
+            return CastList.size();
+        }
     }
 
     private Cast getSelectedCast(int position) {
@@ -81,6 +86,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
             Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
             String personId = selectedCast.getId().toString();
             intent.putExtra(mContext.getString(R.string.personIntentExtraName), personId);
+            intent.putExtra("Credits", "Cast");
             itemView.getContext().startActivity(intent);
         }
     }

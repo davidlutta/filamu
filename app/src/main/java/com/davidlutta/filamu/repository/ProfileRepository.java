@@ -6,8 +6,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.davidlutta.filamu.api.ProfileApi;
 import com.davidlutta.filamu.api.RetrofitService;
+import com.davidlutta.filamu.models.credits.CreditsCast;
+import com.davidlutta.filamu.models.credits.CreditsCrew;
+import com.davidlutta.filamu.models.credits.CreditsResponse;
 import com.davidlutta.filamu.models.profile.Profile;
 import com.davidlutta.filamu.util.Constants;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,5 +52,47 @@ public class ProfileRepository {
             }
         });
         return profileData;
+    }
+
+    public MutableLiveData<List<CreditsCast>> getCreditsCast(String personId) {
+        final MutableLiveData<List<CreditsCast>> creditCastData = new MutableLiveData<>();
+        profileApi.getProfileCredits(personId, Constants.API_KEY).enqueue(new Callback<CreditsResponse>() {
+            @Override
+            public void onResponse(Call<CreditsResponse> call, Response<CreditsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<CreditsCast> cast = response.body().getCreditsCast();
+                        creditCastData.postValue(cast);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreditsResponse> call, Throwable t) {
+                Log.d(TAG, "GetCreditsCast: onFailure: FAILED TO RETRIEVE CAST DATA FOR PROFILE");
+            }
+        });
+        return creditCastData;
+    }
+
+    public MutableLiveData<List<CreditsCrew>> getCreditsCrew(String personId) {
+        final MutableLiveData<List<CreditsCrew>> creditsCrewData = new MutableLiveData<>();
+        profileApi.getProfileCredits(personId, Constants.API_KEY).enqueue(new Callback<CreditsResponse>() {
+            @Override
+            public void onResponse(Call<CreditsResponse> call, Response<CreditsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        List<CreditsCrew> crew = response.body().getCreditsCrew();
+                        creditsCrewData.postValue(crew);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreditsResponse> call, Throwable t) {
+                Log.d(TAG, "GetCreditsCrew: onFailure: FAILED TO RETRIEVE CREW DATA FOR PROFILE");
+            }
+        });
+        return creditsCrewData;
     }
 }

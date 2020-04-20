@@ -1,5 +1,6 @@
 package com.davidlutta.filamu.api;
 
+import com.davidlutta.filamu.models.credits.CreditsResponse;
 import com.davidlutta.filamu.models.profile.Profile;
 
 import retrofit2.Call;
@@ -11,4 +12,6 @@ public interface ProfileApi {
     @GET("/3/person/{person_id}")
     Call<Profile> getProfile(@Path("person_id") String personId, @Query("api_key") String key);
 
+    @GET("/3/person/{person_id}/combined_credits")
+    Call<CreditsResponse> getProfileCredits(@Path("person_id") String personId, @Query("api_key") String key);
 }

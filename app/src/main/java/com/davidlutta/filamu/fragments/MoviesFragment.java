@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,9 +37,6 @@ public class MoviesFragment extends Fragment {
     private List<Movies> upcomingMoviesList;
 
     SweetAlertDialog sweetAlertDialog;
-    private ProgressBar progressBar;
-    private ProgressBar moviesNowPlayingProgressBar;
-    private ProgressBar upcomingMoviesProgressBar;
     private TextView popularTitleTextView;
     private TextView viewAllPopularMoviesTextView;
     private TextView discoverTitleTextView;
@@ -62,7 +58,6 @@ public class MoviesFragment extends Fragment {
         popularMoviesRecyclerView = view.findViewById(R.id.popular_movies_recyclerView);
         moviesPlayingNowRecyclerView = view.findViewById(R.id.now_playing_recyclerView);
         upcomingMoviesRecyclerView = view.findViewById(R.id.upcomingMoviesRecyclerView);
-        progressBar = view.findViewById(R.id.popularMoviesFragmentProgressBar);
         popularTitleTextView = view.findViewById(R.id.popularTitleTextView);
         discoverTitleTextView = view.findViewById(R.id.discoverTitleTextView);
         upcomingMoviesTitle = view.findViewById(R.id.upcomingMoviesTitle);
@@ -143,7 +138,6 @@ public class MoviesFragment extends Fragment {
         pDialog.setTitleText("Loading");
         pDialog.setCancelable(false);
         pDialog.show();*/
-        progressBar.setVisibility(View.VISIBLE);
         popularTitleTextView.setVisibility(View.INVISIBLE);
         discoverTitleTextView.setVisibility(View.INVISIBLE);
         upcomingMoviesTitle.setVisibility(View.INVISIBLE);
@@ -154,7 +148,6 @@ public class MoviesFragment extends Fragment {
 
     private void hideProgressBar() {
         if (!popularMoviesList.isEmpty() && !moviesPlayingNowList.isEmpty() && !upcomingMoviesList.isEmpty()) {
-            progressBar.setVisibility(View.INVISIBLE);
             popularTitleTextView.setVisibility(View.VISIBLE);
             discoverTitleTextView.setVisibility(View.VISIBLE);
             upcomingMoviesTitle.setVisibility(View.VISIBLE);

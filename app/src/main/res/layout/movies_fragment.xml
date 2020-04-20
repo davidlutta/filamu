@@ -54,22 +54,10 @@
                 app:layout_constraintStart_toStartOf="@+id/now_playing_recyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/now_playing_recyclerView" />
 
-            <ProgressBar
-                android:id="@+id/popularMoviesFragmentProgressBar"
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/popular_movies_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="275dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
@@ -87,12 +75,9 @@
                 android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/popularTitleTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toEndOf="@+id/popularTitleTextView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/popularTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/viewAllMoviesPlayingNowTextView"
@@ -102,34 +87,27 @@
                 android:text="@string/view_all"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/discoverTitleTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toEndOf="@+id/discoverTitleTextView"
-                app:layout_constraintTop_toBottomOf="@+id/popular_movies_recyclerView"
-                app:layout_constraintVertical_bias="1.0" />
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/discoverTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/viewAllUpcomingMoviesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
-                android:layout_marginEnd="44dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/view_all"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/upcomingMoviesTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.88"
-                app:layout_constraintStart_toEndOf="@+id/upcomingMoviesTitle"
-                app:layout_constraintTop_toBottomOf="@+id/now_playing_recyclerView"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/upcomingMoviesTitle"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/upcomingMoviesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="275dp"
                 android:layout_marginStart="16dp"
                 android:padding="1dp"
                 android:orientation="horizontal"
@@ -143,7 +121,7 @@
             <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                 android:id="@+id/now_playing_recyclerView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="275dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:msrv_gravity="start"
