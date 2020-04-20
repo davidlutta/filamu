@@ -2,16 +2,17 @@ package com.davidlutta.filamu.adapters.cast;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.davidlutta.filamu.ProfileActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.models.cast.Cast;
@@ -77,7 +78,10 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         protected void onClickItem() {
             int position = getAdapterPosition();
             Cast selectedCast = getSelectedCast(position);
-            Toast.makeText(itemView.getContext(), selectedCast.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
+            String personId = selectedCast.getId().toString();
+            intent.putExtra(mContext.getString(R.string.personIntentExtraName), personId);
+            itemView.getContext().startActivity(intent);
         }
     }
 }

@@ -11,4 +11,5 @@
     <color name="buttonFocused">#d13302</color>
     <color name="buttonPressed">#ba2d02</color>
     <color name="youtubeRed">#FF0000</color>
+    <color name="imageTint">#6F000000</color>
 </resources>

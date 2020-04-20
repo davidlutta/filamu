@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ProfileActivity">
+
+
+        <ImageView
+            android:id="@+id/profilePicImageView"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:contentDescription="@string/profilepic"
+            android:scaleType="centerCrop"
+            android:tint="@color/imageTint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/name"
+            android:textColor="@color/textColor"
+            android:textSize="45sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicImageView"
+            app:layout_constraintStart_toStartOf="@+id/profilePicImageView"
+            tools:text="David Lutta" />
+
+        <TextView
+            android:id="@+id/jobTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/job"
+            android:textColor="@color/textColor"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/userNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
+
+        <TextView
+            android:id="@+id/bioTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="none"
+            android:fontFamily="@font/nunito_regular"
+            android:scrollHorizontally="false"
+            android:text="@string/overviewText"
+            android:textAlignment="textStart"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilePicImageView" />
+
+        <TextView
+            android:id="@+id/DOBTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:text="@string/dob"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/bioTextView"
+            app:layout_constraintTop_toBottomOf="@+id/bioTextView" />
+
+        <TextView
+            android:id="@+id/POBTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:text="@string/POB"
+            android:textColor="@color/textColor"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/DOBTextView"
+            app:layout_constraintTop_toBottomOf="@+id/DOBTextView" />
+
+        <TextView
+            android:id="@+id/KnownForTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/known_for"
+            android:textColor="@color/textColor"
+            android:textFontWeight="700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/POBTextView"
+            app:layout_constraintTop_toBottomOf="@+id/POBTextView" />
+
+        <TextView
+            android:id="@+id/viewAllActorContentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/view_all"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/KnownForTextView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

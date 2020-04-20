@@ -31,8 +31,14 @@ public class RetrofitService {
 
     private static MoviesApi moviesApi = retrofit.create(MoviesApi.class);
 
+    private static ProfileApi profileApi = retrofit.create(ProfileApi.class);
+
     public static MoviesApi getMoviesApi() {
         return moviesApi;
+    }
+
+    public static ProfileApi getProfileApi() {
+        return profileApi;
     }
 
     private static OkHttpClient okHttpClient() {

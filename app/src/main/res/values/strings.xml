@@ -12,11 +12,19 @@
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="save">Save</string>
     <string name="genreText">Action, Fantasy, Drama</string>
-    <string name="overviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras odio turpis, auctor at arcu non, tincidunt placerat sem. Donec et ligula et augue tristique tempor. Fusce auctor ipsum ultricies lectus viverra, ut tempus dui volutpat. Mauris molestie libero diam, pellentesque blandit lectus vulputate in. Phasellus pulvinar arcu arcu, luctus sollicitudin leo interdum sed. Quisque aliquet nisi vitae varius sagittis. In dictum gravida dui, vitae facilisis tellus gravida mattis. Donec dolor tellus, luctus sit amet metus eget, luctus rutrum dolor. Nullam vitae accumsan diam. Duis et mollis libero. Quisque aliquet urna pretium nulla auctor, sed ullamcorper quam rutrum. Donec tristique massa mi, id consequat odio rutrum ac. In a aliquet tellus.</string>
+    <string name="overviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras odio turpis, auctor at arcu non, tincidunt placerat sem. Donec et ligula et augue tristique tempor. Fusce auctor ipsum ultricies lectus viverra, ut tempus dui volutpat. Mauris molestie libero diam, llamcorper quam rutrum. Donec tristique massa mi, id consequat odio rutrum ac. In a aliquet tellus.</string>
     <string name="cast">Cast</string>
     <string name="cast_name">David Lutta</string>
     <string name="cast_role">Director</string>
     <string name="crew">Crew</string>
     <string name="trailers">Trailers</string>
     <string name="similar_movies">Similar Movies</string>
+    <string name="profilepic">profilepic</string>
+    <string name="name">David Lutta</string>
+    <string name="job">Acting</string>
+    <string name="dob">Born: 20 June 1992</string>
+    <string name="POB">Shawnee, Oklahoma, USA</string>
+    <string name="known_for">Known For</string>
+    <string name="personIntentExtraName">personId</string>
+    <string name="movieIntentExtraName">id</string>
 </resources>

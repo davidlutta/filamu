@@ -78,7 +78,7 @@ public class MovieActivity extends AppCompatActivity {
 
     private void subscribeObservers() {
         if (getIntent().hasExtra("id")) {
-            String id = getIntent().getExtras().getString("id");
+            String id = getIntent().getExtras().getString(getString(R.string.movieIntentExtraName));
             moviesViewModel.getMovieDetails(id).observe(this, new Observer<Movie>() {
                 @Override
                 public void onChanged(Movie movie) {

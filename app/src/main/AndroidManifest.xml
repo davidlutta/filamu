@@ -16,12 +16,12 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name=".MovieActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".MainActivity"

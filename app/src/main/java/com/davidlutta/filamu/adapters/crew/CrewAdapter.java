@@ -2,16 +2,17 @@ package com.davidlutta.filamu.adapters.crew;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.davidlutta.filamu.ProfileActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.models.cast.Crew;
@@ -78,7 +79,10 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
         protected void onClickItem() {
             int position = getAdapterPosition();
             Crew selectedCrew = getSelectedCrew(position);
-            Toast.makeText(itemView.getContext(), selectedCrew.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
+            String personId = selectedCrew.getId().toString();
+            intent.putExtra(mContext.getString(R.string.personIntentExtraName), personId);
+            itemView.getContext().startActivity(intent);
         }
     }
 }
