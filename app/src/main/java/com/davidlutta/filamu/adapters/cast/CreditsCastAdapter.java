@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.MovieActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
@@ -46,6 +47,7 @@ public class CreditsCastAdapter extends RecyclerView.Adapter<CreditsCastAdapter.
         holder.characterTextView.setText(character);
         Glide.with(mContext)
                 .load(poster)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .placeholder(R.drawable.poster)
                 .into(holder.backgroundImage);
     }

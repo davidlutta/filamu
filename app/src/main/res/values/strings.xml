@@ -27,4 +27,6 @@
     <string name="known_for">Known For</string>
     <string name="personIntentExtraName">personId</string>
     <string name="movieIntentExtraName">id</string>
+    <string name="saved_items">Saved Items</string>
+    <string name="delete">delete all data</string>
 </resources>

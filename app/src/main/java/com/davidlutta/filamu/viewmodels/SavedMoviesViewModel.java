@@ -12,26 +12,21 @@ import com.davidlutta.filamu.database.movies.MovieDao;
 
 import java.util.List;
 
-public class SavedItemsViewModel extends AndroidViewModel {
+public class SavedMoviesViewModel extends AndroidViewModel {
     private LiveData<List<Movie>> moviesList;
     private MovieDao movieDao;
 
-    public SavedItemsViewModel(@NonNull Application application) {
+    public SavedMoviesViewModel(@NonNull Application application) {
         super(application);
         movieDao = AppDatabase.getInstance(application).movieDao();
         moviesList = movieDao.loadAllSavedMovies();
     }
-    // TODO: Implement the ViewModel
 
-    public LiveData<List<Movie>> getMovies() {
+    public LiveData<List<Movie>> getSavedMovies() {
         return moviesList;
     }
 
-    public void insert(Movie movie) {
-        movieDao.insertMovie(movie);
-    }
-
-    public void deleteMovie(Movie movie) {
-        movieDao.deleteMovieById(movie.getMovieId());
+    public Movie getSavedMovie(int movieId) {
+        return movieDao.loadSavedMovie(movieId);
     }
 }

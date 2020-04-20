@@ -2,12 +2,9 @@ package com.davidlutta.filamu;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -17,22 +14,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.adapters.trailers.TrailersAdapter;
 import com.davidlutta.filamu.models.cast.Cast;
 import com.davidlutta.filamu.models.cast.Crew;
+import com.davidlutta.filamu.models.movie.Genre;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
+import com.davidlutta.filamu.viewmodels.FavouriteViewModel;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.List;
 import java.util.StringJoiner;
 
-public class MovieActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity implements MaterialFavoriteButton.OnFavoriteChangeListener {
 
     private MoviesViewModel moviesViewModel;
 
@@ -58,7 +59,13 @@ public class MovieActivity extends AppCompatActivity {
     private List<Movies> similarMoviesList;
     private MoviesAdapter similarMoviesAdapter;
 
+    private FavouriteViewModel favouriteViewModel;
+
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private MaterialFavoriteButton saveButton;
+
+    private Movie currentMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +83,11 @@ public class MovieActivity extends AppCompatActivity {
         crewRecyclerView = findViewById(R.id.crewRecyclerView);
         trailersRecyclerView = findViewById(R.id.trailersRecyclerView);
         similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
+        saveButton = findViewById(R.id.saveButton);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+        favouriteViewModel = ViewModelProviders.of(this).get(FavouriteViewModel.class);
         subscribeObservers();
+        saveButton.setOnFavoriteChangeListener(this);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -93,6 +103,7 @@ public class MovieActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(Movie movie) {
                     swipeRefreshLayout.setRefreshing(false);
+                    currentMovie = movie;
                     populateData(movie);
                 }
             });
@@ -128,6 +139,7 @@ public class MovieActivity extends AppCompatActivity {
                     setUpSimilarMoviesAdapter();
                 }
             });
+
         }
     }
 
@@ -139,31 +151,38 @@ public class MovieActivity extends AppCompatActivity {
             ratingTextView.setText(rating);
             overviewTextView.setText(movie.getOverview());
             String poster = Constants.IMAGE_BASE_URL + movie.getPosterPath();
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                StringJoiner joiner = new StringJoiner(" | ");
-                for (int i = 0; i < movie.getGenres().size(); i++) {
-                    joiner.add(movie.getGenres().get(i).getName());
-                }
-                String joinedString = joiner.toString();
-                genreTextView.setText(joinedString);
-            } else {
-                StringBuilder stringBuilder = new StringBuilder();
-                String delim = " | ";
-                String loopDelim = "";
-                for (int i = 0; i < movie.getGenres().size(); i++) {
-                    stringBuilder.append(loopDelim);
-                    stringBuilder.append(movie.getGenres().get(i).getName());
-                    loopDelim = delim;
-                }
-                String joinedString = stringBuilder.toString();
-                genreTextView.setText(joinedString);
-            }
+            String genreString = generateGenreString(movie.getGenres());
+            genreTextView.setText(genreString);
+
             backgroundImageView.setVisibility(View.VISIBLE);
             Glide.with(this)
                     .load(poster)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .placeholder(R.drawable.ic_launcher)
                     .into(backgroundImageView);
         }
+    }
+
+    private String generateGenreString(List<Genre> genres) {
+        String joinedString = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            StringJoiner joiner = new StringJoiner(" | ");
+            for (int i = 0; i < genres.size(); i++) {
+                joiner.add(genres.get(i).getName());
+            }
+            joinedString = joiner.toString();
+        } else {
+            StringBuilder stringBuilder = new StringBuilder();
+            String delim = " | ";
+            String loopDelim = "";
+            for (int i = 0; i < genres.size(); i++) {
+                stringBuilder.append(loopDelim);
+                stringBuilder.append(genres.get(i).getName());
+                loopDelim = delim;
+            }
+            joinedString = stringBuilder.toString();
+        }
+        return joinedString;
     }
 
     private void setUpCastAdapter() {
@@ -202,20 +221,15 @@ public class MovieActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.movie_menu, menu);
-        return true;
+    private void saveMovie(Movie movie) {
+        String poster = Constants.IMAGE_BASE_URL + movie.getPosterPath();
+        com.davidlutta.filamu.database.movies.Movie movieToSave =
+                new com.davidlutta.filamu.database.movies.Movie(movie.getId().intValue(), movie.getTitle(), movie.getVoteAverage().toString(), generateGenreString(movie.getGenres()), movie.getOverview(), poster);
+        favouriteViewModel.insert(movieToSave);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_save) {
-            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+        saveMovie(currentMovie);
     }
 }

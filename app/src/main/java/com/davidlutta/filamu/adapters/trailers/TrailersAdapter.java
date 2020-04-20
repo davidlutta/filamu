@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
@@ -43,6 +44,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
         String thumbnail = Constants.THUMBNAIL_BASE_URL + trailer.getKey() + Constants.THUMBNAIL_END;
         Glide.with(mContext)
                 .load(thumbnail)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .placeholder(R.drawable.ic_launcher)
                 .into(holder.trailersImageView);
     }

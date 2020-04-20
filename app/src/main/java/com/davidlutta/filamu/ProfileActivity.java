@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
 import com.davidlutta.filamu.adapters.crew.CreditsCrewAdapter;
 import com.davidlutta.filamu.models.credits.CreditsCast;
@@ -120,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
             String profileImage = Constants.IMAGE_BASE_URL + profile.getProfilePath();
             Glide.with(this)
                     .load(profileImage)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .placeholder(R.drawable.ic_launcher)
                     .into(profilePicImageView);
         }

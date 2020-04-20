@@ -80,6 +80,13 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+        subscribeObservers();
+    }
+
     private void setUpPopularMoviesAdapter() {
         if (moviesAdapter == null) {
             moviesAdapter = new MoviesAdapter(getContext(), popularMoviesList);
@@ -109,13 +116,6 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             upcomingMoviesRecyclerView.setNestedScrollingEnabled(false);
             moviesAdapter = null;
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
-        subscribeObservers();
     }
 
     private void subscribeObservers() {

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.ProfileActivity;
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
@@ -48,6 +49,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         holder.castRoleTextView.setText(role);
         Glide.with(mContext)
                 .load(poster)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .placeholder(R.drawable.ic_launcher)
                 .into(holder.castImageView);
     }
