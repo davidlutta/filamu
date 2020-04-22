@@ -26,12 +26,14 @@ import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
-import com.davidlutta.filamu.viewmodels.FavouriteViewModel;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
+import com.davidlutta.filamu.viewmodels.SavedMoviesViewModel;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.List;
 import java.util.StringJoiner;
+
+import es.dmoral.toasty.Toasty;
 
 public class MovieActivity extends AppCompatActivity implements MaterialFavoriteButton.OnFavoriteChangeListener {
 
@@ -59,7 +61,7 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
     private List<Movies> similarMoviesList;
     private MoviesAdapter similarMoviesAdapter;
 
-    private FavouriteViewModel favouriteViewModel;
+    private SavedMoviesViewModel favouriteViewModel;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -85,7 +87,7 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
         similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
         saveButton = findViewById(R.id.saveButton);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
-        favouriteViewModel = ViewModelProviders.of(this).get(FavouriteViewModel.class);
+        favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
         subscribeObservers();
         saveButton.setOnFavoriteChangeListener(this);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -225,11 +227,13 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
         String poster = Constants.IMAGE_BASE_URL + movie.getPosterPath();
         com.davidlutta.filamu.database.movies.Movie movieToSave =
                 new com.davidlutta.filamu.database.movies.Movie(movie.getId().intValue(), movie.getTitle(), movie.getVoteAverage().toString(), generateGenreString(movie.getGenres()), movie.getOverview(), poster);
-        favouriteViewModel.insert(movieToSave);
+        favouriteViewModel.saveMovie(movieToSave);
     }
 
     @Override
     public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
         saveMovie(currentMovie);
+        Toasty.success(this, "Movie Saved", Toasty.LENGTH_SHORT, true).show();
+        // TODO: 4/21/20 Make Change Button change state based on whether movie is saved or not
     }
 }

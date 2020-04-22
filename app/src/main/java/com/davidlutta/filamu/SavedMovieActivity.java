@@ -1,5 +1,6 @@
 package com.davidlutta.filamu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.database.movies.Movie;
 import com.davidlutta.filamu.viewmodels.SavedMoviesViewModel;
+
+import java.util.concurrent.ExecutionException;
 
 public class SavedMovieActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private SavedMoviesViewModel mViewModel;
@@ -35,14 +38,21 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
         poster = findViewById(R.id.savedBackgroundImageView);
         swipeRefreshLayout = findViewById(R.id.savedMovieActivitySwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        subscribeViewModels();
+        try {
+            subscribeViewModels();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        // TODO: 4/21/20 Add delete movie functionality by pressing the unlike button
     }
 
-    private void subscribeViewModels() {
+    private void subscribeViewModels() throws ExecutionException, InterruptedException {
         if (getIntent().hasExtra("id")) {
             String id = getIntent().getExtras().getString("id");
             swipeRefreshLayout.setRefreshing(false);
-            Movie currentMovie = mViewModel.getSavedMovie(Integer.parseInt(id));
+            Movie currentMovie = null;
+            currentMovie = mViewModel.getSavedMovie(Integer.parseInt(id));
+            assert currentMovie != null;
             populateData(currentMovie);
         }
     }
@@ -63,6 +73,10 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
 
     @Override
     public void onRefresh() {
-        subscribeViewModels();
+        try {
+            subscribeViewModels();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

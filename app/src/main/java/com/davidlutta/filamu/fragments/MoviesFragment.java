@@ -73,10 +73,6 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         viewAllMoviesPlayingNowTextView = view.findViewById(R.id.viewAllMoviesPlayingNowTextView);
         viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
         viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
-
-        final float scale = getContext().getResources().getDisplayMetrics().density;
-        int pixels = (int) (350 * scale + 0.5f);
-        upcomingMoviesRecyclerView.getLayoutParams().height = pixels;
         return view;
     }
 

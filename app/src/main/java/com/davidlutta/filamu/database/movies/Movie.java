@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.sql.Timestamp;
+
 @Entity(tableName = "savedMoviesTable")
 public class Movie {
     @PrimaryKey(autoGenerate = true)
@@ -27,6 +29,9 @@ public class Movie {
     @ColumnInfo(name = "poster")
     private String poster;
 
+    @ColumnInfo(name = "timestamp")
+    private long timestamp;
+
     public Movie(int movieId, String title, String rating, String genres, String overview, String poster) {
         this.movieId = movieId;
         this.title = title;
@@ -34,6 +39,7 @@ public class Movie {
         this.genres = genres;
         this.overview = overview;
         this.poster = poster;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public String getPoster() {
@@ -82,6 +88,14 @@ public class Movie {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override

@@ -51,15 +51,6 @@ public class SavedItemsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        /*mViewModel = ViewModelProviders.of(this).get(SavedItemsViewModel.class);
-        mViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                System.out.println("-------------------------------------- SAVED MOVIES ---------------------------------------");
-                System.out.println(movies.toString());
-                System.out.println("-------------------------------------- SAVED MOVIES ---------------------------------------");
-            }
-        });*/
     }
 
     @Override
@@ -70,7 +61,7 @@ public class SavedItemsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toasty.success(getContext(), "I've been clicked", Toasty.LENGTH_SHORT, true);
+        Toasty.success(getContext(), "I've been clicked", Toasty.LENGTH_SHORT, true).show();
         return true;
     }
 }

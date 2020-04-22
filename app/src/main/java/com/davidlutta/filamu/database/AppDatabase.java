@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import com.davidlutta.filamu.database.movies.Movie;
 import com.davidlutta.filamu.database.movies.MovieDao;
 
-@Database(entities = {Movie.class}, version = 2, exportSchema = false)
+@Database(entities = {Movie.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String TAG = AppDatabase.class.getSimpleName();
     public static final Object LOCK = new Object();
@@ -31,7 +31,6 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase createDb(Context context) {
         RoomDatabase.Builder<AppDatabase> builder =
                 Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, AppDatabase.DATABASE_NAME)
-                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration();
         return builder.build();
     }

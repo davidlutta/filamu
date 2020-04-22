@@ -13,7 +13,6 @@ import com.davidlutta.filamu.database.movies.MovieDao;
 import java.util.List;
 
 public class FavouriteViewModel extends AndroidViewModel {
-    private LiveData<List<Movie>> moviesList;
     private MovieDao movieDao;
 
     public FavouriteViewModel(@NonNull Application application) {
@@ -22,9 +21,6 @@ public class FavouriteViewModel extends AndroidViewModel {
         movieDao.loadAllSavedMovies();
     }
 
-    public LiveData<List<Movie>> getMovies() {
-        return moviesList;
-    }
 
     public void insert(Movie movie) {
         movieDao.insertMovie(movie);

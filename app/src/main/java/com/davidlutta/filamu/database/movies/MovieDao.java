@@ -10,7 +10,7 @@ import java.util.List;
 
 @Dao
 public interface MovieDao {
-    @Query("SELECT * FROM savedMoviesTable")
+    @Query("SELECT * FROM savedMoviesTable ORDER BY timestamp")
     LiveData<List<Movie>> loadAllSavedMovies();
 
     @Query("SELECT * FROM savedMoviesTable WHERE movieId = :movieId")

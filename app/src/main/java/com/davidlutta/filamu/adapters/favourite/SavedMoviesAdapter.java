@@ -58,7 +58,7 @@ public class SavedMoviesAdapter extends RecyclerView.Adapter<SavedMoviesAdapter.
         return movieList.size();
     }
 
-    private Movie getSelectedSavedMovie(int position) {
+    public Movie getSelectedSavedMovie(int position) {
         if (movieList.size() > 0) {
             return movieList.get(position);
         }
