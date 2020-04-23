@@ -1,5 +1,6 @@
 package com.davidlutta.filamu.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.davidlutta.filamu.R;
+import com.davidlutta.filamu.ViewAllMoviesActivity;
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
@@ -54,7 +56,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // FIXME: 4/19/20 Make Unnecessary Text disappear until data is loaded
         View view = inflater.inflate(R.layout.movies_fragment, container, false);
@@ -73,6 +75,32 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         viewAllMoviesPlayingNowTextView = view.findViewById(R.id.viewAllMoviesPlayingNowTextView);
         viewAllPopularMoviesTextView = view.findViewById(R.id.viewAllPopularMoviesTextView);
         viewAllUpcomingMoviesTextView = view.findViewById(R.id.viewAllUpcomingMoviesTextView);
+
+        viewAllPopularMoviesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewAllMoviesActivity.class);
+                intent.putExtra("id", "popularMovies");
+                startActivity(intent);
+            }
+        });
+        viewAllUpcomingMoviesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewAllMoviesActivity.class);
+                intent.putExtra("id", "upcomingMovies");
+                startActivity(intent);
+            }
+        });
+        viewAllMoviesPlayingNowTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewAllMoviesActivity.class);
+                intent.putExtra("id", "moviesPlayingNow");
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

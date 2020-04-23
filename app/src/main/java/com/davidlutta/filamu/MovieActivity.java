@@ -1,7 +1,7 @@
 package com.davidlutta.filamu;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +30,6 @@ import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
 import com.davidlutta.filamu.viewmodels.SavedMoviesViewModel;
-import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -47,6 +46,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
     private TextView ratingTextView;
     private TextView overviewTextView;
     private ImageView backgroundImageView;
+    private TextView viewAllSimilarMoviesTextView;
 
     private RecyclerView castRecyclerView;
     private List<Cast> castList;
@@ -89,11 +89,21 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         trailersRecyclerView = findViewById(R.id.trailersRecyclerView);
         similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
         saveButton = findViewById(R.id.saveButton);
+        viewAllSimilarMoviesTextView = findViewById(R.id.viewAllSimilarMoviesTextView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
         subscribeObservers();
         saveButton.setOnClickListener(this);
 
+        viewAllSimilarMoviesTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewAllMoviesActivity.class);
+                intent.putExtra("id", "similarMovies");
+                intent.putExtra("movieId", currentMovie.getId().toString());
+                startActivity(intent);
+            }
+        });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
