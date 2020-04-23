@@ -40,24 +40,6 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/poster"
                         android:visibility="invisible" />
-
-                    <com.github.ivbaranov.mfb.MaterialFavoriteButton
-                        android:id="@+id/savedActivitySaveButton"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/savedBackgroundImageView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:mfb_animate_favorite="true"
-                        app:mfb_animate_unfavorite="true"
-                        app:mfb_favorite_image="@drawable/ic_saved"
-                        app:mfb_not_favorite_image="@drawable/ic_save"
-                        app:mfb_rotation_angle="360"
-                        app:mfb_rotation_duration="400"
-                        app:mfb_size="70" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>

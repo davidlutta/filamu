@@ -50,13 +50,14 @@ public class SavedMoviesFragment extends Fragment {
                 //for drag and drop functionality
             }
 
+            // FIXME: 4/23/20 FIX MEEEEE !!!!!!
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 movieList.remove(position);
                 moviesAdapter.notifyItemRemoved(position);
                 moviesAdapter.notifyItemChanged(position);
-                mViewModel.deleteSavedMovie(moviesAdapter.getSelectedSavedMovie(position));
+                mViewModel.deleteSavedMovie(moviesAdapter.getSelectedSavedMovie(position).getMovieId());
                 subscribeViewModels();
                 Toasty.warning(Objects.requireNonNull(getContext()), "Deleted Movie", Toasty.LENGTH_SHORT, true).show();
             }

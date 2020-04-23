@@ -1,8 +1,10 @@
 package com.davidlutta.filamu;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,10 +34,11 @@ import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.concurrent.ExecutionException;
 
 import es.dmoral.toasty.Toasty;
 
-public class MovieActivity extends AppCompatActivity implements MaterialFavoriteButton.OnFavoriteChangeListener {
+public class MovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MoviesViewModel moviesViewModel;
 
@@ -65,7 +68,7 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    private MaterialFavoriteButton saveButton;
+    private Button saveButton;
 
     private Movie currentMovie;
 
@@ -89,7 +92,8 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
         subscribeObservers();
-        saveButton.setOnFavoriteChangeListener(this);
+        saveButton.setOnClickListener(this);
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -163,6 +167,14 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
                     .placeholder(R.drawable.ic_launcher)
                     .into(backgroundImageView);
         }
+        try {
+            if (checkIfSaved()) {
+                saveButton.setText(R.string.saved);
+                saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private String generateGenreString(List<Genre> genres) {
@@ -230,10 +242,34 @@ public class MovieActivity extends AppCompatActivity implements MaterialFavorite
         favouriteViewModel.saveMovie(movieToSave);
     }
 
+    private boolean checkIfSaved() throws ExecutionException, InterruptedException {
+        com.davidlutta.filamu.database.movies.Movie movie = favouriteViewModel.getSavedMovie(currentMovie.getId().intValue());
+        boolean bool = false;
+        if (movie!=null){
+            bool = true;
+        }
+        return bool;
+    }
+
+
     @Override
-    public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
-        saveMovie(currentMovie);
-        Toasty.success(this, "Movie Saved", Toasty.LENGTH_SHORT, true).show();
-        // TODO: 4/21/20 Make Change Button change state based on whether movie is saved or not
+    public void onClick(View v) {
+        try {
+            if (checkIfSaved()) {
+                saveButton.setText(R.string.saved);
+                saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+                favouriteViewModel.deleteSavedMovie(currentMovie.getId().intValue());
+                Toasty.error(this,"Deleted Movie",Toasty.LENGTH_SHORT,true).show();
+                saveButton.setText(R.string.save);
+                saveButton.setBackgroundResource(R.drawable.red_rounded_button_background);
+            } else {
+                saveMovie(currentMovie);
+                saveButton.setText(R.string.saved);
+                saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+                Toasty.success(this, "Movie Saved", Toasty.LENGTH_SHORT, true).show();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

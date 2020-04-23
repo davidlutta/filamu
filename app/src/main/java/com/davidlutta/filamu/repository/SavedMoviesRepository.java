@@ -32,8 +32,8 @@ public class SavedMoviesRepository {
         new InsertMovieAsyncTask(movieDao).execute(movie);
     }
 
-    public void deleteMovie(Movie movie) {
-        new DeleteMovieAsyncTask(movieDao).execute(movie);
+    public void deleteMovie(int movieId) {
+        new DeleteMovieAsyncTask(movieDao).execute(movieId);
     }
 
     private static class InsertMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
@@ -50,7 +50,7 @@ public class SavedMoviesRepository {
         }
     }
 
-    private static class DeleteMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
+    private static class DeleteMovieAsyncTask extends AsyncTask<Integer, Void, Void> {
         private MovieDao movieDao;
 
         public DeleteMovieAsyncTask(MovieDao movieDao) {
@@ -58,8 +58,8 @@ public class SavedMoviesRepository {
         }
 
         @Override
-        protected Void doInBackground(Movie... movies) {
-            movieDao.deleteMovieById(movies[0].getMovieId());
+        protected Void doInBackground(Integer... integers) {
+            movieDao.deleteMovieById(integers[0]);
             return null;
         }
     }

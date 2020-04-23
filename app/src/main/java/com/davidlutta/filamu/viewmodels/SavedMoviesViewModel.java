@@ -36,7 +36,7 @@ public class SavedMoviesViewModel extends AndroidViewModel {
 
     public void saveMovie(Movie movie) { savedMoviesRepository.saveMovie(movie); }
 
-    public void deleteSavedMovie(Movie movie){
-        savedMoviesRepository.deleteMovie(movie);
+    public void deleteSavedMovie(int movieId){
+        savedMoviesRepository.deleteMovie(movieId);
     }
 }

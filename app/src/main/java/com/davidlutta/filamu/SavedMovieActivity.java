@@ -3,6 +3,7 @@ package com.davidlutta.filamu;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import com.davidlutta.filamu.viewmodels.SavedMoviesViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class SavedMovieActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class SavedMovieActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private SavedMoviesViewModel mViewModel;
     private TextView title;
     private TextView genre;
@@ -25,6 +26,8 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
     private TextView overview;
     private ImageView poster;
     private SwipeRefreshLayout swipeRefreshLayout;
+    Movie currentMovie = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,6 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
         if (getIntent().hasExtra("id")) {
             String id = getIntent().getExtras().getString("id");
             swipeRefreshLayout.setRefreshing(false);
-            Movie currentMovie = null;
             currentMovie = mViewModel.getSavedMovie(Integer.parseInt(id));
             assert currentMovie != null;
             populateData(currentMovie);
@@ -79,4 +81,5 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
             e.printStackTrace();
         }
     }
+
 }

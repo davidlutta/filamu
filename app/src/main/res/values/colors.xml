@@ -7,9 +7,12 @@
     <color name="cardBackgroundColor">#424242</color>
     <color name="textColor">#FFFFFF</color>
     <color name="tintColor">#FFFFFF</color>
-    <color name="buttonUnfocused">#E93903</color>
-    <color name="buttonFocused">#d13302</color>
-    <color name="buttonPressed">#ba2d02</color>
+    <color name="redButtonUnfocused">#E93903</color>
+    <color name="redButtonFocused">#d13302</color>
+    <color name="redButtonPressed">#ba2d02</color>
+    <color name="greenButtonUnfocused">#00A86B</color>
+    <color name="greenButtonFocused">#00a85c</color>
+    <color name="greenButtonPressed">#00a84e</color>
     <color name="youtubeRed">#FF0000</color>
     <color name="imageTint">#6F000000</color>
     <color name="transparent">#80000000</color>
