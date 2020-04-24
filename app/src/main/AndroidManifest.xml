@@ -15,8 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".UI.popularmovies.ViewAllPopularMoviesActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeActionBar"></activity>
-        <activity android:name=".SavedMovieActivity" android:screenOrientation="portrait"  />
+        <activity android:name=".UI.movies.playingnowmovies.ViewAllPlayingMoviesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionBar" ></activity>
+        <activity android:name=".UI.movies.upcomingmovies.ViewAllUpcomingMoviesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionBar" />
+        <activity android:name=".UI.movies.similarmovies.ViewAllSimilarMoviesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionBar" />
+        <activity
+            android:name=".UI.movies.popularmovies.ViewAllPopularMoviesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionBar" />
+        <activity
+            android:name=".SavedMovieActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".NetworkChangeReceiver"

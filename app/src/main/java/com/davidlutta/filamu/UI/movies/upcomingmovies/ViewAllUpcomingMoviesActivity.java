@@ -1,6 +1,4 @@
-package com.davidlutta.filamu.UI.popularmovies;
-
-import android.os.Bundle;
+package com.davidlutta.filamu.UI.movies.upcomingmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,27 +8,29 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Bundle;
+
 import com.davidlutta.filamu.R;
-import com.davidlutta.filamu.UI.popularmovies.viewmodel.PopularViewModel;
+import com.davidlutta.filamu.UI.movies.upcomingmovies.viewmodel.UpcomingViewModel;
 import com.davidlutta.filamu.adapters.movies.ViewAllMoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 
-public class ViewAllPopularMoviesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ViewAllUpcomingMoviesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView moviesRecyclerView;
-    private PopularViewModel mViewModel;
-    private ViewAllMoviesAdapter moviesAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ViewAllMoviesAdapter moviesAdapter;
+    private UpcomingViewModel mViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_all_movies);
-        moviesRecyclerView = findViewById(R.id.viewAllMoviesRecyclerView);
-        swipeRefreshLayout = findViewById(R.id.viewAllMoviesSwipeRefreshLayout);
-        setTitle("Popular Movies");
-        mViewModel = ViewModelProviders.of(this).get(PopularViewModel.class);
-        // TODO: 4/24/20 Add Pagination to this page Please We might have to just create a new adapter reference this https://github.com/davidlutta/retro/tree/c60678bb2afedb78c4a7b253548625d848336c8d/app/src/main/java/com/davidlutta/retro 
+        setContentView(R.layout.activity_view_all_upcoming_movies);
+        moviesRecyclerView = findViewById(R.id.ViewAllUpcomingMoviesActivityRecyclerView);
+        swipeRefreshLayout = findViewById(R.id.ViewAllUpcomingMoviesActivitySwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        setTitle("Upcoming Movies");
+        mViewModel = ViewModelProviders.of(this).get(UpcomingViewModel.class);
         setUpAdapter();
         subscribeViewModels();
     }

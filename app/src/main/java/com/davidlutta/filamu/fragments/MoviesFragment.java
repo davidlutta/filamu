@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.davidlutta.filamu.R;
-import com.davidlutta.filamu.UI.popularmovies.ViewAllPopularMoviesActivity;
+import com.davidlutta.filamu.UI.movies.playingnowmovies.ViewAllPlayingMoviesActivity;
+import com.davidlutta.filamu.UI.movies.popularmovies.ViewAllPopularMoviesActivity;
+import com.davidlutta.filamu.UI.movies.upcomingmovies.ViewAllUpcomingMoviesActivity;
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
@@ -80,23 +82,20 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ViewAllPopularMoviesActivity.class);
-                intent.putExtra("id", "popularMovies");
                 startActivity(intent);
             }
         });
         viewAllUpcomingMoviesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ViewAllPopularMoviesActivity.class);
-                intent.putExtra("id", "upcomingMovies");
+                Intent intent = new Intent(v.getContext(), ViewAllUpcomingMoviesActivity.class);
                 startActivity(intent);
             }
         });
         viewAllMoviesPlayingNowTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ViewAllPopularMoviesActivity.class);
-                intent.putExtra("id", "moviesPlayingNow");
+                Intent intent = new Intent(v.getContext(), ViewAllPlayingMoviesActivity.class);
                 startActivity(intent);
             }
         });

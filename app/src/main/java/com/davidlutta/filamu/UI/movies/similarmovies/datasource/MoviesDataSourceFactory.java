@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.UI.popularmovies.datasource;
+package com.davidlutta.filamu.UI.movies.similarmovies.datasource;
 
 import android.util.Log;
 
@@ -9,14 +9,16 @@ public class MoviesDataSourceFactory extends DataSource.Factory {
     public static final String TAG = "MoviesDataSourceFactory";
     MoviesDataSource moviesDataSource;
     MutableLiveData<MoviesDataSource> mutableLiveData;
+    private String movieId;
 
-    public MoviesDataSourceFactory() {
+    public MoviesDataSourceFactory(String movieId) {
+        this.movieId = movieId;
         mutableLiveData = new MutableLiveData<>();
     }
 
     @Override
     public DataSource create() {
-        moviesDataSource = new MoviesDataSource();
+        moviesDataSource = new MoviesDataSource(movieId);
         Log.d(TAG, "create: " + moviesDataSource);
         mutableLiveData.postValue(moviesDataSource);
         return moviesDataSource;

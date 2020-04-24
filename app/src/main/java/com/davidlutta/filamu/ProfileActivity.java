@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
                 subscribeViewModels();
             }
         });
+
     }
 
     private void subscribeViewModels() {

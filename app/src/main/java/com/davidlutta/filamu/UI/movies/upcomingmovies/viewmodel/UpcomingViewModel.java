@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.UI.popularmovies.viewmodel;
+package com.davidlutta.filamu.UI.movies.upcomingmovies.viewmodel;
 
 import android.app.Application;
 
@@ -9,20 +9,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.davidlutta.filamu.UI.popularmovies.datasource.MoviesDataSource;
-import com.davidlutta.filamu.UI.popularmovies.datasource.MoviesDataSourceFactory;
+import com.davidlutta.filamu.UI.movies.upcomingmovies.datasource.MoviesDataSource;
+import com.davidlutta.filamu.UI.movies.upcomingmovies.datasource.MoviesDataSourceFactory;
 import com.davidlutta.filamu.models.movies.Movies;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class PopularViewModel extends AndroidViewModel {
+public class UpcomingViewModel extends AndroidViewModel {
     private MoviesDataSourceFactory moviesDataSourceFactory;
     private MutableLiveData<MoviesDataSource> dataSourceMutableLiveData;
     private LiveData<PagedList<Movies>> pagedListLiveData;
     private Executor executor;
 
-    public PopularViewModel(@NonNull Application application) {
+    public UpcomingViewModel(@NonNull Application application) {
         super(application);
         moviesDataSourceFactory = new MoviesDataSourceFactory();
         dataSourceMutableLiveData = moviesDataSourceFactory.getMutableLiveData();

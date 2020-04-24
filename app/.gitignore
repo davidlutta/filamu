@@ -1,2 +1,4 @@
 /build
 /src/main/java/com/davidlutta/filamu/Constants.java
+!/src/main/java/com/davidlutta/filamu/todos
+!/src/main/java/com/davidlutta/filamu/util/Constants.java
