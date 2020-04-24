@@ -4,12 +4,16 @@ package com.davidlutta.filamu.models.movies;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Movies implements Serializable, Parcelable
 {
@@ -292,5 +296,17 @@ public class Movies implements Serializable, Parcelable
     public int describeContents() {
         return  0;
     }
+
+    public static final DiffUtil.ItemCallback<Movies> CALLBACK = new DiffUtil.ItemCallback<Movies>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Movies oldItem, @NonNull Movies newItem) {
+            return Objects.equals(oldItem.id, newItem.id);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Movies oldItem, @NonNull Movies newItem) {
+            return Objects.equals(oldItem, newItem);
+        }
+    };
 
 }

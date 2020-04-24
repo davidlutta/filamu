@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewAllMoviesActivity">
-    <androidx.recyclerview.widget.RecyclerView
+    tools:context=".UI.popularmovies.ViewAllPopularMoviesActivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/viewAllMoviesSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewAllMoviesRecyclerView"
-        />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewAllMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

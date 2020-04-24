@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.UI.popularmovies.ViewAllPopularMoviesActivity;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
@@ -98,7 +99,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         viewAllSimilarMoviesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ViewAllMoviesActivity.class);
+                Intent intent = new Intent(v.getContext(), ViewAllPopularMoviesActivity.class);
                 intent.putExtra("id", "similarMovies");
                 intent.putExtra("movieId", currentMovie.getId().toString());
                 startActivity(intent);

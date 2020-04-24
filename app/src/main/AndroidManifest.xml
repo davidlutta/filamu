@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ViewAllMoviesActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeActionBar"></activity>
+        <activity android:name=".UI.popularmovies.ViewAllPopularMoviesActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeActionBar"></activity>
         <activity android:name=".SavedMovieActivity" android:screenOrientation="portrait"  />
 
         <receiver

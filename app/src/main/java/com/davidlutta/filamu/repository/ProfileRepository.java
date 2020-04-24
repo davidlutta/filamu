@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// TODO: 4/24/20 Add AsyncTask Classes to perform queries in the background
 public class ProfileRepository {
     public static final String TAG = "ProfileRepository";
     private static ProfileRepository instance;
