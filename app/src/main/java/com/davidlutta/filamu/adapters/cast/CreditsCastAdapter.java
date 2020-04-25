@@ -34,7 +34,7 @@ public class CreditsCastAdapter extends RecyclerView.Adapter<CreditsCastAdapter.
     @NonNull
     @Override
     public CreditsCrewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_two, parent, false);
         return new CreditsCrewViewHolder(view);
     }
 

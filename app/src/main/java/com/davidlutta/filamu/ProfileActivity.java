@@ -1,6 +1,9 @@
 package com.davidlutta.filamu;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.UI.credits.KnownForActivity;
 import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
 import com.davidlutta.filamu.adapters.crew.CreditsCrewAdapter;
 import com.davidlutta.filamu.models.credits.CreditsCast;
@@ -25,6 +29,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
     private ImageView profilePicImageView;
@@ -33,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView bio;
     private TextView DOBTextView;
     private TextView POBTextView;
+    private Button allActorContent;
 
     private ProfileViewModel profileViewModel;
     private CreditsCastAdapter creditsCastAdapter;
@@ -57,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
         DOBTextView = findViewById(R.id.DOBTextView);
         POBTextView = findViewById(R.id.POBTextView);
         knownForRecycler = findViewById(R.id.knownForRecycler);
+        allActorContent = findViewById(R.id.viewAllActorContentTextView);
+
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         subscribeViewModels();
@@ -66,7 +74,25 @@ public class ProfileActivity extends AppCompatActivity {
                 subscribeViewModels();
             }
         });
-
+        allActorContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), KnownForActivity.class);
+                String personId = getIntent().getExtras().getString("personId");
+                String credits = Objects.requireNonNull(getIntent().getExtras()).getString("Credits");
+                intent.putExtra("personId", personId);
+                assert credits != null;
+                switch (credits) {
+                    case "Crew":
+                        intent.putExtra("Credits", "Crew");
+                        break;
+                    case "Cast":
+                        intent.putExtra("Credits", "Cast");
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
     }
 
     private void subscribeViewModels() {

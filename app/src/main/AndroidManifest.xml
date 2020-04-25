@@ -15,13 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".UI.movies.playingnowmovies.ViewAllPlayingMoviesActivity"
+        <activity android:name=".UI.credits.KnownForActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeActionBar" ></activity>
-        <activity android:name=".UI.movies.upcomingmovies.ViewAllUpcomingMoviesActivity"
+            android:theme="@style/AppThemeActionBar"></activity>
+        <activity
+            android:name=".UI.movies.playingnowmovies.ViewAllPlayingMoviesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeActionBar" />
-        <activity android:name=".UI.movies.similarmovies.ViewAllSimilarMoviesActivity"
+        <activity
+            android:name=".UI.movies.upcomingmovies.ViewAllUpcomingMoviesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeActionBar" />
+        <activity
+            android:name=".UI.movies.similarmovies.ViewAllSimilarMoviesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeActionBar" />
         <activity

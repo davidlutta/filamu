@@ -47,7 +47,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
     private TextView ratingTextView;
     private TextView overviewTextView;
     private ImageView backgroundImageView;
-    private TextView viewAllSimilarMoviesTextView;
+    private Button viewAllSimilarMoviesTextView;
 
     private RecyclerView castRecyclerView;
     private List<Cast> castList;

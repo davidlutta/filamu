@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,11 +44,11 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     SweetAlertDialog sweetAlertDialog;
     private TextView popularTitleTextView;
-    private TextView viewAllPopularMoviesTextView;
+    private Button viewAllPopularMoviesTextView;
     private TextView discoverTitleTextView;
-    private TextView viewAllMoviesPlayingNowTextView;
+    private Button viewAllMoviesPlayingNowTextView;
     private TextView upcomingMoviesTitle;
-    private TextView viewAllUpcomingMoviesTextView;
+    private Button viewAllUpcomingMoviesTextView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
