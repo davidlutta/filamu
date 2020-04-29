@@ -1,13 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvFragmentSwipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.TvFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tv Fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/airingTodayTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/airing_today"
+                    android:textColor="@color/textColor"
+                    android:textFontWeight="900"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/onAirTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/on_the_air"
+                    android:textColor="@color/textColor"
+                    android:textFontWeight="900"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="@+id/airing_today_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/airing_today_recyclerView" />
+
+                <TextView
+                    android:id="@+id/popularSeriesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/popular_series"
+                    android:textColor="@color/textColor"
+                    android:textFontWeight="900"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="@+id/on_air_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/on_air_recyclerView" />
+
+                <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                    android:id="@+id/airing_today_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="275dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/airingTodayTitleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/airingTodayTitleTextView"
+                    app:msrv_gravity="start"
+                    app:msrv_interval="1"
+                    app:msrv_speed_ms_per_inch="100" />
+
+                <Button
+                    android:id="@+id/viewAllAiringTodayButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/view_all"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold"
+                    android:background="@drawable/rounded_button_background"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/airingTodayTitleTextView"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/viewAllOnAirButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/view_all"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold"
+                    android:background="@drawable/rounded_button_background"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/onAirTitleTextView"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/viewAllPopularSeriesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/view_all"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold"
+                    android:background="@drawable/rounded_button_background"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/popularSeriesTitle"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                    android:id="@+id/popular_series_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="275dp"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal"
+                    android:padding="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/popularSeriesTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/popularSeriesTitle"
+                    app:msrv_gravity="start"
+                    app:msrv_interval="1"
+                    app:msrv_speed_ms_per_inch="100" />
+
+                <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                    android:id="@+id/on_air_recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="275dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/airing_today_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/onAirTitleTextView"
+                    app:msrv_gravity="start"
+                    app:msrv_interval="1"
+                    app:msrv_speed_ms_per_inch="100" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.mainActivityFrameLayout, MoviesFragment.newInstance());
+        // FIXME: 4/30/20 REPLACE TV FRAGMENT BACK TO MOVIESFRAGMENT
+        transaction.replace(R.id.mainActivityFrameLayout, TvFragment.newInstance());
         transaction.commit();
 
         setupBroadcastReceiver();

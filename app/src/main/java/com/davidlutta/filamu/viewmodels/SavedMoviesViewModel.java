@@ -1,18 +1,14 @@
 package com.davidlutta.filamu.viewmodels;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.davidlutta.filamu.database.AppDatabase;
 import com.davidlutta.filamu.database.movies.Movie;
-import com.davidlutta.filamu.database.movies.MovieDao;
-import com.davidlutta.filamu.repository.SavedMoviesRepository;
+import com.davidlutta.filamu.repository.movies.SavedMoviesRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

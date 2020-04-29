@@ -29,4 +29,7 @@
     <string name="saved_items">Saved Items</string>
     <string name="delete">delete all data</string>
     <string name="save">Save</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="on_the_air">On The Air</string>
+    <string name="popular_series">popular Series</string>
 </resources>

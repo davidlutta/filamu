@@ -8,7 +8,7 @@ import com.davidlutta.filamu.models.cast.Crew;
 import com.davidlutta.filamu.models.movie.Movie;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.models.trailers.Trailer;
-import com.davidlutta.filamu.repository.MoviesRepository;
+import com.davidlutta.filamu.repository.movies.MoviesRepository;
 
 import java.util.List;
 
@@ -52,12 +52,6 @@ public class MoviesViewModel extends ViewModel {
 
     public LiveData<List<Movies>> getSimilarMovies(String movieId) {
         return mMoviesRepository.getSimilarMovies(movieId);
-    }
-
-    public void searchNextPage() {
-        if (!mIsPerformingQuery && mIsViewingMovies) {
-            mMoviesRepository.searchNextPage();
-        }
     }
 
     public boolean isPerformingQuery() {

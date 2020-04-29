@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.repository;
+package com.davidlutta.filamu.repository.movies;
 
 import android.util.Log;
 
@@ -23,11 +23,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-// TODO: 4/24/20 Add AsyncTask Classes to perform queries in the background
 public class MoviesRepository {
     private static MoviesRepository instance;
     private MoviesApi moviesApi;
-    private int mPageNumber;
     private static final String TAG = "MoviesRepository";
 
     private MoviesRepository() {
@@ -217,19 +215,4 @@ public class MoviesRepository {
         });
         return moviesData;
     }
-
-    // TODO: 4/16/20 LOOK AT MEE TOO PLEASE !!!
-    public void getMoviesApi(int pageNumber) {
-        if (pageNumber == 0) {
-            pageNumber = 1;
-        }
-        mPageNumber = pageNumber;
-//        moviesApiClient.getMoviesApi(pageNumber);
-    }
-
-    public void searchNextPage() {
-        getMoviesApi(mPageNumber + 1);
-    }
-
-
 }

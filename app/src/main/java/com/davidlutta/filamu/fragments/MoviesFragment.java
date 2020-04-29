@@ -27,8 +27,6 @@ import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.List;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private MoviesViewModel mViewModel;
@@ -42,7 +40,6 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private MultiSnapRecyclerView upcomingMoviesRecyclerView;
     private List<Movies> upcomingMoviesList;
 
-    SweetAlertDialog sweetAlertDialog;
     private TextView popularTitleTextView;
     private Button viewAllPopularMoviesTextView;
     private TextView discoverTitleTextView;

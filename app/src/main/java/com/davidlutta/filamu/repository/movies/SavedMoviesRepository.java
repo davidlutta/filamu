@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.repository;
+package com.davidlutta.filamu.repository.movies;
 
 import android.app.Application;
 import android.os.AsyncTask;

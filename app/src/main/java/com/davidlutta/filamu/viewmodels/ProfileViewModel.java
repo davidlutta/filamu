@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.davidlutta.filamu.models.credits.CreditsCast;
 import com.davidlutta.filamu.models.credits.CreditsCrew;
 import com.davidlutta.filamu.models.profile.Profile;
-import com.davidlutta.filamu.repository.ProfileRepository;
+import com.davidlutta.filamu.repository.profile.ProfileRepository;
 
 import java.util.List;
 

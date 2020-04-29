@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.repository;
+package com.davidlutta.filamu.repository.profile;
 
 import android.util.Log;
 
