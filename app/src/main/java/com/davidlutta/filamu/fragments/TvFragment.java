@@ -1,5 +1,6 @@
 package com.davidlutta.filamu.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.davidlutta.filamu.R;
+import com.davidlutta.filamu.UI.series.ViewAllSeriesHolderActivity;
 import com.davidlutta.filamu.adapters.series.SeriesAdapter;
 import com.davidlutta.filamu.models.series.Series;
 import com.davidlutta.filamu.viewmodels.TvViewModel;
@@ -46,7 +47,7 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tv_fragment, container, false);
         airingTodayRecyclerView = view.findViewById(R.id.airing_today_recyclerView);
@@ -59,7 +60,32 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         swipeRefreshLayout = view.findViewById(R.id.tvFragmentSwipeRefreshLayout);
 
         swipeRefreshLayout.setOnRefreshListener(this);
+        viewAllAiringTodayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ViewAllSeriesHolderActivity.class);
+                intent.putExtra("Category", "AiringToday");
+                startActivity(intent);
+            }
+        });
 
+        viewOnAirButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ViewAllSeriesHolderActivity.class);
+                intent.putExtra("Category", "OnTheAir");
+                startActivity(intent);
+            }
+        });
+
+        viewAllPopularButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ViewAllSeriesHolderActivity.class);
+                intent.putExtra("Category", "popularSeries");
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

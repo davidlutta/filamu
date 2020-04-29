@@ -15,9 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".UI.credits.KnownForActivity"
+        <activity android:name=".UI.series.ViewAllSeriesHolderActivity"></activity>
+        <activity
+            android:name=".UI.credits.KnownForActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeActionBar"></activity>
+            android:theme="@style/AppThemeActionBar" />
         <activity
             android:name=".UI.movies.playingnowmovies.ViewAllPlayingMoviesActivity"
             android:screenOrientation="portrait"

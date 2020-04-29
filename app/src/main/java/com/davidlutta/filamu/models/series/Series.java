@@ -4,8 +4,13 @@ package com.davidlutta.filamu.models.series;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -236,6 +241,19 @@ public class Series implements Serializable, Parcelable
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
+
+    public static final DiffUtil.ItemCallback<Series> CALLBACK = new DiffUtil.ItemCallback<Series>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Series oldItem, @NonNull Series newItem) {
+            return Objects.equals(oldItem.id, newItem.id);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Series oldItem, @NonNull Series newItem) {
+            return Objects.equals(oldItem, newItem);
+        }
+    };
+
 
     @Override
     public String toString() {
