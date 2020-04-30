@@ -14,6 +14,7 @@ import androidx.paging.PagedListAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.R;
+import com.davidlutta.filamu.SeriesActivity;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.models.series.Series;
 import com.davidlutta.filamu.util.Constants;
@@ -75,9 +76,9 @@ public class ViewAllSeriesAdapter extends PagedListAdapter<Series, ViewAllSeries
             int position = getAdapterPosition();
             Series selectedSeries = getSelectedSeries(position);
             String id = selectedSeries.getId().toString();
-            /*Intent intent = new Intent(itemView.getContext(), MovieActivity.class);
+            Intent intent = new Intent(itemView.getContext(), SeriesActivity.class);
             intent.putExtra(mContext.getString(R.string.movieIntentExtraName), id);
-            itemView.getContext().startActivity(intent);*/
+            itemView.getContext().startActivity(intent);
         }
     }
 }
