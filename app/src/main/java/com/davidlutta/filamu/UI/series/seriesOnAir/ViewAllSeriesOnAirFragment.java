@@ -47,6 +47,7 @@ public class ViewAllSeriesOnAirFragment extends Fragment implements SwipeRefresh
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setTitle("Series On Air");
         recyclerView = view.findViewById(R.id.viewAllOnAirRecyclerView);
         swipeRefreshLayout = view.findViewById(R.id.onAirSwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
 
