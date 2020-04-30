@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".MovieActivity">
 
             <androidx.cardview.widget.CardView
@@ -95,7 +95,6 @@
                 android:id="@+id/seriesOverviewTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ellipsize="none"
                 android:fontFamily="@font/nunito_regular"
@@ -107,77 +106,70 @@
                 app:layout_constraintTop_toBottomOf="@+id/seriesGenreTextView" />
 
             <TextView
-                android:id="@+id/seriesCastTitle"
+                android:id="@+id/firstEpisodeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/creditsCast"
-                android:textColor="@color/textColor"
-                android:textFontWeight="700"
-                android:textSize="20sp"
+                android:text="@string/firstEpisode"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/seriesOverviewTextView"
-                app:layout_constraintTop_toBottomOf="@+id/seriesOverviewTextView" />
-
-            <Button
-                android:id="@+id/viewAllSeriesCastTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/view_all"
-                android:textColor="@color/textColor"
-                android:textStyle="bold"
-                android:background="@drawable/rounded_button_background"
-                app:layout_constraintBaseline_toBaselineOf="@+id/seriesCastTitle"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/seriesCastRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/seriesOverviewTextView"
-                app:layout_constraintStart_toStartOf="@+id/seriesCastTitle"
-                app:layout_constraintTop_toBottomOf="@+id/seriesCastTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/seriesOverviewTextView"
+                app:layout_constraintStart_toStartOf="@+id/seriesOverviewTextView"/>
 
             <TextView
-                android:id="@+id/seriesCrewTitleTextView"
+                android:id="@+id/numOfSeasonsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/firstEpisodeTextView"
+                app:layout_constraintStart_toStartOf="@+id/firstEpisodeTextView"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/creditsCrew"
+                android:text="@string/numOfEpisodes"/>
+
+            <TextView
+                android:id="@+id/runtimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/runtime"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/numOfSeasonsTextView"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/numOfSeasonsTextView"/>
+
+            <TextView
+                android:id="@+id/statusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                app:layout_constraintTop_toBottomOf="@+id/runtimeTextView"
+                app:layout_constraintStart_toStartOf="@+id/runtimeTextView"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/prodCompTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/production_companies"
                 android:textColor="@color/textColor"
                 android:textFontWeight="700"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/seriesCastRecyclerView"
-                app:layout_constraintTop_toBottomOf="@+id/seriesCastRecyclerView" />
-
-            <Button
-                android:id="@+id/viewAllSeriesCrewTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/view_all"
-                android:textColor="@color/textColor"
-                android:textStyle="bold"
-                android:background="@drawable/rounded_button_background"
-                app:layout_constraintBaseline_toBaselineOf="@+id/seriesCrewTitleTextView"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/statusTextView"
+                app:layout_constraintStart_toStartOf="@+id/statusTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/seriesCrewRecyclerView"
-                android:layout_width="0dp"
+                android:id="@+id/productionCompaniesRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/seriesOverviewTextView"
-                app:layout_constraintStart_toStartOf="@+id/seriesCrewTitleTextView"
-                app:layout_constraintTop_toBottomOf="@+id/seriesCrewTitleTextView" />
-
+                app:layout_constraintTop_toBottomOf="@+id/prodCompTitleTextView"
+                app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

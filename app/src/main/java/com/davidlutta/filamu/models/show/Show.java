@@ -231,8 +231,8 @@ public class Show implements Serializable, Parcelable
         this.createdBy = createdBy;
     }
 
-    public List<Integer> getEpisodeRunTime() {
-        return episodeRunTime;
+    public String getEpisodeRunTime() {
+        return String.valueOf(episodeRunTime.get(0));
     }
 
     public void setEpisodeRunTime(List<Integer> episodeRunTime) {

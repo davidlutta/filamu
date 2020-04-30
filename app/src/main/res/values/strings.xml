@@ -33,4 +33,9 @@
     <string name="on_the_air">On The Air</string>
     <string name="popular_series">popular Series</string>
     <string name="category">Category</string>
+    <string name="firstEpisode">First Episode: 2/30/2020</string>
+    <string name="numOfEpisodes">Number of Seasons: 3</string>
+    <string name="runtime">RunTime: 55mins</string>
+    <string name="status">Status: Running</string>
+    <string name="production_companies">Production Companies</string>
 </resources>
