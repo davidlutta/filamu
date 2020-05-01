@@ -157,6 +157,7 @@
                 android:text="@string/production_companies"
                 android:textColor="@color/textColor"
                 android:textFontWeight="700"
+                android:fontFamily="@font/nunito_bold"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
@@ -170,6 +171,134 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/prodCompTitleTextView"
                 app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"/>
+
+            <TextView
+                android:id="@+id/seriesActivityCastTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:textFontWeight="900"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="25sp"
+                android:text="@string/creditsCast"
+                app:layout_constraintTop_toBottomOf="@+id/productionCompaniesRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/statusTextView"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/seriesActivityViewAllCastTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/view_all"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:background="@drawable/rounded_button_background"
+                app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivityCastTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesActivityCastRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seriesActivityCastTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCastTitleTextView" />
+
+            <TextView
+                android:id="@+id/seriesActivityCrewTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/creditsCrew"
+                android:textColor="@color/textColor"
+                android:textFontWeight="900"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/statusTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCastRecyclerView"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/seriesActivityViewAllCrewTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/view_all"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:background="@drawable/rounded_button_background"
+                app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivityCrewTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesActivityCrewRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCrewTitleTextView" />
+
+            <TextView
+                android:id="@+id/seriesActivityTrailerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trailers"
+                android:textFontWeight="900"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="25sp"
+                android:textColor="@color/textColor"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCrewRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"
+                android:layout_marginTop="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesActivityTrailerRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seriesActivityTrailerTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityTrailerTextView" />
+
+            <TextView
+                android:id="@+id/seriesActivitySimilarSeriesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/similar_shows"
+                android:textFontWeight="900"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="25sp"
+                android:textColor="@color/textColor"
+                app:layout_constraintStart_toStartOf="@+id/seriesActivityTrailerRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityTrailerRecyclerView"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/seriesActivityViewAllSimilarSeriesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/view_all"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:background="@drawable/rounded_button_background"
+                app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivitySimilarSeriesTextView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesActivitySimilarRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seriesActivitySimilarSeriesTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivitySimilarSeriesTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

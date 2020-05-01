@@ -16,10 +16,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.adapters.cast.CastAdapter;
+import com.davidlutta.filamu.adapters.crew.CrewAdapter;
 import com.davidlutta.filamu.adapters.productionCompanies.ProductionCompanyAdapter;
+import com.davidlutta.filamu.adapters.series.SeriesAdapter;
+import com.davidlutta.filamu.adapters.trailers.TrailersAdapter;
+import com.davidlutta.filamu.models.cast.Cast;
+import com.davidlutta.filamu.models.cast.Crew;
+import com.davidlutta.filamu.models.series.Series;
 import com.davidlutta.filamu.models.show.Genre;
 import com.davidlutta.filamu.models.show.ProductionCompany;
 import com.davidlutta.filamu.models.show.Show;
+import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
 import com.davidlutta.filamu.viewmodels.TvViewModel;
 
@@ -49,8 +57,25 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
     private List<ProductionCompany> productionCompaniesList;
     private ProductionCompanyAdapter productionCompanyAdapter;
 
+    private List<Cast> castList;
+    private CastAdapter castAdapter;
+    private RecyclerView castRecyclerView;
+
+    private List<Crew> crewList;
+    private CrewAdapter crewAdapter;
+    private RecyclerView crewRecyclerView;
+
+    private List<Trailer> trailerList;
+    private TrailersAdapter trailersAdapter;
+    private RecyclerView trailersRecyclerView;
+
+    private List<Series> similarSeriesList;
+    private RecyclerView similarSeriesRecyclerView;
+    private SeriesAdapter seriesAdapter;
+
     @SuppressLint("CutPasteId")
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
@@ -65,6 +90,10 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         runtimeTextView = findViewById(R.id.runtimeTextView);
         statusTextView = findViewById(R.id.statusTextView);
         productionCompaniesRecyclerView = findViewById(R.id.productionCompaniesRecyclerView);
+        castRecyclerView = findViewById(R.id.seriesActivityCastRecyclerView);
+        crewRecyclerView = findViewById(R.id.seriesActivityCrewRecyclerView);
+        trailersRecyclerView = findViewById(R.id.seriesActivityTrailerRecyclerView);
+        similarSeriesRecyclerView = findViewById(R.id.seriesActivitySimilarRecyclerView);
         swipeRefreshLayout.setOnRefreshListener(this);
         mViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
         subscribeViewModel();
@@ -79,6 +108,38 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
                     swipeRefreshLayout.setRefreshing(false);
                     currentSeries = show;
                     populateData();
+                }
+            });
+            mViewModel.getSeriesCast(id).observe(this, new Observer<List<Cast>>() {
+                @Override
+                public void onChanged(List<Cast> casts) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    castList = casts;
+                    setUpCastAdapter();
+                }
+            });
+            mViewModel.getSeriesCrew(id).observe(this, new Observer<List<Crew>>() {
+                @Override
+                public void onChanged(List<Crew> crews) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    crewList = crews;
+                    setUpCrewAdapter();
+                }
+            });
+            mViewModel.getSeriesTrailers(id).observe(this, new Observer<List<Trailer>>() {
+                @Override
+                public void onChanged(List<Trailer> trailers) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    trailerList = trailers;
+                    setUpTrailersAdapter();
+                }
+            });
+            mViewModel.getSimilarShows(id).observe(this, new Observer<List<Series>>() {
+                @Override
+                public void onChanged(List<Series> series) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    similarSeriesList = series;
+                    setUpSimilarShowsAdapter();
                 }
             });
         }
@@ -104,7 +165,7 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
                 firstEpisodeTextView.setText(date);
             }
             statusTextView.setText(status);
-            firstEpisodeTextView.setText(String.format("First Episode: %s\nLast Episode: %s", currentSeries.getFirstAirDate(),lastAirDate));
+            firstEpisodeTextView.setText(String.format("First Episode: %s\nLast Episode: %s", currentSeries.getFirstAirDate(), lastAirDate));
             runtimeTextView.setText(runtime);
             numOfSeasonsTextView.setText(numberOfSeasons);
             ratingTextView.setText(rating);
@@ -126,6 +187,42 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             productionCompaniesRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
             productionCompaniesRecyclerView.setAdapter(productionCompanyAdapter);
             productionCompaniesRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpCastAdapter() {
+        if (castAdapter == null) {
+            castAdapter = new CastAdapter(this, castList);
+            castRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            castRecyclerView.setAdapter(castAdapter);
+            castRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpCrewAdapter() {
+        if (crewAdapter == null) {
+            crewAdapter = new CrewAdapter(this, crewList);
+            crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            crewRecyclerView.setAdapter(crewAdapter);
+            crewRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpTrailersAdapter() {
+        if (trailersAdapter == null) {
+            trailersAdapter = new TrailersAdapter(this, trailerList);
+            trailersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            trailersRecyclerView.setAdapter(trailersAdapter);
+            trailersRecyclerView.setNestedScrollingEnabled(false);
+        }
+    }
+
+    private void setUpSimilarShowsAdapter() {
+        if (seriesAdapter == null) {
+            seriesAdapter = new SeriesAdapter(this, similarSeriesList);
+            similarSeriesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            similarSeriesRecyclerView.setAdapter(seriesAdapter);
+            similarSeriesRecyclerView.setNestedScrollingEnabled(false);
         }
     }
 
