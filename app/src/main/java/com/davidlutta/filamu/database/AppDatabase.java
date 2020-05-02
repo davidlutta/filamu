@@ -9,8 +9,9 @@ import androidx.room.RoomDatabase;
 
 import com.davidlutta.filamu.database.movies.Movie;
 import com.davidlutta.filamu.database.movies.MovieDao;
+import com.davidlutta.filamu.database.tv.SeriesDao;
 
-@Database(entities = {Movie.class}, version = 3, exportSchema = false)
+@Database(entities = {Movie.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String TAG = AppDatabase.class.getSimpleName();
     public static final Object LOCK = new Object();
@@ -36,4 +37,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract MovieDao movieDao();
+
+    public abstract SeriesDao seriesDao();
 }

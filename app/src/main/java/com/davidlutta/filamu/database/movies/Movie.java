@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Entity(tableName = "savedMoviesTable")
 public class Movie {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "movieId")
     private int movieId;
