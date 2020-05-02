@@ -9,13 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.UI.series.ViewAllSeriesHolderActivity;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
 import com.davidlutta.filamu.adapters.productionCompanies.ProductionCompanyAdapter;
@@ -73,6 +76,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
     private RecyclerView similarSeriesRecyclerView;
     private SeriesAdapter seriesAdapter;
 
+    private Button similarShowsButton;
+
     @SuppressLint("CutPasteId")
     @Override
 
@@ -94,8 +99,18 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         crewRecyclerView = findViewById(R.id.seriesActivityCrewRecyclerView);
         trailersRecyclerView = findViewById(R.id.seriesActivityTrailerRecyclerView);
         similarSeriesRecyclerView = findViewById(R.id.seriesActivitySimilarRecyclerView);
+        similarShowsButton = findViewById(R.id.seriesActivityViewAllSimilarSeriesButton);
         swipeRefreshLayout.setOnRefreshListener(this);
         mViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
+        similarShowsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewAllSeriesHolderActivity.class);
+                intent.putExtra("Category", "similarSeries");
+                intent.putExtra("tvId", currentSeries.getId().toString());
+                startActivity(intent);
+            }
+        });
         subscribeViewModel();
     }
 

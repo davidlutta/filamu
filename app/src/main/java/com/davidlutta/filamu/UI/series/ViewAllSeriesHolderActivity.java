@@ -10,6 +10,7 @@ import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.UI.series.airingSeries.ViewAllAiringFragment;
 import com.davidlutta.filamu.UI.series.popularSeries.ViewAllPopularFragment;
 import com.davidlutta.filamu.UI.series.seriesOnAir.ViewAllSeriesOnAirFragment;
+import com.davidlutta.filamu.UI.series.similarSeries.ViewAllSimilarSeriesFragment;
 
 import java.util.Objects;
 
@@ -39,6 +40,9 @@ public class ViewAllSeriesHolderActivity extends AppCompatActivity {
                     break;
                 case "popularSeries":
                     selectedFragment = ViewAllPopularFragment.newInstance();
+                    break;
+                case "similarSeries":
+                    selectedFragment = ViewAllSimilarSeriesFragment.newInstance();
                     break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

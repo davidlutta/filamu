@@ -30,5 +30,5 @@ public interface TvSeriesApi {
     Call<TrailerResponse> getTrailer(@Path("tv_id") String tvId, @Query("api_key") String key);
 
     @GET("/3/tv/{tv_id}/similar")
-    Call<SeriesResponse> getSimilarShows(@Path("tv_id") String tvId, @Query("api_key") String key);
+    Call<SeriesResponse> getSimilarShows(@Path("tv_id") String tvId, @Query("api_key") String key, @Query("page") String page);
 }

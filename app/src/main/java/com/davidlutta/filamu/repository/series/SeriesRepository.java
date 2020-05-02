@@ -196,7 +196,7 @@ public class SeriesRepository {
 
     public MutableLiveData<List<Series>> getSimilarShows(String tvID) {
         final MutableLiveData<List<Series>> seriesData = new MutableLiveData<>();
-        seriesApi.getSimilarShows(tvID, mAPI_KEY).enqueue(new Callback<SeriesResponse>() {
+        seriesApi.getSimilarShows(tvID, mAPI_KEY, "1").enqueue(new Callback<SeriesResponse>() {
             @Override
             public void onResponse(Call<SeriesResponse> call, Response<SeriesResponse> response) {
                 if (response.isSuccessful()) {
