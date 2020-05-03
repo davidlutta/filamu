@@ -269,7 +269,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
                 saveButton.setText(R.string.saved);
                 saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
                 favouriteViewModel.deleteSavedMovie(currentMovie.getId().intValue());
-                Toasty.error(this,"Deleted Movie",Toasty.LENGTH_SHORT,true).show();
+                Toasty.error(this,"Removed Movie",Toasty.LENGTH_SHORT,true).show();
                 saveButton.setText(R.string.save);
                 saveButton.setBackgroundResource(R.drawable.red_rounded_button_background);
             } else {

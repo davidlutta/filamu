@@ -2,7 +2,6 @@ package com.davidlutta.filamu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +31,7 @@ import com.davidlutta.filamu.models.show.ProductionCompany;
 import com.davidlutta.filamu.models.show.Show;
 import com.davidlutta.filamu.models.trailers.Trailer;
 import com.davidlutta.filamu.util.Constants;
+import com.davidlutta.filamu.viewmodels.SavedTvSeriesViewModel;
 import com.davidlutta.filamu.viewmodels.TvViewModel;
 
 import java.time.LocalDate;
@@ -40,8 +40,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.StringJoiner;
+import java.util.concurrent.ExecutionException;
 
-public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+import es.dmoral.toasty.Toasty;
+
+public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     private ImageView backgroundImageView;
     private TextView titleTextView;
     private TextView genreTextView;
@@ -77,6 +80,9 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
     private SeriesAdapter seriesAdapter;
 
     private Button similarShowsButton;
+    private Button saveButton;
+
+    private SavedTvSeriesViewModel savedTvSeriesViewModel;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -100,8 +106,10 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         trailersRecyclerView = findViewById(R.id.seriesActivityTrailerRecyclerView);
         similarSeriesRecyclerView = findViewById(R.id.seriesActivitySimilarRecyclerView);
         similarShowsButton = findViewById(R.id.seriesActivityViewAllSimilarSeriesButton);
+        saveButton = findViewById(R.id.seriesSaveButton);
         swipeRefreshLayout.setOnRefreshListener(this);
         mViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
+        savedTvSeriesViewModel = ViewModelProviders.of(this).get(SavedTvSeriesViewModel.class);
         similarShowsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +119,7 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
                 startActivity(intent);
             }
         });
+        saveButton.setOnClickListener(this);
         subscribeViewModel();
     }
 
@@ -263,9 +272,54 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         return joinedString;
     }
 
+    private void saveShow() {
+        String poster = Constants.IMAGE_BASE_URL + currentSeries.getPosterPath();
+        com.davidlutta.filamu.database.tv.Series showToSave = new com.davidlutta.filamu.database.tv.Series(
+                currentSeries.getId(),
+                currentSeries.getOriginalName(),
+                generateGenreString(currentSeries.getGenres()),
+                currentSeries.getVoteAverage().toString(),
+                poster, currentSeries.getOverview(),
+                currentSeries.getFirstAirDate(),
+                currentSeries.getLastAirDate(),
+                currentSeries.getNumberOfSeasons().toString(),
+                currentSeries.getStatus()
+        );
+        savedTvSeriesViewModel.saveSeries(showToSave);
+    }
+
+    private boolean checkIfSaved() throws ExecutionException, InterruptedException {
+        com.davidlutta.filamu.database.tv.Series show = savedTvSeriesViewModel.getSavedSeries(currentSeries.getId());
+        boolean bool = false;
+        if (show != null) {
+            bool = true;
+        }
+        return bool;
+    }
 
     @Override
     public void onRefresh() {
         subscribeViewModel();
+    }
+
+    @Override
+    public void onClick(View v) {
+        try {
+            if (checkIfSaved()) {
+                saveButton.setText(R.string.saved);
+                saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+                savedTvSeriesViewModel.deleteSeries(currentSeries.getId());
+                Toasty.error(this,"Removed Show",Toasty.LENGTH_SHORT,true).show();
+                saveButton.setText(R.string.save);
+                saveButton.setBackgroundResource(R.drawable.red_rounded_button_background);
+            } else {
+                saveShow();
+                saveButton.setText(R.string.saved);
+                saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+                Toasty.success(this, "Show Saved", Toasty.LENGTH_SHORT, true).show();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

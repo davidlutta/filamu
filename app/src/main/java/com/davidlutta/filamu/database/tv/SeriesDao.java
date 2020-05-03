@@ -15,11 +15,11 @@ public interface SeriesDao {
     LiveData<List<Series>> loadAllSavedSeries();
 
     @Query("SELECT * FROM savedShowsTable WHERE tvId =:tvId")
-    Series loadSavedSeries(String tvId);
+    Series loadSavedSeries(int tvId);
 
     @Insert
     void insertSeries(Series series);
 
     @Query("DELETE FROM savedShowsTable WHERE tvId = :tvId")
-    void deleteMovieById(String tvId);
+    void deleteMovieById(int tvId);
 }

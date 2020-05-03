@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Series {
     @PrimaryKey
     @NonNull
-    private String tvId;
+    private int tvId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -19,6 +19,9 @@ public class Series {
 
     @ColumnInfo(name = "rating")
     private String rating;
+
+    @ColumnInfo(name = "poster")
+    private String poster;
 
     @ColumnInfo(name = "overview")
     private String overView;
@@ -38,11 +41,12 @@ public class Series {
     @ColumnInfo(name = "timestamp")
     private long timestamp;
 
-    public Series(@NonNull String tvId, String title, String genre, String rating, String overView, String firstAirDate, String lastAirDate, String numOfSeasons, String status) {
+    public Series(@NonNull int tvId, String title, String genre, String rating, String poster, String overView, String firstAirDate, String lastAirDate, String numOfSeasons, String status) {
         this.tvId = tvId;
         this.title = title;
         this.genre = genre;
         this.rating = rating;
+        this.poster = poster;
         this.overView = overView;
         this.firstAirDate = firstAirDate;
         this.lastAirDate = lastAirDate;
@@ -52,11 +56,11 @@ public class Series {
     }
 
     @NonNull
-    public String getTvId() {
+    public int getTvId() {
         return tvId;
     }
 
-    public void setTvId(@NonNull String tvId) {
+    public void setTvId(@NonNull int tvId) {
         this.tvId = tvId;
     }
 
@@ -66,6 +70,14 @@ public class Series {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     public String getGenre() {
@@ -135,10 +147,11 @@ public class Series {
     @Override
     public String toString() {
         return "Series{" +
-                "tvId='" + tvId + '\'' +
+                "tvId=" + tvId +
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
                 ", rating='" + rating + '\'' +
+                ", poster='" + poster + '\'' +
                 ", overView='" + overView + '\'' +
                 ", firstAirDate='" + firstAirDate + '\'' +
                 ", lastAirDate='" + lastAirDate + '\'' +
