@@ -55,7 +55,7 @@ public class SavedTvSeriesFragment extends Fragment implements SwipeRefreshLayou
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 mViewModel.deleteSeries(adapter.getSelectedSeries(viewHolder.getAdapterPosition()).getTvId());
-                Toasty.warning(Objects.requireNonNull(getContext()), "Deleted Movie", Toasty.LENGTH_SHORT, true).show();
+                Toasty.error(Objects.requireNonNull(getContext()), "Removed Show", Toasty.LENGTH_SHORT, true).show();
             }
         }).attachToRecyclerView(recyclerView);
         return view;

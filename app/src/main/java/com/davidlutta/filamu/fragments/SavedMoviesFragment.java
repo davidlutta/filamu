@@ -29,7 +29,6 @@ public class SavedMoviesFragment extends Fragment {
     private SavedMoviesViewModel mViewModel;
     private RecyclerView savedMoviesRecyclerView;
     private SavedMoviesAdapter moviesAdapter;
-    private List<Movie> movieList;
 
     public static SavedMoviesFragment newInstance() {
         return new SavedMoviesFragment();
@@ -41,25 +40,18 @@ public class SavedMoviesFragment extends Fragment {
         final View view = inflater.inflate(R.layout.saved_movies_fragment, container, false);
         savedMoviesRecyclerView = view.findViewById(R.id.savedMoviesRecyclerView);
 
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT) {
+                ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
                 //for drag and drop functionality
             }
 
-            // FIXME: 4/23/20 FIX MEEEEE !!!!!!
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                movieList.remove(position);
-                moviesAdapter.notifyItemRemoved(position);
-                moviesAdapter.notifyItemChanged(position);
-                mViewModel.deleteSavedMovie(moviesAdapter.getSelectedSavedMovie(position).getMovieId());
-                subscribeViewModels();
-                Toasty.warning(Objects.requireNonNull(getContext()), "Deleted Movie", Toasty.LENGTH_SHORT, true).show();
+                mViewModel.deleteSavedMovie(moviesAdapter.getSelectedSavedMovie(viewHolder.getAdapterPosition()).getMovieId());
+                Toasty.error(Objects.requireNonNull(getContext()), "Removed Movie", Toasty.LENGTH_SHORT, true).show();
             }
         }).attachToRecyclerView(savedMoviesRecyclerView);
         return view;
@@ -69,6 +61,13 @@ public class SavedMoviesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
+        moviesAdapter = new SavedMoviesAdapter(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        savedMoviesRecyclerView.setLayoutManager(layoutManager);
+        savedMoviesRecyclerView.setAdapter(moviesAdapter);
+        savedMoviesRecyclerView.setNestedScrollingEnabled(false);
         subscribeViewModels();
     }
 
@@ -76,16 +75,7 @@ public class SavedMoviesFragment extends Fragment {
         mViewModel.getSavedMovies().observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                if (moviesAdapter == null) {
-                    movieList = movies;
-                    moviesAdapter = new SavedMoviesAdapter(getContext(), movieList);
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                    layoutManager.setReverseLayout(true);
-                    layoutManager.setStackFromEnd(true);
-                    savedMoviesRecyclerView.setLayoutManager(layoutManager);
-                    savedMoviesRecyclerView.setAdapter(moviesAdapter);
-                    savedMoviesRecyclerView.setNestedScrollingEnabled(false);
-                }
+                moviesAdapter.submitList(movies);
             }
         });
     }

@@ -202,6 +202,14 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
                     .placeholder(R.drawable.ic_launcher)
                     .into(backgroundImageView);
             setUpProductionCompanyAdapter();
+            try {
+                if (checkIfSaved()) {
+                    saveButton.setText(R.string.saved);
+                    saveButton.setBackgroundResource(R.drawable.green_rounded_button_background);
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

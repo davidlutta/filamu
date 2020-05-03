@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -18,16 +19,27 @@ import com.davidlutta.filamu.SavedMovieActivity;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.database.movies.Movie;
 
-import java.util.List;
+import java.util.Objects;
 
-public class SavedMoviesAdapter extends RecyclerView.Adapter<SavedMoviesAdapter.SavedMoviesViewHolder> {
+public class SavedMoviesAdapter extends ListAdapter<Movie,SavedMoviesAdapter.SavedMoviesViewHolder> {
     private Context mContext;
-    private List<Movie> movieList;
 
-    public SavedMoviesAdapter(Context mContext, List<Movie> movieList) {
+    public SavedMoviesAdapter(Context mContext) {
+        super(DIFF_CALLBACK);
         this.mContext = mContext;
-        this.movieList = movieList;
     }
+
+    private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+            return oldItem.getMovieId() == newItem.getMovieId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+            return Objects.equals(oldItem, newItem);
+        }
+    };
 
     @NonNull
     @Override
@@ -53,14 +65,10 @@ public class SavedMoviesAdapter extends RecyclerView.Adapter<SavedMoviesAdapter.
                 .into(holder.poster);
     }
 
-    @Override
-    public int getItemCount() {
-        return movieList.size();
-    }
 
     public Movie getSelectedSavedMovie(int position) {
-        if (movieList.size() > 0) {
-            return movieList.get(position);
+        if (getCurrentList().size() > 0) {
+            return getItem(position);
         }
         return null;
     }
