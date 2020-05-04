@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="500dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="1dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/savedSeriesActivityBackgroundImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/background_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/poster"
+                    android:visibility="invisible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/savedSeriesActivityTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/textColor"
+            android:textFontWeight="900"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+        <TextView
+            android:id="@+id/savedSeriesActivityGenreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/savedSeriesActivityTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityTitleTextView" />
+
+        <TextView
+            android:id="@+id/savedSeriesActivityRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityTitleTextView" />
+
+        <TextView
+            android:id="@+id/savedSeriesActivityOverviewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="none"
+            android:fontFamily="@font/nunito_regular"
+            android:scrollHorizontally="false"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toStartOf="@+id/savedSeriesActivityGenreTextView"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityGenreTextView" />
+
+        <TextView
+            android:id="@+id/savedSeriesActivityFirstEpisodeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/firstEpisode"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityOverviewTextView"
+            app:layout_constraintStart_toStartOf="@+id/savedSeriesActivityOverviewTextView"/>
+
+        <TextView
+            android:id="@+id/savedSeriesActivityNumOfSeasonsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityFirstEpisodeTextView"
+            app:layout_constraintStart_toStartOf="@+id/savedSeriesActivityFirstEpisodeTextView"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:text="@string/numOfEpisodes"/>
+
+        <TextView
+            android:id="@+id/savedSeriesActivityStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:text="@string/status"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/savedSeriesActivityNumOfSeasonsTextView"
+            app:layout_constraintTop_toBottomOf="@+id/savedSeriesActivityNumOfSeasonsTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

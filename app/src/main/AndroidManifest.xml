@@ -15,12 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".SeriesActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".UI.series.ViewAllSeriesHolderActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".SavedSeriesActivity"></activity>
+        <activity
+            android:name=".SeriesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UI.series.ViewAllSeriesHolderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UI.credits.KnownForActivity"
             android:screenOrientation="portrait"

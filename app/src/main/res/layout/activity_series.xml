@@ -146,6 +146,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/status"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/runtimeTextView"
                 app:layout_constraintStart_toStartOf="@+id/runtimeTextView"
                 android:layout_marginTop="8dp"/>

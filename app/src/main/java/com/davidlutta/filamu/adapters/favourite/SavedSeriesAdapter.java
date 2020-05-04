@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.davidlutta.filamu.R;
+import com.davidlutta.filamu.SavedSeriesActivity;
 import com.davidlutta.filamu.adapters.BaseViewHolder;
 import com.davidlutta.filamu.database.tv.Series;
 
@@ -90,10 +91,9 @@ public class SavedSeriesAdapter extends ListAdapter<Series, SavedSeriesAdapter.S
             int position = getAdapterPosition();
             Series series = getSelectedSeries(position);
             String id = String.valueOf(series.getTvId());
-            Toast.makeText(mContext, series.getTitle(), Toast.LENGTH_SHORT).show();
-            /*Intent intent = new Intent(itemView.getContext(), );
+            Intent intent = new Intent(itemView.getContext(), SavedSeriesActivity.class);
             intent.putExtra("id", id);
-            itemView.getContext().startActivity(intent);*/
+            itemView.getContext().startActivity(intent);
         }
     }
 }

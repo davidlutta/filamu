@@ -1,15 +1,12 @@
 package com.davidlutta.filamu;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -18,14 +15,13 @@ import com.davidlutta.filamu.viewmodels.SavedMoviesViewModel;
 
 import java.util.concurrent.ExecutionException;
 
-public class SavedMovieActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class SavedMovieActivity extends AppCompatActivity{
     private SavedMoviesViewModel mViewModel;
     private TextView title;
     private TextView genre;
     private TextView rating;
     private TextView overview;
     private ImageView poster;
-    private SwipeRefreshLayout swipeRefreshLayout;
     Movie currentMovie = null;
 
 
@@ -39,8 +35,6 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
         rating = findViewById(R.id.savedActivityRatingTextView);
         overview = findViewById(R.id.savedActivityOverviewTextView);
         poster = findViewById(R.id.savedBackgroundImageView);
-        swipeRefreshLayout = findViewById(R.id.savedMovieActivitySwipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
         try {
             subscribeViewModels();
         } catch (ExecutionException | InterruptedException e) {
@@ -52,7 +46,6 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
     private void subscribeViewModels() throws ExecutionException, InterruptedException {
         if (getIntent().hasExtra("id")) {
             String id = getIntent().getExtras().getString("id");
-            swipeRefreshLayout.setRefreshing(false);
             currentMovie = mViewModel.getSavedMovie(Integer.parseInt(id));
             assert currentMovie != null;
             populateData(currentMovie);
@@ -72,14 +65,4 @@ public class SavedMovieActivity extends AppCompatActivity implements SwipeRefres
                 .placeholder(R.drawable.ic_launcher)
                 .into(poster);
     }
-
-    @Override
-    public void onRefresh() {
-        try {
-            subscribeViewModels();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

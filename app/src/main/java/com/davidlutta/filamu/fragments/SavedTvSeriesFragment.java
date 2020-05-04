@@ -25,12 +25,11 @@ import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
 
-public class SavedTvSeriesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class SavedTvSeriesFragment extends Fragment{
 
     private SavedTvSeriesViewModel mViewModel;
     private SavedSeriesAdapter adapter;
     private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static SavedTvSeriesFragment newInstance() {
         return new SavedTvSeriesFragment();
@@ -41,8 +40,6 @@ public class SavedTvSeriesFragment extends Fragment implements SwipeRefreshLayou
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.saved_tv_series_fragment, container, false);
         recyclerView = view.findViewById(R.id.savedSeriesRecyclerView);
-        swipeRefreshLayout = view.findViewById(R.id.savedSeriesSwipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.RIGHT) {
@@ -79,14 +76,8 @@ public class SavedTvSeriesFragment extends Fragment implements SwipeRefreshLayou
         mViewModel.getSavedSeries().observe(getViewLifecycleOwner(), new Observer<List<Series>>() {
             @Override
             public void onChanged(List<Series> series) {
-                swipeRefreshLayout.setRefreshing(false);
                 adapter.submitList(series);
             }
         });
-    }
-
-    @Override
-    public void onRefresh() {
-        subscribeViewModels();
     }
 }

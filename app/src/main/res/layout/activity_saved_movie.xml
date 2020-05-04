@@ -1,100 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/savedMovieActivitySwipeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MovieActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".MovieActivity">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/savedItemCardView"
+            android:layout_width="0dp"
+            android:layout_height="500dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="1dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/savedItemCardView"
-                android:layout_width="0dp"
-                android:layout_height="500dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:elevation="1dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
+                    android:id="@+id/savedBackgroundImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/background_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/poster"
+                    android:visibility="invisible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:id="@+id/savedBackgroundImageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/background_image"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/poster"
-                        android:visibility="invisible" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/savedActivityTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/textColor"
+            android:textFontWeight="900"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/savedItemCardView"
+            app:layout_constraintTop_toBottomOf="@+id/savedItemCardView" />
 
-            <TextView
-                android:id="@+id/savedActivityTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:textColor="@color/textColor"
-                android:textFontWeight="900"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/savedItemCardView"
-                app:layout_constraintTop_toBottomOf="@+id/savedItemCardView" />
+        <TextView
+            android:id="@+id/savedActivityGenreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/savedActivityTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/savedActivityTitleTextView" />
 
-            <TextView
-                android:id="@+id/savedActivityGenreTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/nunito_light"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/savedActivityTitleTextView"
-                app:layout_constraintTop_toBottomOf="@+id/savedActivityTitleTextView" />
+        <TextView
+            android:id="@+id/savedActivityRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/nunito_light"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedActivityTitleTextView" />
 
-            <TextView
-                android:id="@+id/savedActivityRatingTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/nunito_light"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/savedActivityTitleTextView" />
+        <TextView
+            android:id="@+id/savedActivityOverviewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="none"
+            android:fontFamily="@font/nunito_regular"
+            android:scrollHorizontally="false"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/savedItemCardView"
+            app:layout_constraintStart_toStartOf="@+id/savedActivityGenreTextView"
+            app:layout_constraintTop_toBottomOf="@+id/savedActivityGenreTextView" />
 
-            <TextView
-                android:id="@+id/savedActivityOverviewTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:ellipsize="none"
-                android:fontFamily="@font/nunito_regular"
-                android:scrollHorizontally="false"
-                android:textAlignment="textStart"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="@+id/savedItemCardView"
-                app:layout_constraintStart_toStartOf="@+id/savedActivityGenreTextView"
-                app:layout_constraintTop_toBottomOf="@+id/savedActivityGenreTextView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
