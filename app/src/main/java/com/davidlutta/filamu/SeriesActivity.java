@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.UI.credits.CreditsViewHolderActivity;
 import com.davidlutta.filamu.UI.series.ViewAllSeriesHolderActivity;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
@@ -81,6 +82,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
 
     private Button similarShowsButton;
     private Button saveButton;
+    private Button viewAllCast;
+    private Button viewAllCrew;
 
     private SavedTvSeriesViewModel savedTvSeriesViewModel;
 
@@ -107,6 +110,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         similarSeriesRecyclerView = findViewById(R.id.seriesActivitySimilarRecyclerView);
         similarShowsButton = findViewById(R.id.seriesActivityViewAllSimilarSeriesButton);
         saveButton = findViewById(R.id.seriesSaveButton);
+        viewAllCast = findViewById(R.id.seriesActivityViewAllCastButton);
+        viewAllCrew = findViewById(R.id.seriesActivityViewAllCrewButton);
         swipeRefreshLayout.setOnRefreshListener(this);
         mViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
         savedTvSeriesViewModel = ViewModelProviders.of(this).get(SavedTvSeriesViewModel.class);
@@ -120,6 +125,27 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             }
         });
         saveButton.setOnClickListener(this);
+        viewAllCast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreditsViewHolderActivity.class);
+                intent.putExtra("Credits", "cast");
+                intent.putExtra("Category", "Series");
+                intent.putExtra("id", currentSeries.getId().toString());
+                startActivity(intent);
+            }
+        });
+        viewAllCrew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreditsViewHolderActivity.class);
+                intent.putExtra("Credits", "crew");
+                intent.putExtra("Category", "Series");
+                intent.putExtra("id", currentSeries.getId().toString());
+                startActivity(intent);
+            }
+        });
+
         subscribeViewModel();
     }
 

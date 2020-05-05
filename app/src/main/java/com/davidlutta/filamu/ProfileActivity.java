@@ -16,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.davidlutta.filamu.UI.credits.KnownForActivity;
+import com.davidlutta.filamu.UI.credits.moviesknownfor.KnownForActivity;
 import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
 import com.davidlutta.filamu.adapters.crew.CreditsCrewAdapter;
 import com.davidlutta.filamu.models.credits.CreditsCast;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.credits.KnownForActivity">
+    tools:context=".UI.credits.moviesknownfor.KnownForActivity">
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/KnowForActivitySwipeRefreshLayout"
         android:layout_width="match_parent"

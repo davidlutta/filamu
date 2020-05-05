@@ -1,4 +1,4 @@
-package com.davidlutta.filamu.UI.credits;
+package com.davidlutta.filamu.UI.credits.moviesknownfor;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;

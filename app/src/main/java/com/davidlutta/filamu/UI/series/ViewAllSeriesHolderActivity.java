@@ -26,10 +26,6 @@ public class ViewAllSeriesHolderActivity extends AppCompatActivity {
     private void selectFragment() {
         if (getIntent().hasExtra("Category")) {
             String category = Objects.requireNonNull(getIntent().getExtras()).getString("Category");
-            System.out.println("------------------------------------------------------------------------------------------------");
-            System.out.println("CATEGORY");
-            System.out.println(category);
-            System.out.println("------------------------------------------------------------------------------------------------");
             Fragment selectedFragment = null;
             switch (category) {
                 case "AiringToday":

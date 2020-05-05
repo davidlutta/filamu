@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.davidlutta.filamu.UI.credits.CreditsViewHolderActivity;
 import com.davidlutta.filamu.UI.movies.similarmovies.ViewAllSimilarMoviesActivity;
 import com.davidlutta.filamu.adapters.cast.CastAdapter;
 import com.davidlutta.filamu.adapters.crew.CrewAdapter;
@@ -70,6 +71,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private Button saveButton;
+    private Button viewAllCastButton;
+    private Button viewAllCrewButton;
 
     private Movie currentMovie;
 
@@ -93,6 +96,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         viewAllSimilarMoviesTextView = findViewById(R.id.viewAllSimilarMoviesTextView);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
+        viewAllCastButton = findViewById(R.id.viewAllCastTextView);
+        viewAllCrewButton = findViewById(R.id.viewAllCrewTextView);
         subscribeObservers();
         saveButton.setOnClickListener(this);
 
@@ -101,6 +106,28 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ViewAllSimilarMoviesActivity.class);
                 intent.putExtra("movieId", currentMovie.getId().toString());
+                startActivity(intent);
+            }
+        });
+
+        viewAllCastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreditsViewHolderActivity.class);
+                intent.putExtra("Credits", "cast");
+                intent.putExtra("Category", "Movies");
+                intent.putExtra("id", currentMovie.getId().toString());
+                startActivity(intent);
+            }
+        });
+
+        viewAllCrewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreditsViewHolderActivity.class);
+                intent.putExtra("Credits", "crew");
+                intent.putExtra("Category", "Movies");
+                intent.putExtra("id", currentMovie.getId().toString());
                 startActivity(intent);
             }
         });

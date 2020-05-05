@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".SavedSeriesActivity"></activity>
+        <activity android:name=".UI.credits.CreditsViewHolderActivity"></activity>
+        <activity android:name=".SavedSeriesActivity" />
         <activity
             android:name=".SeriesActivity"
             android:screenOrientation="portrait" />
@@ -23,7 +24,7 @@
             android:name=".UI.series.ViewAllSeriesHolderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UI.credits.KnownForActivity"
+            android:name=".UI.credits.moviesknownfor.KnownForActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeActionBar" />
         <activity
