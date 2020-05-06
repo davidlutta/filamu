@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.SearchFragment">
+    <TextView
+        android:id="@+id/searchFragmentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/search"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/textColor"
+        android:textFontWeight="900"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/moviesFragmentCard"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="1dp"
+        android:padding="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchFragmentTitle">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/moviesFragmentSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:queryBackground="@android:color/transparent"
+            app:queryBackground="@android:color/transparent"
+            android:iconifiedByDefault="false"
+            app:iconifiedByDefault="false"
+            android:focusableInTouchMode="true"
+            android:focusable="false"
+            app:queryHint="@string/search_movie"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchFragmentRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moviesFragmentCard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

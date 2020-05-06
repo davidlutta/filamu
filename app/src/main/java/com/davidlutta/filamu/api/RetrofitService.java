@@ -35,6 +35,8 @@ public class RetrofitService {
 
     private static TvSeriesApi tvSeriesApi = retrofit.create(TvSeriesApi.class);
 
+    private static SearchApi searchApi = retrofit.create(SearchApi.class);
+
     public static MoviesApi getMoviesApi() {
         return moviesApi;
     }
@@ -45,6 +47,10 @@ public class RetrofitService {
 
     public static TvSeriesApi getTvSeriesApi(){
         return tvSeriesApi;
+    }
+
+    public static SearchApi getSearchApi() {
+        return searchApi;
     }
 
     private static OkHttpClient okHttpClient() {

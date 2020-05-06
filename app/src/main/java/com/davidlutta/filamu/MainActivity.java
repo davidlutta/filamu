@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.davidlutta.filamu.fragments.MoviesFragment;
 import com.davidlutta.filamu.fragments.SavedItemsFragment;
+import com.davidlutta.filamu.fragments.SearchFragment;
 import com.davidlutta.filamu.fragments.TvFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_favourite:
                         selectedFragment = SavedItemsFragment.newInstance();
+                        break;
+                    case R.id.action_search:
+                        selectedFragment = SearchFragment.newInstance();
                         break;
                 }
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

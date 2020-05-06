@@ -42,4 +42,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_movie">Search Movie or Series</string>
+    <string name="search">Search</string>
+    <string name="tv_series">Tv Series</string>
 </resources>
