@@ -45,11 +45,17 @@ public class CreditsCrewAdapter extends RecyclerView.Adapter<CreditsCrewAdapter.
         String poster = Constants.IMAGE_BASE_URL + creditsCrewList.get(position).getPosterPath();
         holder.titleTextView.setText(title);
         holder.characterTextView.setText(job);
-        Glide.with(mContext)
-                .load(poster)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.poster)
-                .into(holder.backgroundImage);
+        if (getCreditsCrew(position).getPosterPath() != null) {
+            Glide.with(mContext)
+                    .load(poster)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .placeholder(R.drawable.person)
+                    .into(holder.backgroundImage);
+        } else {
+            Glide.with(mContext)
+                    .load(R.drawable.person)
+                    .into(holder.backgroundImage);
+        }
     }
 
     @Override

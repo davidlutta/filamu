@@ -198,11 +198,17 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             genreTextView.setText(genreString);
 
             backgroundImageView.setVisibility(View.VISIBLE);
-            Glide.with(this)
-                    .load(poster)
-                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .placeholder(R.drawable.ic_launcher)
-                    .into(backgroundImageView);
+            if (movie.getPosterPath()!=null) {
+                Glide.with(this)
+                        .load(poster)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .placeholder(R.drawable.poster)
+                        .into(backgroundImageView);
+            }else {
+                Glide.with(this)
+                        .load(R.drawable.poster)
+                        .into(backgroundImageView);
+            }
         }
         try {
             if (checkIfSaved()) {

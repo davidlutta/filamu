@@ -45,11 +45,17 @@ public class CreditsCastAdapter extends RecyclerView.Adapter<CreditsCastAdapter.
         String poster = Constants.IMAGE_BASE_URL + creditsCastsList.get(position).getPosterPath();
         holder.titleTextView.setText(title);
         holder.characterTextView.setText(character);
-        Glide.with(mContext)
-                .load(poster)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.poster)
-                .into(holder.backgroundImage);
+        if (getCreditsCast(position).getPosterPath() != null) {
+            Glide.with(mContext)
+                    .load(poster)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .placeholder(R.drawable.person)
+                    .into(holder.backgroundImage);
+        } else {
+            Glide.with(mContext)
+                    .load(R.drawable.person)
+                    .into(holder.backgroundImage);
+        }
     }
 
     @Override

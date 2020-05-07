@@ -45,7 +45,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
         Glide.with(mContext)
                 .load(thumbnail)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.ic_launcher)
+                .placeholder(R.drawable.poster)
                 .into(holder.trailersImageView);
     }
 

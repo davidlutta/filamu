@@ -45,7 +45,7 @@ public class ProductionCompanyAdapter extends RecyclerView.Adapter<ProductionCom
         Glide.with(mContext)
                 .load(poster)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.ic_launcher)
+                .placeholder(R.drawable.poster)
                 .into(holder.castImageView);
     }
 

@@ -47,11 +47,17 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
         String poster = Constants.IMAGE_BASE_URL + CrewList.get(position).getProfilePath();
         holder.CrewNameTextView.setText(name);
         holder.CrewRoleTextView.setText(job);
-        Glide.with(mContext)
-                .load(poster)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.ic_launcher)
-                .into(holder.CrewImageView);
+        if (getSelectedCrew(position).getProfilePath()!=null) {
+            Glide.with(mContext)
+                    .load(poster)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .placeholder(R.drawable.person)
+                    .into(holder.CrewImageView);
+        }else {
+            Glide.with(mContext)
+                    .load(R.drawable.person)
+                    .into(holder.CrewImageView);
+        }
     }
 
     @Override

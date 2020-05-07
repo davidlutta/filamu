@@ -47,11 +47,17 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         String poster = Constants.IMAGE_BASE_URL + CastList.get(position).getProfilePath();
         holder.castNameTextView.setText(name);
         holder.castRoleTextView.setText(role);
-        Glide.with(mContext)
-                .load(poster)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.ic_launcher)
-                .into(holder.castImageView);
+        if (getSelectedCast(position).getProfilePath() != null) {
+            Glide.with(mContext)
+                    .load(poster)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .placeholder(R.drawable.person)
+                    .into(holder.castImageView);
+        } else {
+            Glide.with(mContext)
+                    .load(R.drawable.person)
+                    .into(holder.castImageView);
+        }
     }
 
     @Override

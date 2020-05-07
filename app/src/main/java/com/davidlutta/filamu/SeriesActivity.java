@@ -222,11 +222,17 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             overviewTextView.setText(currentSeries.getOverview());
             genreTextView.setText(genre);
             backgroundImageView.setVisibility(View.VISIBLE);
+            if (currentSeries.getPosterPath() != null) {
             Glide.with(this)
                     .load(poster)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .placeholder(R.drawable.ic_launcher)
+                    .placeholder(R.drawable.person)
                     .into(backgroundImageView);
+            }else {
+                Glide.with(this)
+                        .load(R.drawable.person)
+                        .into(backgroundImageView);
+            }
             setUpProductionCompanyAdapter();
             try {
                 if (checkIfSaved()) {
