@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +42,10 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     private List<Series> seriesOnAirList;
     private List<Series> popularSeriesList;
 
+    private ProgressBar airingProgressBar;
+    private ProgressBar onAirProgressBar;
+    private ProgressBar popularSeriesProgressBar;
+
 
     public static TvFragment newInstance() {
         return new TvFragment();
@@ -58,6 +63,10 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         viewOnAirButton = view.findViewById(R.id.viewAllOnAirButton);
         viewAllPopularButton = view.findViewById(R.id.viewAllPopularSeriesButton);
         swipeRefreshLayout = view.findViewById(R.id.tvFragmentSwipeRefreshLayout);
+
+        airingProgressBar = view.findViewById(R.id.airingTodayProgressBar);
+        onAirProgressBar = view.findViewById(R.id.onAirProgressBar);
+        popularSeriesProgressBar = view.findViewById(R.id.popularSeriesProgressBar);
 
         swipeRefreshLayout.setOnRefreshListener(this);
         viewAllAiringTodayButton.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +138,8 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
             airingTodayRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             airingTodayRecyclerView.setAdapter(seriesAdapter);
             airingTodayRecyclerView.setNestedScrollingEnabled(false);
+            airingTodayRecyclerView.setVisibility(View.VISIBLE);
+            airingProgressBar.setVisibility(View.INVISIBLE);
             seriesAdapter = null;
         }
     }
@@ -139,6 +150,8 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
             onAirRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             onAirRecyclerView.setAdapter(seriesAdapter);
             onAirRecyclerView.setNestedScrollingEnabled(false);
+            onAirRecyclerView.setVisibility(View.VISIBLE);
+            onAirProgressBar.setVisibility(View.INVISIBLE);
             seriesAdapter = null;
         }
     }
@@ -149,6 +162,8 @@ public class TvFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
             popularSeriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             popularSeriesRecyclerView.setAdapter(seriesAdapter);
             popularSeriesRecyclerView.setNestedScrollingEnabled(false);
+            popularSeriesRecyclerView.setVisibility(View.VISIBLE);
+            popularSeriesProgressBar.setVisibility(View.INVISIBLE);
             seriesAdapter = null;
         }
     }

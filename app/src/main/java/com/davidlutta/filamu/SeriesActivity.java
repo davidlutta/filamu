@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -85,6 +86,12 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
     private Button viewAllCast;
     private Button viewAllCrew;
 
+    private ProgressBar productionCompaniesProgressBar;
+    private ProgressBar castProgressBar;
+    private ProgressBar crewProgressBar;
+    private ProgressBar trailerProgressBar;
+    private ProgressBar similarProgressBar;
+
     private SavedTvSeriesViewModel savedTvSeriesViewModel;
 
     @SuppressLint("CutPasteId")
@@ -112,6 +119,12 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
         saveButton = findViewById(R.id.seriesSaveButton);
         viewAllCast = findViewById(R.id.seriesActivityViewAllCastButton);
         viewAllCrew = findViewById(R.id.seriesActivityViewAllCrewButton);
+        productionCompaniesProgressBar = findViewById(R.id.prodCompProgressBar);
+        castProgressBar = findViewById(R.id.seriesCastProgressBar);
+        crewProgressBar = findViewById(R.id.seriesCrewProgressBar);
+        trailerProgressBar = findViewById(R.id.seriesTrailerProgressBar);
+        similarProgressBar = findViewById(R.id.similarSeriesProgressBar);
+
         swipeRefreshLayout.setOnRefreshListener(this);
         mViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
         savedTvSeriesViewModel = ViewModelProviders.of(this).get(SavedTvSeriesViewModel.class);
@@ -251,6 +264,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             productionCompaniesRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
             productionCompaniesRecyclerView.setAdapter(productionCompanyAdapter);
             productionCompaniesRecyclerView.setNestedScrollingEnabled(false);
+            productionCompaniesRecyclerView.setVisibility(View.VISIBLE);
+            productionCompaniesProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -260,6 +275,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             castRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             castRecyclerView.setAdapter(castAdapter);
             castRecyclerView.setNestedScrollingEnabled(false);
+            castRecyclerView.setVisibility(View.VISIBLE);
+            castProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -269,6 +286,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             crewRecyclerView.setAdapter(crewAdapter);
             crewRecyclerView.setNestedScrollingEnabled(false);
+            crewRecyclerView.setVisibility(View.VISIBLE);
+            crewProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -278,6 +297,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             trailersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             trailersRecyclerView.setAdapter(trailersAdapter);
             trailersRecyclerView.setNestedScrollingEnabled(false);
+            trailersRecyclerView.setVisibility(View.VISIBLE);
+            trailerProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -287,6 +308,8 @@ public class SeriesActivity extends AppCompatActivity implements SwipeRefreshLay
             similarSeriesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             similarSeriesRecyclerView.setAdapter(seriesAdapter);
             similarSeriesRecyclerView.setNestedScrollingEnabled(false);
+            similarSeriesRecyclerView.setVisibility(View.VISIBLE);
+            similarProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 

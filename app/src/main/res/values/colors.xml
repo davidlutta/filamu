@@ -16,4 +16,5 @@
     <color name="youtubeRed">#FF0000</color>
     <color name="imageTint">#6F000000</color>
     <color name="transparent">#80000000</color>
+    <color name="shimmerBackground">#dddddd</color>
 </resources>

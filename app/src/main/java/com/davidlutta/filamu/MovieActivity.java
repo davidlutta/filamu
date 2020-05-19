@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,6 +76,11 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
     private Button viewAllCastButton;
     private Button viewAllCrewButton;
 
+    private ProgressBar castProgressBar;
+    private ProgressBar crewProgressBar;
+    private ProgressBar trailerProgressBar;
+    private ProgressBar similarProgressBar;
+
     private Movie currentMovie;
 
     @Override
@@ -94,10 +101,14 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         similarMoviesRecyclerView = findViewById(R.id.similarMoviesRecyclerView);
         saveButton = findViewById(R.id.saveButton);
         viewAllSimilarMoviesTextView = findViewById(R.id.viewAllSimilarMoviesTextView);
-        moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
-        favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
         viewAllCastButton = findViewById(R.id.viewAllCastTextView);
         viewAllCrewButton = findViewById(R.id.viewAllCrewTextView);
+        castProgressBar = findViewById(R.id.movieCastProgressBar);
+        crewProgressBar = findViewById(R.id.crewProgressBar);
+        trailerProgressBar = findViewById(R.id.trailersProgressBar);
+        similarProgressBar = findViewById(R.id.similarMoviesProgressBar);
+        moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+        favouriteViewModel = ViewModelProviders.of(this).get(SavedMoviesViewModel.class);
         subscribeObservers();
         saveButton.setOnClickListener(this);
 
@@ -248,6 +259,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             castRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             castRecyclerView.setAdapter(castAdapter);
             castRecyclerView.setNestedScrollingEnabled(false);
+            castRecyclerView.setVisibility(View.VISIBLE);
+            castProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -257,6 +270,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             crewRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             crewRecyclerView.setAdapter(crewAdapter);
             crewRecyclerView.setNestedScrollingEnabled(false);
+            crewRecyclerView.setVisibility(View.VISIBLE);
+            crewProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -266,6 +281,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             trailersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             trailersRecyclerView.setAdapter(trailersAdapter);
             trailersRecyclerView.setNestedScrollingEnabled(false);
+            trailersRecyclerView.setVisibility(View.VISIBLE);
+            trailerProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -275,6 +292,8 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             similarMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             similarMoviesRecyclerView.setAdapter(similarMoviesAdapter);
             similarMoviesRecyclerView.setNestedScrollingEnabled(false);
+            similarMoviesRecyclerView.setVisibility(View.VISIBLE);
+            similarProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 

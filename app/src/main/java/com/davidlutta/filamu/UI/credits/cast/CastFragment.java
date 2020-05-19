@@ -76,6 +76,7 @@ public class CastFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     });
                     break;
@@ -88,6 +89,7 @@ public class CastFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     });
                     break;

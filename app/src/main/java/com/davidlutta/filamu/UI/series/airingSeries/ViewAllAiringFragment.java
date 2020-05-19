@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,6 +74,7 @@ public class ViewAllAiringFragment extends Fragment implements SwipeRefreshLayou
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
             seriesRecyclerView.setLayoutManager(layoutManager);
             seriesRecyclerView.setAdapter(seriesAdapter);
+            seriesRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 

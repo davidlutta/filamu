@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".UI.credits.cast.CastFragment">
+        tools:context=".UI.credits.cast.CrewFragment">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/airingAppBarLayout"
             android:layout_width="match_parent"
@@ -27,6 +27,7 @@
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/crewFragmentRecyclerView"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

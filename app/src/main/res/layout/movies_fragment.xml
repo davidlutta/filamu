@@ -74,10 +74,20 @@
                     app:layout_constraintStart_toStartOf="@+id/now_playing_recyclerView"
                     app:layout_constraintTop_toBottomOf="@+id/now_playing_recyclerView" />
 
+                <ProgressBar
+                    android:id="@+id/popularMoviesProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/popular_movies_recyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/popular_movies_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/popularTitleTextView" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/popular_movies_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="275dp"
+                    android:visibility="invisible"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
@@ -127,8 +137,18 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/upcomingMoviesTitle"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <ProgressBar
+                    android:id="@+id/upcomingMoviesProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/upcomingMoviesRecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/upcomingMoviesRecyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/upcomingMoviesTitle" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/upcomingMoviesRecyclerView"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="275dp"
                     android:layout_marginStart="16dp"
@@ -141,12 +161,22 @@
                     app:msrv_interval="1"
                     app:msrv_speed_ms_per_inch="100" />
 
+                <ProgressBar
+                    android:id="@+id/playingNowProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/now_playing_recyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/now_playing_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/discoverTitleTextView" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/now_playing_recyclerView"
                     android:layout_width="0dp"
                     android:layout_height="275dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/popular_movies_recyclerView"
                     app:layout_constraintTop_toBottomOf="@+id/discoverTitleTextView"

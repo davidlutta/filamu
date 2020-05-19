@@ -132,8 +132,18 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/castTitle"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/movieCastProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/castRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/castRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/castTitle" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/castRecyclerView"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -168,11 +178,21 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/crewTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/crewProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/crewRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/crewRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/crewTitleTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/crewRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/overviewTextView"
                 app:layout_constraintStart_toStartOf="@+id/crewTitleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/crewTitleTextView" />
@@ -190,8 +210,17 @@
                 app:layout_constraintStart_toStartOf="@+id/crewRecyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/crewRecyclerView" />
 
+            <ProgressBar
+                android:id="@+id/trailersProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/trailersRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/trailersRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/trailersTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/trailersRecyclerView"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -226,6 +255,15 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/similarMoviesTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/trailersRecyclerView" />
+
+            <ProgressBar
+                android:id="@+id/similarMoviesProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/similarMoviesRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/similarMoviesRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/similarMoviesRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/similarMoviesTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/similarMoviesRecyclerView"

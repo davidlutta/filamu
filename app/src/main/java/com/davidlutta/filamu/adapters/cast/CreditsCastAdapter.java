@@ -49,11 +49,11 @@ public class CreditsCastAdapter extends RecyclerView.Adapter<CreditsCastAdapter.
             Glide.with(mContext)
                     .load(poster)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .placeholder(R.drawable.person)
+                    .placeholder(R.drawable.poster)
                     .into(holder.backgroundImage);
         } else {
             Glide.with(mContext)
-                    .load(R.drawable.person)
+                    .load(R.drawable.poster)
                     .into(holder.backgroundImage);
         }
     }

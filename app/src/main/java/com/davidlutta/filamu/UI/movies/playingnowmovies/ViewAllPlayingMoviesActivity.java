@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.UI.movies.playingnowmovies.viewmodel.PlayingViewModel;
@@ -20,7 +22,6 @@ public class ViewAllPlayingMoviesActivity extends AppCompatActivity implements S
     private SwipeRefreshLayout swipeRefreshLayout;
     private PlayingViewModel mViewModel;
     private ViewAllMoviesAdapter moviesAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class ViewAllPlayingMoviesActivity extends AppCompatActivity implements S
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             moviesRecyclerView.setLayoutManager(layoutManager);
             moviesRecyclerView.setAdapter(moviesAdapter);
+            moviesRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 

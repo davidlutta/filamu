@@ -18,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.UI.series.similarSeries.viewmodel.SimilarSeriesViewModel;
@@ -79,6 +80,7 @@ public class ViewAllSimilarSeriesFragment extends Fragment implements SwipeRefre
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
+            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

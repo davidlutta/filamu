@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -75,6 +76,7 @@ public class CrewFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     });
                     break;
@@ -87,6 +89,7 @@ public class CrewFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     });
                     break;

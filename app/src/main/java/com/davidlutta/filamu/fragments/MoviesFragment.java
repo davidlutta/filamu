@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.davidlutta.filamu.UI.movies.upcomingmovies.ViewAllUpcomingMoviesActiv
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.List;
@@ -51,6 +53,10 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     private MoviesAdapter moviesAdapter;
 
+    private ProgressBar popularMoviesPb;
+    private ProgressBar playingNowMoviesPb;
+    private ProgressBar upcomingMoviesPb;
+
     public static MoviesFragment newInstance() {
         return new MoviesFragment();
     }
@@ -62,6 +68,10 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         View view = inflater.inflate(R.layout.movies_fragment, container, false);
 
         swipeRefreshLayout = view.findViewById(R.id.moviesFragmentSwipeRefreshLayout);
+
+        popularMoviesPb = view.findViewById(R.id.popularMoviesProgressBar);
+        playingNowMoviesPb = view.findViewById(R.id.playingNowProgressBar);
+        upcomingMoviesPb = view.findViewById(R.id.upcomingMoviesProgressBar);
 
         swipeRefreshLayout.setOnRefreshListener(this);
 
@@ -114,6 +124,8 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             popularMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             popularMoviesRecyclerView.setAdapter(moviesAdapter);
             popularMoviesRecyclerView.setNestedScrollingEnabled(false);
+            popularMoviesRecyclerView.setVisibility(View.VISIBLE);
+            popularMoviesPb.setVisibility(View.INVISIBLE);
             moviesAdapter = null;
         }
 
@@ -125,6 +137,8 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             moviesPlayingNowRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             moviesPlayingNowRecyclerView.setAdapter(moviesAdapter);
             moviesPlayingNowRecyclerView.setNestedScrollingEnabled(false);
+            moviesPlayingNowRecyclerView.setVisibility(View.VISIBLE);
+            playingNowMoviesPb.setVisibility(View.INVISIBLE);
             moviesAdapter = null;
         }
     }
@@ -135,6 +149,8 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
             upcomingMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             upcomingMoviesRecyclerView.setAdapter(moviesAdapter);
             upcomingMoviesRecyclerView.setNestedScrollingEnabled(false);
+            upcomingMoviesRecyclerView.setVisibility(View.VISIBLE);
+            upcomingMoviesPb.setVisibility(View.INVISIBLE);
             moviesAdapter = null;
         }
     }

@@ -53,6 +53,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "com.github.takusemba:multisnaprecyclerview:$multiSnap_version"
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

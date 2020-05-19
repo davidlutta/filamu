@@ -167,13 +167,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/statusTextView"
                 app:layout_constraintStart_toStartOf="@+id/statusTextView" />
 
+            <ProgressBar
+                android:id="@+id/prodCompProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/productionCompaniesRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prodCompTitleTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productionCompaniesRecyclerView"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/prodCompTitleTextView"
-                app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"/>
+                app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/prodCompTitleTextView" />
 
             <TextView
                 android:id="@+id/seriesActivityCastTitleTextView"
@@ -201,8 +211,18 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivityCastTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/seriesCastProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/seriesActivityCastRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCastTitleTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seriesActivityCastRecyclerView"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -236,11 +256,20 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivityCrewTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/seriesCrewProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/seriesActivityCrewRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityCrewTitleTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seriesActivityCrewRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"
@@ -259,8 +288,18 @@
                 app:layout_constraintStart_toStartOf="@+id/prodCompTitleTextView"
                 android:layout_marginTop="8dp"/>
 
+            <ProgressBar
+                android:id="@+id/seriesTrailerProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/seriesActivityTrailerRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/seriesActivityTrailerRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivityTrailerTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seriesActivityTrailerRecyclerView"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -294,10 +333,20 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/seriesActivitySimilarSeriesTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/similarSeriesProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/seriesActivitySimilarRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/seriesActivitySimilarRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/seriesActivitySimilarSeriesTextView" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seriesActivitySimilarRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/seriesActivitySimilarSeriesTextView"

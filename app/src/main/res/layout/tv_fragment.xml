@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tvFragmentSwipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -71,11 +72,20 @@
                     app:layout_constraintStart_toStartOf="@+id/on_air_recyclerView"
                     app:layout_constraintTop_toBottomOf="@+id/on_air_recyclerView" />
 
+                <ProgressBar
+                    android:id="@+id/airingTodayProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/airing_today_recyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/airing_today_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/airingTodayTitleTextView" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/airing_today_recyclerView"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="275dp"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="@+id/airingTodayTitleTextView"
@@ -124,9 +134,19 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/popularSeriesTitle"
                     app:layout_constraintEnd_toEndOf="parent" />
 
+                <ProgressBar
+                    android:id="@+id/popularSeriesProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/popular_series_RecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/popular_series_RecyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/popularSeriesTitle" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/popular_series_RecyclerView"
                     android:layout_width="match_parent"
+                    android:visibility="invisible"
                     android:layout_height="275dp"
                     android:layout_marginStart="16dp"
                     android:orientation="horizontal"
@@ -138,10 +158,20 @@
                     app:msrv_interval="1"
                     app:msrv_speed_ms_per_inch="100" />
 
+                <ProgressBar
+                    android:id="@+id/onAirProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/on_air_recyclerView"
+                    app:layout_constraintEnd_toEndOf="@+id/on_air_recyclerView"
+                    app:layout_constraintStart_toStartOf="@+id/on_air_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@+id/onAirTitleTextView" />
+
                 <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
                     android:id="@+id/on_air_recyclerView"
                     android:layout_width="0dp"
                     android:layout_height="275dp"
+                    android:visibility="invisible"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -10,6 +10,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.UI.movies.similarmovies.viewmodel.SimilarViewModel;
@@ -55,6 +57,7 @@ public class ViewAllSimilarMoviesActivity extends AppCompatActivity implements S
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             moviesRecyclerView.setLayoutManager(layoutManager);
             moviesRecyclerView.setAdapter(moviesAdapter);
+            moviesRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 

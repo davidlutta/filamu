@@ -1,6 +1,8 @@
 package com.davidlutta.filamu.UI.movies.popularmovies;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -20,6 +22,7 @@ public class ViewAllPopularMoviesActivity extends AppCompatActivity implements S
     private PopularViewModel mViewModel;
     private ViewAllMoviesAdapter moviesAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,9 @@ public class ViewAllPopularMoviesActivity extends AppCompatActivity implements S
         setContentView(R.layout.activity_view_all_movies);
         moviesRecyclerView = findViewById(R.id.viewAllMoviesRecyclerView);
         swipeRefreshLayout = findViewById(R.id.viewAllMoviesSwipeRefreshLayout);
+        progressBar = findViewById(R.id.allPopularMoviesProgressBar);
         setTitle("Popular Movies");
         mViewModel = ViewModelProviders.of(this).get(PopularViewModel.class);
-        // TODO: 4/24/20 Add Pagination to this page Please We might have to just create a new adapter reference this https://github.com/davidlutta/retro/tree/c60678bb2afedb78c4a7b253548625d848336c8d/app/src/main/java/com/davidlutta/retro 
         swipeRefreshLayout.setOnRefreshListener(this);
         setUpAdapter();
         subscribeViewModels();
@@ -41,6 +44,8 @@ public class ViewAllPopularMoviesActivity extends AppCompatActivity implements S
             public void onChanged(PagedList<Movies> movies) {
                 swipeRefreshLayout.setRefreshing(false);
                 moviesAdapter.submitList(movies);
+                progressBar.setVisibility(View.INVISIBLE);
+
             }
         });
     }
@@ -51,6 +56,7 @@ public class ViewAllPopularMoviesActivity extends AppCompatActivity implements S
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             moviesRecyclerView.setLayoutManager(layoutManager);
             moviesRecyclerView.setAdapter(moviesAdapter);
+            moviesRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 

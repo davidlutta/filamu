@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.davidlutta.filamu.R;
 import com.davidlutta.filamu.adapters.cast.CreditsCastAdapter;
@@ -77,6 +79,7 @@ public class KnownForActivity extends AppCompatActivity implements SwipeRefreshL
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             knownForRecycler.setLayoutManager(layoutManager);
             knownForRecycler.setAdapter(castAdapter);
+            knownForRecycler.setVisibility(View.VISIBLE);
         }
     }
 
@@ -86,6 +89,7 @@ public class KnownForActivity extends AppCompatActivity implements SwipeRefreshL
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
             knownForRecycler.setLayoutManager(layoutManager);
             knownForRecycler.setAdapter(crewAdapter);
+            knownForRecycler.setVisibility(View.VISIBLE);
         }
     }
 
