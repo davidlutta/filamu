@@ -62,7 +62,7 @@ public class SavedMovieActivity extends AppCompatActivity{
         Glide.with(this)
                 .load(currentMovie.getPoster())
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .placeholder(R.drawable.ic_launcher)
+                .placeholder(R.drawable.poster)
                 .into(poster);
     }
 }

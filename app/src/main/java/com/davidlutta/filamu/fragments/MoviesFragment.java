@@ -24,7 +24,6 @@ import com.davidlutta.filamu.UI.movies.upcomingmovies.ViewAllUpcomingMoviesActiv
 import com.davidlutta.filamu.adapters.movies.MoviesAdapter;
 import com.davidlutta.filamu.models.movies.Movies;
 import com.davidlutta.filamu.viewmodels.MoviesViewModel;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.List;

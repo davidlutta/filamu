@@ -69,7 +69,7 @@ public class SavedSeriesActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(currentSeries.getPoster())
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .placeholder(R.drawable.ic_launcher)
+                    .placeholder(R.drawable.poster)
                     .into(backgroundImage);
         }
     }

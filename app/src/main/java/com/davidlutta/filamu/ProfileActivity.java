@@ -149,7 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(profileImage)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .placeholder(R.drawable.ic_launcher)
+                    .placeholder(R.drawable.person)
                     .into(profilePicImageView);
         }
     }
