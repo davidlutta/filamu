@@ -5,7 +5,7 @@ This is an android app that fetches and displays movies and series from themovie
 - MVVM Architecture
 
 ## Technologies Used
-- LiveData Library
+- LiveData
 - Paging Library
 - Room Persistence Library
 - Retrofit2
